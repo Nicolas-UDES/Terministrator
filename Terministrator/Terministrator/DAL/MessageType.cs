@@ -62,7 +62,7 @@ namespace Terministrator.Terministrator.DAL
             using (TerministratorContext context = new TerministratorContext(true))
             {
                 return (from c in context.MessageType
-                        select c).ToList();
+                    select c).ToList();
             }
         }
 

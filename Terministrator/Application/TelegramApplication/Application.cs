@@ -16,23 +16,23 @@ namespace Terministrator.Application.TelegramApplication
     class Application : IApplication
     {
         private static readonly Lazy<Application> Lazy = new Lazy<Application>(() => new Application());
-        public static Application Instance => Lazy.Value;
 
         private readonly List<IMessage> _waitingMessages;
-        private Task<User> _terministratorTask;
         private TelegramBotClient _bot;
         private Action<IMessage> _receivedMessage;
-
-        public DateTime StartTime { get; private set; }
-        public Boolean Running { get; private set; }
-        public string Token { get; set; }
+        private Task<User> _terministratorTask;
 
         private Application()
         {
             _waitingMessages = new List<IMessage>();
         }
 
-        
+        public static Application Instance => Lazy.Value;
+
+        public DateTime StartTime { get; private set; }
+        public bool Running { get; private set; }
+        public string Token { get; set; }
+
 
         public string GetApplicationName() => "TELEGRAM 1.0.6";
 
@@ -73,9 +73,14 @@ namespace Terministrator.Application.TelegramApplication
         {
             if (message != null)
             {
-                return Task.Factory.StartNew(() => _bot.SendTextMessageAsync(Convert.ToInt64(message.GetChannel().GetApplicationId()), message.GetText(),
-                    disableNotification: true,
-                    replyToMessageId: Convert.ToInt32(message.GetRepliesTo()?.GetApplicationId() ?? "0")).Result.MessageId.ToString());
+                return
+                    Task.Factory.StartNew(
+                        () =>
+                            _bot.SendTextMessageAsync(Convert.ToInt64(message.GetChannel().GetApplicationId()),
+                                    message.GetText(),
+                                    disableNotification: true,
+                                    replyToMessageId: Convert.ToInt32(message.GetRepliesTo()?.GetApplicationId() ?? "0"))
+                                .Result.MessageId.ToString());
             }
             return null;
         }
@@ -84,24 +89,6 @@ namespace Terministrator.Application.TelegramApplication
         {
             _bot.EditMessageTextAsync(Convert.ToInt64(message.GetChannel().GetApplicationId()),
                 Convert.ToInt32(message.GetChannel().GetApplicationId()), message.GetText());
-        }
-
-        private void MessageReceived(object o, MessageEventArgs args)
-        {
-            if (_receivedMessage != null)
-            {
-                foreach (IMessage message in _waitingMessages)
-                {
-                    _receivedMessage(message);
-                }
-                _waitingMessages.Clear();
-
-                _receivedMessage(new Message(args.Message));
-            }
-            else
-            {
-                _waitingMessages.Add(new Message(args.Message));
-            }
         }
 
         public bool CanKick(IChannel channel)
@@ -120,12 +107,14 @@ namespace Terministrator.Application.TelegramApplication
 
         public List<IUser> Mods(IChannel channel)
         {
-            return _bot.GetChatAdministratorsAsync(channel.GetApplicationId()).Result.Select(x => (IUser) new User(x.User)).ToList();
+            return
+                _bot.GetChatAdministratorsAsync(channel.GetApplicationId())
+                    .Result.Select(x => (IUser) new User(x.User))
+                    .ToList();
         }
 
         public TimeSpan? Ping(TimeSpan? max = null)
         {
-
             DateTime now = DateTime.UtcNow;
             try
             {
@@ -145,6 +134,24 @@ namespace Terministrator.Application.TelegramApplication
         public string GetUserSymbol()
         {
             return "@";
+        }
+
+        private void MessageReceived(object o, MessageEventArgs args)
+        {
+            if (_receivedMessage != null)
+            {
+                foreach (IMessage message in _waitingMessages)
+                {
+                    _receivedMessage(message);
+                }
+                _waitingMessages.Clear();
+
+                _receivedMessage(new Message(args.Message));
+            }
+            else
+            {
+                _waitingMessages.Add(new Message(args.Message));
+            }
         }
     }
 }

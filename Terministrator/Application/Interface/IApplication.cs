@@ -10,13 +10,13 @@ namespace Terministrator.Application.Interface
 {
     interface IApplication
     {
+        string Token { get; set; }
         string GetCommandSymbol();
         string GetUserSymbol();
         string GetApplicationName();
         void SetMessageDestination(Action<IMessage> receivedMessage);
         void Start();
         void Stop();
-        string Token { get; set; }
         Task<string> SendMessage(IMessage message);
         void EditMessage(IMessage message);
         IUser GetTerministrator();

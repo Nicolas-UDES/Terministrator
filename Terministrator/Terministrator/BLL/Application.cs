@@ -26,12 +26,14 @@ namespace Terministrator.Terministrator.BLL
 
         public static Entites.Application Create(IApplication iApplication)
         {
-            return DAL.Application.Create(new Entites.Application(iApplication.GetApplicationName(), iApplication.GetCommandSymbol(), iApplication.GetUserSymbol(), iApplication.Token));
+            return
+                DAL.Application.Create(new Entites.Application(iApplication.GetApplicationName(),
+                    iApplication.GetCommandSymbol(), iApplication.GetUserSymbol(), iApplication.Token));
         }
 
         public static Entites.Application Update(IApplication iApplication, Entites.Application application)
         {
-            application.CommandSymbols = iApplication.GetCommandSymbol();          
+            application.CommandSymbols = iApplication.GetCommandSymbol();
             application.UserSymbols = iApplication.GetUserSymbol();
             application.Token = iApplication.Token;
             return DAL.Application.Update(application);

@@ -3,7 +3,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using DiscordSharp;
@@ -18,21 +17,22 @@ namespace Terministrator.Application.DiscordApplication
     class Application : IApplication
     {
         private static readonly Lazy<Application> Lazy = new Lazy<Application>(() => new Application());
-        public static Application Instance => Lazy.Value;
 
         private readonly List<IMessage> _waitingMessages;
         private DiscordClient _bot;
-        private Task<User> _terministratorTask;       
         private Action<IMessage> _receivedMessage;
-
-        public string Token { get; set; }
-        public DateTime StartTime { get; set; }
-        public Boolean Running { get; private set; }
+        private Task<User> _terministratorTask;
 
         private Application()
         {
             _waitingMessages = new List<IMessage>();
         }
+
+        public static Application Instance => Lazy.Value;
+        public DateTime StartTime { get; set; }
+        public bool Running { get; private set; }
+
+        public string Token { get; set; }
 
         public string GetApplicationName() => "DISCORD";
 
@@ -81,11 +81,18 @@ namespace Terministrator.Application.DiscordApplication
             {
                 if (message.GetChannel().IsSolo())
                 {
-                    DiscordPrivateChannel dpc = _bot.GetPrivateChannels().FirstOrDefault(x => x.ID == message.GetChannel().GetApplicationId());
-                    return dpc != null ? Task.Factory.StartNew(() => _bot.SendMessageToUser(message.GetText(), dpc.Recipient).ID) : null;
+                    DiscordPrivateChannel dpc =
+                        _bot.GetPrivateChannels().FirstOrDefault(x => x.ID == message.GetChannel().GetApplicationId());
+                    return dpc != null
+                        ? Task.Factory.StartNew(() => _bot.SendMessageToUser(message.GetText(), dpc.Recipient).ID)
+                        : null;
                 }
 
-                return Task.Factory.StartNew(() => _bot.SendMessageToChannel(message.GetText(), _bot.GetChannelByID(Convert.ToInt64(message.GetChannel().GetApplicationId()))).ID);
+                return
+                    Task.Factory.StartNew(
+                        () =>
+                            _bot.SendMessageToChannel(message.GetText(),
+                                _bot.GetChannelByID(Convert.ToInt64(message.GetChannel().GetApplicationId()))).ID);
             }
 
             return null;
@@ -93,12 +100,59 @@ namespace Terministrator.Application.DiscordApplication
 
         public void EditMessage(IMessage message)
         {
-            _bot.EditMessage(message.GetApplicationId(), message.GetText(), _bot.GetChannelByID(Convert.ToInt64(message.GetChannel().GetApplicationId())));
+            _bot.EditMessage(message.GetApplicationId(), message.GetText(),
+                _bot.GetChannelByID(Convert.ToInt64(message.GetChannel().GetApplicationId())));
         }
 
         public void Kick(IUser user, IChannel channel)
         {
-            _bot.KickMember(_bot.GetMemberFromChannel(_bot.GetChannelByID(Convert.ToInt64(channel.GetApplicationId())), user.GetApplicationId()));
+            _bot.KickMember(_bot.GetMemberFromChannel(_bot.GetChannelByID(Convert.ToInt64(channel.GetApplicationId())),
+                user.GetApplicationId()));
+        }
+
+        public bool CanKick(IChannel channel)
+        {
+            return true;
+        }
+
+        public List<IUser> Mods(IChannel channel)
+        {
+            return
+                _bot.GetMessageHistory(_bot.GetChannelByID(Convert.ToInt64(channel.GetApplicationId())), int.MaxValue)
+                    .Where(x => x.Author.Roles.Any(y => y.Position > 0))
+                    .Select(x => (IUser) new User(x.Author)).ToList();
+        }
+
+        public TimeSpan? Ping(TimeSpan? max = null)
+        {
+            if (!Running)
+            {
+                return null;
+            }
+
+            DateTime now = DateTime.UtcNow;
+            try
+            {
+                return
+                    Task.Run(() => { _bot.ChangeClientInformation(_bot.ClientPrivateInformation); })
+                        .Wait(max?.Milliseconds ?? 5000)
+                        ? (TimeSpan?) (DateTime.UtcNow - now)
+                        : null;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public string GetCommandSymbol()
+        {
+            return "!";
+        }
+
+        public string GetUserSymbol()
+        {
+            return "@";
         }
 
         private void MessageReceived(object o, DiscordMessageEventArgs args)
@@ -135,46 +189,6 @@ namespace Terministrator.Application.DiscordApplication
             {
                 _waitingMessages.Add(new Message(args));
             }
-        }
-
-        public bool CanKick(IChannel channel)
-        {
-            return true;
-        }
-
-        public List<IUser> Mods(IChannel channel)
-        {
-            return _bot.GetMessageHistory(_bot.GetChannelByID(Convert.ToInt64(channel.GetApplicationId())), Int32.MaxValue)
-                .Where(x => x.Author.Roles.Any(y => y.Position > 0))
-                .Select(x => (IUser) new User(x.Author)).ToList();
-        }
-
-        public TimeSpan? Ping(TimeSpan? max = null)
-        {
-            if (!Running)
-            {
-                return null;
-            }
-
-            DateTime now = DateTime.UtcNow;
-            try
-            {
-                return Task.Run(()=> { _bot.ChangeClientInformation(_bot.ClientPrivateInformation);}).Wait(max?.Milliseconds ?? 5000) ? (TimeSpan?)(DateTime.UtcNow - now) : null;
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-        }
-
-        public string GetCommandSymbol()
-        {
-            return "!";
-        }
-
-        public string GetUserSymbol()
-        {
-            return "@";
         }
     }
 }

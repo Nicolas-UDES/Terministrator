@@ -2,7 +2,6 @@
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 
 #endregion
@@ -11,9 +10,13 @@ namespace Terministrator.Terministrator.Entites
 {
     abstract class Namable : ApplicationReferencable
     {
-        public Namable() { }
+        public Namable()
+        {
+        }
 
-        public Namable(Application application, string idForApplication) : base(application, idForApplication) { }
+        public Namable(Application application, string idForApplication) : base(application, idForApplication)
+        {
+        }
 
         [Key]
         public int NamableId { get; set; }

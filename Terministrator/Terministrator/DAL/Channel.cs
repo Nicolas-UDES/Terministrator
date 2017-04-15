@@ -1,10 +1,8 @@
 ﻿#region Usings
 
-using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using Terministrator.Application.Interface;
 
 #endregion
 

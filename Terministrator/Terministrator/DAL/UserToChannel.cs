@@ -3,7 +3,6 @@
 using System;
 using System.Data.Entity;
 using System.Linq;
-using Terministrator.Terministrator.Types;
 
 #endregion
 
@@ -15,7 +14,8 @@ namespace Terministrator.Terministrator.DAL
             Get(userID, channelID, applicationName) != null;
 
         public static bool Exists(Entites.UserToChannel userToChannel) =>
-            Exists(userToChannel.User.IdForApplication, userToChannel.Channel.IdForApplication, userToChannel.Channel.Application.ApplicationName);
+            Exists(userToChannel.User.IdForApplication, userToChannel.Channel.IdForApplication,
+                userToChannel.Channel.Application.ApplicationName);
 
         public static Entites.UserToChannel Create(Entites.UserToChannel userToChannel)
         {
@@ -74,6 +74,7 @@ namespace Terministrator.Terministrator.DAL
                 return userToChannel == null ? 0 : LoadMessage(userToChannel).Messages.Count;
             }
         }
+
         public static Entites.UserToChannel LoadMessage(Entites.UserToChannel userToChannel)
         {
             using (TerministratorContext context = new TerministratorContext(true))
@@ -132,7 +133,7 @@ namespace Terministrator.Terministrator.DAL
         private static Entites.UserToChannel ClearReferences(Entites.UserToChannel userToChannel)
         {
             Entites.UserToChannel reference = new Entites.UserToChannel(userToChannel.Application, userToChannel.User,
-            userToChannel.Channel, DateTime.MinValue, userToChannel.Privileges);
+                userToChannel.Channel, DateTime.MinValue, userToChannel.Privileges);
             userToChannel.Application = null;
             userToChannel.User = null;
             userToChannel.Channel = null;
@@ -140,7 +141,8 @@ namespace Terministrator.Terministrator.DAL
             return reference;
         }
 
-        private static Entites.UserToChannel AddReferences(Entites.UserToChannel userToChannel, Entites.UserToChannel reference)
+        private static Entites.UserToChannel AddReferences(Entites.UserToChannel userToChannel,
+            Entites.UserToChannel reference)
         {
             userToChannel.Application = reference.Application;
             userToChannel.User = reference.User;

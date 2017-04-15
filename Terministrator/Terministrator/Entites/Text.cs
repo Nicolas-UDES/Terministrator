@@ -12,10 +12,10 @@ namespace Terministrator.Terministrator.Entites
     {
         public Text()
         {
-            
         }
 
-        public Text(string text, DateTime setOn, Message message, string r9kText = null, SimilarTexts similarTexts = null)
+        public Text(string text, DateTime setOn, Message message, string r9kText = null,
+            SimilarTexts similarTexts = null)
         {
             ZeText = text;
             SetOn = setOn;

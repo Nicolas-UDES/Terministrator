@@ -1,10 +1,8 @@
 ﻿#region Usings
 
 using System;
-using System.Threading.Tasks;
 using DiscordSharp;
 using DiscordSharp.Events;
-using DiscordSharp.Objects;
 using Terministrator.Application.Interface;
 
 #endregion

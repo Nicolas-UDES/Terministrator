@@ -53,7 +53,8 @@ namespace Terministrator.Terministrator.DAL
         {
             using (TerministratorContext context = new TerministratorContext(true))
             {
-                Entites.Text retour = context.Text.FirstOrDefault(x => x.R9KText == text.R9KText && x.TextId != text.TextId);
+                Entites.Text retour =
+                    context.Text.FirstOrDefault(x => x.R9KText == text.R9KText && x.TextId != text.TextId);
                 if (retour != null)
                 {
                     context.Entry(retour).Reference(p => p.SimilarTexts).Load();

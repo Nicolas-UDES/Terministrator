@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿#region Usings
+
+using System;
 using Terministrator.Application.Interface;
+
+#endregion
 
 namespace Terministrator.Terministrator.BLL
 {
@@ -16,12 +16,14 @@ namespace Terministrator.Terministrator.BLL
 
         public static Entites.UserName ExtractUserName(IUser iUser, Entites.User user)
         {
-            return new Entites.UserName(iUser.GetFirstName(), iUser.GetLastName(), iUser.GetUsername(), true, DateTime.UtcNow, user);
+            return new Entites.UserName(iUser.GetFirstName(), iUser.GetLastName(), iUser.GetUsername(), true,
+                DateTime.UtcNow, user);
         }
 
         public static Entites.UserName ExtractUserName(IChannel iChannel, Entites.Channel channel)
         {
-            return new Entites.UserName(iChannel.GetFirstName(), iChannel.GetLastName(), iChannel.GetUsername(), true, DateTime.UtcNow, channel);
+            return new Entites.UserName(iChannel.GetFirstName(), iChannel.GetLastName(), iChannel.GetUsername(), true,
+                DateTime.UtcNow, channel);
         }
 
         public static Entites.UserName UpdateUserName(Entites.UserName userName)

@@ -13,6 +13,8 @@ namespace Terministrator.Terministrator.Entites
 {
     class Message : ApplicationReferencable, IMessage
     {
+        public static Action<Message> SendMessage = m => { m.Application.SendMessage(m); };
+
         public Message()
         {
         }
@@ -36,7 +38,8 @@ namespace Terministrator.Terministrator.Entites
         }
 
         public Message(Application application, string idMessageForApplication, DateTime sentOn,
-            UserToChannel userToChannel, MessageType messageType, Message repliesTo = null, bool deleted = false, UserToChannel joinedUser = null) : base(application, idMessageForApplication)
+            UserToChannel userToChannel, MessageType messageType, Message repliesTo = null, bool deleted = false,
+            UserToChannel joinedUser = null) : base(application, idMessageForApplication)
         {
             UserToChannelId = userToChannel.UserToChannelId;
             UserToChannel = userToChannel;
@@ -84,8 +87,6 @@ namespace Terministrator.Terministrator.Entites
 
         public virtual UserToChannel JoinedUser { get; set; }
 
-        public static Action<Message> SendMessage = m => { m.Application.SendMessage(m); };
-
         public string GetApplicationId()
         {
             return IdForApplication;
@@ -116,14 +117,14 @@ namespace Terministrator.Terministrator.Entites
             return RepliesTo;
         }
 
-        public override string ToString()
-        {
-            return '[' + SentOn.ToString("HH:mm") + "] " + UserToChannel.User + ": " + GetText() ?? "{no text}";
-        }
-
         public IUser GetJoinedUser()
         {
             return JoinedUser.User;
+        }
+
+        public override string ToString()
+        {
+            return '[' + SentOn.ToString("HH:mm") + "] " + UserToChannel.User + ": " + GetText() ?? "{no text}";
         }
     }
 }

@@ -54,11 +54,11 @@ namespace Terministrator.Terministrator.DAL
             using (TerministratorContext context = new TerministratorContext(true))
             {
                 return (from c in context.Message
-                        where c.UserToChannel.Channel.NamableId == channelId &&
-                              c.ApplicationName == applicationName &&
-                              c.SentOn >= deb &&
-                              c.SentOn < fin
-                        select c).Count();
+                    where c.UserToChannel.Channel.NamableId == channelId &&
+                          c.ApplicationName == applicationName &&
+                          c.SentOn >= deb &&
+                          c.SentOn < fin
+                    select c).Count();
             }
         }
 
@@ -112,7 +112,8 @@ namespace Terministrator.Terministrator.DAL
 
         private static Entites.Message ClearReferences(Entites.Message message)
         {
-            Entites.Message reference = new Entites.Message(message.Application, null, DateTime.MinValue, message.UserToChannel, message.MessageType, message.RepliesTo, false, message.JoinedUser);
+            Entites.Message reference = new Entites.Message(message.Application, null, DateTime.MinValue,
+                message.UserToChannel, message.MessageType, message.RepliesTo, false, message.JoinedUser);
             message.Application = null;
             message.UserToChannel = null;
             message.RepliesTo = null;

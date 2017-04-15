@@ -1,25 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿#region Usings
+
+using System;
 using System.Deployment.Application;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using Terministrator.Terministrator.Types;
+
+#endregion
 
 namespace Terministrator.Terministrator.BLL
 {
     static class Terministrator
     {
-        private static string CurrentVersion => ApplicationDeployment.IsNetworkDeployed ? 
-            ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString() : Assembly.GetExecutingAssembly().GetName().Version.ToString();
+        private static string CurrentVersion => ApplicationDeployment.IsNetworkDeployed
+            ? ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString()
+            : Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
         public static void Start(Command command, Core core = null)
         {
-            Entites.Message.SendMessage(Message.Answer(command.Message, 
+            Entites.Message.SendMessage(Message.Answer(command.Message,
                 $"./​Terministator\r\n" +
-                $"Loading Terministrator v{CurrentVersion}{(char)('a' + new Random().Next(0,10))}...\r\n" +
+                $"Loading Terministrator v{CurrentVersion}{(char) ('a' + new Random().Next(0, 10))}...\r\n" +
                 $"Initializing...\r\n" +
                 $"Terministator ready. Send /help to begin troll annihilation."));
         }

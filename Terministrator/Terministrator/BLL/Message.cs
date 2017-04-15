@@ -2,7 +2,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Data.SqlTypes;
 using Terministrator.Application.Interface;
 
 #endregion
@@ -18,19 +17,26 @@ namespace Terministrator.Terministrator.BLL
 
         public static Entites.Message Get(IMessage iMessage)
         {
-            return DAL.Message.Get(iMessage.GetApplicationId(), iMessage.GetChannel().GetApplication().GetApplicationName());
+            return DAL.Message.Get(iMessage.GetApplicationId(),
+                iMessage.GetChannel().GetApplication().GetApplicationName());
         }
 
 
         public static Entites.Message Create(IMessage iMessage)
         {
             Entites.Message message =
-                DAL.Message.Create(new Entites.Message(Application.UpdateOrCreate(iMessage.GetChannel().GetApplication()),
-                    iMessage.GetApplicationId(), iMessage.GetSentDate(),
-                    UserToChannel.UpdateOrCreate(iMessage.GetChannel().GetApplication(), iMessage.GetFrom(), iMessage.GetChannel()),
-                    MessageType.Get("Text"), iMessage.GetRepliesTo() != null ? GetOrCreate(iMessage.GetRepliesTo()) : null,
-                    false,
-                    iMessage.GetJoinedUser() == null ? null : UserToChannel.GetOrCreate(iMessage.GetChannel().GetApplication(), iMessage.GetJoinedUser(), iMessage.GetChannel())));
+                DAL.Message.Create(
+                    new Entites.Message(Application.UpdateOrCreate(iMessage.GetChannel().GetApplication()),
+                        iMessage.GetApplicationId(), iMessage.GetSentDate(),
+                        UserToChannel.UpdateOrCreate(iMessage.GetChannel().GetApplication(), iMessage.GetFrom(),
+                            iMessage.GetChannel()),
+                        MessageType.Get("Text"),
+                        iMessage.GetRepliesTo() != null ? GetOrCreate(iMessage.GetRepliesTo()) : null,
+                        false,
+                        iMessage.GetJoinedUser() == null
+                            ? null
+                            : UserToChannel.GetOrCreate(iMessage.GetChannel().GetApplication(), iMessage.GetJoinedUser(),
+                                iMessage.GetChannel())));
 
             if (!string.IsNullOrEmpty(iMessage.GetText()))
             {
@@ -42,7 +48,8 @@ namespace Terministrator.Terministrator.BLL
             }
 
             // If the user was invited back, we make sure to reboot their consequences.
-            if (message.JoinedUser != null && (message.JoinedUser.NbSilences != 0 || message.JoinedUser.SilencedTo != null))
+            if (message.JoinedUser != null &&
+                (message.JoinedUser.NbSilences != 0 || message.JoinedUser.SilencedTo != null))
             {
                 message.JoinedUser.NbSilences = 0;
                 message.JoinedUser.SilencedTo = null;
@@ -54,8 +61,9 @@ namespace Terministrator.Terministrator.BLL
 
         public static Entites.Message Create(string text, Entites.UserToChannel userToChannel)
         {
-            Entites.Message message = new Entites.Message(userToChannel.Application, null, DateTime.Now, userToChannel, null);
-            message.Texts = new List<Entites.Text> { new Entites.Text(text, message.SentOn, message) };
+            Entites.Message message = new Entites.Message(userToChannel.Application, null, DateTime.Now, userToChannel,
+                null);
+            message.Texts = new List<Entites.Text> {new Entites.Text(text, message.SentOn, message)};
             return message;
         }
 

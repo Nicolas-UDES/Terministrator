@@ -1,9 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿#region Usings
+
+using System;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+#endregion
 
 namespace Terministrator.Terministrator.DAL
 {
@@ -65,9 +66,9 @@ namespace Terministrator.Terministrator.DAL
             using (TerministratorContext context = new TerministratorContext(true))
             {
                 return (from c in context.Privileges
-                        where c.ChannelId == channelId &&
-                              c.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase)
-                        select c).FirstOrDefault();
+                    where c.ChannelId == channelId &&
+                          c.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase)
+                    select c).FirstOrDefault();
             }
         }
 

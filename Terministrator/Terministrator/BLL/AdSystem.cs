@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿#region Usings
+
+using System;
 using Terministrator.Terministrator.Types;
+
+#endregion
 
 namespace Terministrator.Terministrator.BLL
 {
@@ -36,17 +36,19 @@ namespace Terministrator.Terministrator.BLL
 
         public static void SetAdSystem(Command command, Core core)
         {
-            string[] arguements = command.Arguement.Split(new[] { ' ' }, 3, StringSplitOptions.RemoveEmptyEntries);
+            string[] arguements = command.Arguement.Split(new[] {' '}, 3, StringSplitOptions.RemoveEmptyEntries);
             bool and = "and".Equals(arguements[1], StringComparison.InvariantCultureIgnoreCase);
             int nbMessages = -1, temps = -1;
 
-            if (!and && !"or".Equals(arguements[1], StringComparison.InvariantCultureIgnoreCase) || !int.TryParse(arguements[0], out nbMessages) || !int.TryParse(arguements[2], out temps))
+            if (!and && !"or".Equals(arguements[1], StringComparison.InvariantCultureIgnoreCase) ||
+                !int.TryParse(arguements[0], out nbMessages) || !int.TryParse(arguements[2], out temps))
             {
                 Entites.Message.SendMessage(Message.Answer(command.Message,
                     "The format for this command is '\\setadsystem nbMessages (and|or) periode', where nbMessages is the number of messages between two ads and the period is the time (in minutes) between two messages."));
             }
 
-            command.Message.UserToChannel.Channel.AdSystem = new Entites.AdSystem(command.Message.UserToChannel.Channel, nbMessages, TimeSpan.FromMinutes(temps), and);
+            command.Message.UserToChannel.Channel.AdSystem = new Entites.AdSystem(
+                command.Message.UserToChannel.Channel, nbMessages, TimeSpan.FromMinutes(temps), and);
             UpdateOrCreate(command.Message.UserToChannel.Channel.AdSystem);
         }
     }

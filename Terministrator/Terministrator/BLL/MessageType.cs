@@ -22,7 +22,8 @@ namespace Terministrator.Terministrator.BLL
             if (DAL.MessageType.Count() != Types.Length)
             {
                 DAL.MessageType.DeleteAll();
-                return CreateTypes().FirstOrDefault(x => x.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase));
+                return
+                    CreateTypes().FirstOrDefault(x => x.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase));
             }
             return DAL.MessageType.Get(name);
         }

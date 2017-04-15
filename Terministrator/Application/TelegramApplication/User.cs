@@ -1,5 +1,6 @@
 ﻿#region Usings
 
+using Telegram.Bot.Types;
 using Terministrator.Application.Interface;
 
 #endregion
@@ -9,7 +10,7 @@ namespace Terministrator.Application.TelegramApplication
     #region Usings
 
     using TUser = Telegram.Bot.Types.User;
-    using CUser = Telegram.Bot.Types.ChatMember;
+    using CUser = ChatMember;
 
     #endregion
 

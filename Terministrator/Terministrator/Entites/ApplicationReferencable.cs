@@ -9,7 +9,9 @@ namespace Terministrator.Terministrator.Entites
 {
     abstract class ApplicationReferencable
     {
-        public ApplicationReferencable() { }
+        public ApplicationReferencable()
+        {
+        }
 
         public ApplicationReferencable(Application application, string idForApplication)
         {

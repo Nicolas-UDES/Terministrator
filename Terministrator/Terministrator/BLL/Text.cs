@@ -1,4 +1,8 @@
-﻿using System.Diagnostics;
+﻿#region Usings
+
+using System.Diagnostics;
+
+#endregion
 
 namespace Terministrator.Terministrator.BLL
 {

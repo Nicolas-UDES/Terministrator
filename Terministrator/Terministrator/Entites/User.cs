@@ -1,7 +1,6 @@
 ﻿#region Usings
 
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using Terministrator.Application.Interface;
 
 #endregion
@@ -14,7 +13,9 @@ namespace Terministrator.Terministrator.Entites
         {
         }
 
-        public User(Application application, string idUserForApplication) : base(application, idUserForApplication) { }
+        public User(Application application, string idUserForApplication) : base(application, idUserForApplication)
+        {
+        }
 
         public virtual List<UserToChannel> Channels { get; set; }
 

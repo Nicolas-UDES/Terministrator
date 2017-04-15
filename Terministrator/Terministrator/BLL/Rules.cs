@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿#region Usings
+
+using System;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using Terministrator.Application.Interface;
 using Terministrator.Terministrator.Types;
-using Regex = System.Text.RegularExpressions.Regex;
+using Regex = Terministrator.Terministrator.Types.Regex;
+
+#endregion
 
 namespace Terministrator.Terministrator.BLL
 {
@@ -28,14 +28,13 @@ namespace Terministrator.Terministrator.BLL
 
         private static void ApplyR9K(Entites.Message message)
         {
-
             Entites.Text text = message.Texts.OrderByDescending(x => x.SetOn).First();
             text.R9KText = ToR9KText(text.ZeText);
 
             // Check if not enough content or if we know the message
             if (text.ZeText.Length == 0 ||
                 text.ZeText.Length > 10 && (text.R9KText.Length / Convert.ToDouble(text.ZeText.Length) < SignalRatio ||
-                Text.SearchAndLink(text).SimilarTexts != null))
+                                            Text.SearchAndLink(text).SimilarTexts != null))
             {
                 Fail(message);
             }
@@ -56,7 +55,8 @@ namespace Terministrator.Terministrator.BLL
             message.UserToChannel.SilencedTo = DateTime.UtcNow + muteTime;
             UserToChannel.Update(message.UserToChannel);
             DAL.UserToChannel.LoadChannel(message.UserToChannel);
-            Entites.Message.SendMessage(Message.Answer(message, "This room is in r9k mode and the message you attempted to send is not unique."));
+            Entites.Message.SendMessage(Message.Answer(message,
+                "This room is in r9k mode and the message you attempted to send is not unique."));
         }
 
         private static void Kick(Entites.UserToChannel userToChannel)
@@ -86,26 +86,28 @@ namespace Terministrator.Terministrator.BLL
         public static string ToR9KText(string msg)
         {
             msg = msg.ToLower();
-            msg = RegexReplace(msg, Types.Regex.ControlCharacters, Types.Regex.ControlCharactersReplace);
-            msg = RegexReplace(msg, Types.Regex.Smileys, Types.Regex.SmileysReplace);
-            msg = RegexReplace(msg, Types.Regex.Quote, Types.Regex.QuoteReplace);
-            msg = RegexReplace(msg, Types.Regex.Tiret, Types.Regex.TiretReplace);
-            msg = RegexReplace(msg, Types.Regex.RepeatingChar, Types.Regex.RepeatingCharReplace);
-            msg = RegexReplace(msg, Types.Regex.RepeatingChars, Types.Regex.RepeatingCharsReplace);
+            msg = RegexReplace(msg, Regex.ControlCharacters, Regex.ControlCharactersReplace);
+            msg = RegexReplace(msg, Regex.Smileys, Regex.SmileysReplace);
+            msg = RegexReplace(msg, Regex.Quote, Regex.QuoteReplace);
+            msg = RegexReplace(msg, Regex.Tiret, Regex.TiretReplace);
+            msg = RegexReplace(msg, Regex.RepeatingChar, Regex.RepeatingCharReplace);
+            msg = RegexReplace(msg, Regex.RepeatingChars, Regex.RepeatingCharsReplace);
             msg = msg.Trim();
-            msg = RegexReplace(msg, Types.Regex.Spaces, Types.Regex.SpacesReplace);
+            msg = RegexReplace(msg, Regex.Spaces, Regex.SpacesReplace);
 
             return msg;
         }
 
         private static string RegexReplace(string text, string pattern, string replacement)
         {
-            return new Regex(pattern, RegexOptions.None).Replace(text, replacement);
+            return new System.Text.RegularExpressions.Regex(pattern, RegexOptions.None).Replace(text, replacement);
         }
 
         private static TimeSpan GetMuteTime(int nbMutes)
         {
-            return nbMutes <= 0 ? TimeSpan.Zero : TimeSpan.FromSeconds(2.5 * Math.Pow(Math.E, MuteTimeConstant * nbMutes));
+            return nbMutes <= 0
+                ? TimeSpan.Zero
+                : TimeSpan.FromSeconds(2.5 * Math.Pow(Math.E, MuteTimeConstant * nbMutes));
         }
 
         public static Entites.Rules Create(Entites.Rules rules)
@@ -125,7 +127,8 @@ namespace Terministrator.Terministrator.BLL
 
         public static void GetRules(Command command, Core core = null)
         {
-            command.Message.Application.SendMessage(Message.Answer(command.Message, command.Message.UserToChannel.Privileges.Rules.ToString()));
+            command.Message.Application.SendMessage(Message.Answer(command.Message,
+                command.Message.UserToChannel.Privileges.Rules.ToString()));
         }
     }
 }

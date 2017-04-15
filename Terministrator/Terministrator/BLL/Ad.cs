@@ -1,6 +1,11 @@
-﻿using System;
+﻿#region Usings
+
+using System;
 using System.Data.SqlTypes;
+using System.Timers;
 using Terministrator.Terministrator.Types;
+
+#endregion
 
 namespace Terministrator.Terministrator.BLL
 {
@@ -35,24 +40,29 @@ namespace Terministrator.Terministrator.BLL
         {
             DAL.Channel.LoadAdSystem(command.Message.UserToChannel.Channel);
             DAL.Message.LoadRepliesTo(command.Message);
-            if (command.Arguement == null || command.Message.UserToChannel.Channel.AdSystem == null || command.Message.RepliesTo == null)
+            if (command.Arguement == null || command.Message.UserToChannel.Channel.AdSystem == null ||
+                command.Message.RepliesTo == null)
             {
-                Entites.Message.SendMessage(Message.Answer(command.Message, "Your add is not valid; you must reply to the message you want to set as an ad and give it a name like so: \"/addad name\"."));
+                Entites.Message.SendMessage(Message.Answer(command.Message,
+                    "Your add is not valid; you must reply to the message you want to set as an ad and give it a name like so: \"/addad name\"."));
                 return;
             }
-            string[] arguements = command.Arguement.Split(new[] { ' ' }, 1, StringSplitOptions.RemoveEmptyEntries);
+            string[] arguements = command.Arguement.Split(new[] {' '}, 1, StringSplitOptions.RemoveEmptyEntries);
 
-            Entites.Ad ad = Create(new Entites.Ad(-1, arguements[0], SqlDateTime.MinValue.Value, command.Message.RepliesTo, command.Message.UserToChannel.Channel.AdSystem));
-            System.Timers.Timer t = new System.Timers.Timer { AutoReset = true };
+            Entites.Ad ad =
+                Create(new Entites.Ad(-1, arguements[0], SqlDateTime.MinValue.Value, command.Message.RepliesTo,
+                    command.Message.UserToChannel.Channel.AdSystem));
+            Timer t = new Timer {AutoReset = true};
             t.Elapsed += delegate { SendAd(t, ad.AdId); };
             t.Start();
         }
 
-        private static void SendAd(System.Timers.Timer timer, int adId)
+        private static void SendAd(Timer timer, int adId)
         {
             Entites.Ad ad = Get(adId);
 
-            if (ad.AdSystem.BothConditions && ad.AdSystem.MinNbOfMessage > Message.NbMessagesSince(ad.AdSystem.Channel, ad.LastSent))
+            if (ad.AdSystem.BothConditions &&
+                ad.AdSystem.MinNbOfMessage > Message.NbMessagesSince(ad.AdSystem.Channel, ad.LastSent))
             {
                 timer.Interval = 60 * 1000;
                 return;

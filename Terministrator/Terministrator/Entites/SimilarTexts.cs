@@ -10,7 +10,9 @@ namespace Terministrator.Terministrator.Entites
 {
     class SimilarTexts
     {
-        public SimilarTexts() { }
+        public SimilarTexts()
+        {
+        }
 
         public SimilarTexts(int nbSimilar, DateTime lastIncrement)
         {

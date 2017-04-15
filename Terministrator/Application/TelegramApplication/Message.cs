@@ -18,12 +18,12 @@ namespace Terministrator.Application.TelegramApplication
     {
         private readonly Channel _channel;
         private readonly User _from;
+        private readonly User _joinedUser;
         private readonly int _messageId;
         private readonly Task<Message> _repliesToTask;
         private readonly DateTime _sentDate;
         private readonly string _text;
         private Message _repliesTo;
-        private readonly User _joinedUser;
 
         public Message(TMessage message)
         {
@@ -64,11 +64,11 @@ namespace Terministrator.Application.TelegramApplication
             return null;
         }
 
-        public int GetOriginalApplicationId() => _messageId;
-
         public IUser GetJoinedUser()
         {
             return _joinedUser;
         }
+
+        public int GetOriginalApplicationId() => _messageId;
     }
 }

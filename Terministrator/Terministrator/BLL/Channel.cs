@@ -32,11 +32,13 @@ namespace Terministrator.Terministrator.BLL
         {
             return DAL.Channel.Get(application.GetApplicationName());
         }
-        
+
         public static List<Entites.UserToChannel> TopPoster(Entites.Channel channel)
         {
-            return DAL.Channel.LoadUsers(channel).Users.OrderByDescending(x => DAL.UserToChannel.CountMessage(x.UserToChannelId)).ToList();
-
+            return
+                DAL.Channel.LoadUsers(channel)
+                    .Users.OrderByDescending(x => DAL.UserToChannel.CountMessage(x.UserToChannelId))
+                    .ToList();
         }
 
         public static Entites.Channel Create(IChannel iChannel)
@@ -45,7 +47,10 @@ namespace Terministrator.Terministrator.BLL
                 DAL.Channel.Create(new Entites.Channel(Application.GetOrCreate(iChannel.GetApplication()),
                     iChannel.GetApplicationId(), iChannel.IsSolo()));
 
-            channel.UserNames = new List<Entites.UserName> { DAL.UserName.Create(UserName.ExtractUserName(iChannel, channel)) };
+            channel.UserNames = new List<Entites.UserName>
+            {
+                DAL.UserName.Create(UserName.ExtractUserName(iChannel, channel))
+            };
 
             if (!channel.Private)
             {
@@ -70,7 +75,9 @@ namespace Terministrator.Terministrator.BLL
 
         public static Entites.Channel GetPrivateChannel(Entites.User user)
         {
-            return DAL.User.LoadChannels(user).Channels.FirstOrDefault(x => DAL.UserToChannel.LoadChannel(x).Channel.Private)?.Channel;
+            return
+                DAL.User.LoadChannels(user)
+                    .Channels.FirstOrDefault(x => DAL.UserToChannel.LoadChannel(x).Channel.Private)?.Channel;
         }
 
         public static void GetTopPosters(Command command, Core core = null)
@@ -78,7 +85,8 @@ namespace Terministrator.Terministrator.BLL
             StringBuilder sb = new StringBuilder();
             foreach (Entites.UserToChannel userToChannel in TopPoster(command.Message.UserToChannel.Channel))
             {
-                sb.AppendLine($"{DAL.User.LoadUserNames(DAL.UserToChannel.LoadUser(userToChannel).User)} - {DAL.UserToChannel.CountMessage(userToChannel.UserToChannelId)} messages");
+                sb.AppendLine(
+                    $"{DAL.User.LoadUserNames(DAL.UserToChannel.LoadUser(userToChannel).User)} - {DAL.UserToChannel.CountMessage(userToChannel.UserToChannelId)} messages");
             }
             command.Message.Application.SendMessage(Message.Answer(command.Message, sb.ToString()));
         }

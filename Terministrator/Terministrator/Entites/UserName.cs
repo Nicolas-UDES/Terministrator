@@ -14,7 +14,8 @@ namespace Terministrator.Terministrator.Entites
         {
         }
 
-        public UserName(string firstName, string lastName, string username, bool current, DateTime changedOn, Namable ownedBy)
+        public UserName(string firstName, string lastName, string username, bool current, DateTime changedOn,
+            Namable ownedBy)
         {
             FirstName = firstName;
             LastName = lastName;

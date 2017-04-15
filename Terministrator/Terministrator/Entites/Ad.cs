@@ -10,7 +10,9 @@ namespace Terministrator.Terministrator.Entites
 {
     class Ad
     {
-        public Ad() { }
+        public Ad()
+        {
+        }
 
         public Ad(int maxShow, string name, DateTime lastSent, Message message, AdSystem adSystem)
         {

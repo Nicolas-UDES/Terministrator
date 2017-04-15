@@ -1,9 +1,10 @@
-﻿using System;
+﻿#region Usings
+
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terministrator.Terministrator.Types;
+
+#endregion
 
 namespace Terministrator.Terministrator.BLL
 {
@@ -82,12 +83,14 @@ namespace Terministrator.Terministrator.BLL
             string[] args = command.Arguement.Split(new[] {' '}, 2);
             if (args.Length == 0)
             {
-                command.Message.Application.SendMessage(Message.Answer(command.Message, "The command is \"/addprivileges name [copiedprivileges]\"."));
+                command.Message.Application.SendMessage(Message.Answer(command.Message,
+                    "The command is \"/addprivileges name [copiedprivileges]\"."));
                 return;
             }
             if (GetPrivileges(command.Message.UserToChannel.Channel, args[0]) != null)
             {
-                command.Message.Application.SendMessage(Message.Answer(command.Message, $"A privileges group named {args[0]} already exists."));
+                command.Message.Application.SendMessage(Message.Answer(command.Message,
+                    $"A privileges group named {args[0]} already exists."));
                 return;
             }
 
@@ -96,12 +99,15 @@ namespace Terministrator.Terministrator.BLL
                 : GetPrivileges(command.Message.UserToChannel.Channel, args[1]);
             if (copying == null)
             {
-                command.Message.Application.SendMessage(Message.Answer(command.Message, $"No privileges group nammed {args[1]} was found."));
+                command.Message.Application.SendMessage(Message.Answer(command.Message,
+                    $"No privileges group nammed {args[1]} was found."));
                 return;
             }
 
-            DAL.Privileges.Create(new Entites.Privileges(args[0], false, command.Message.UserToChannel.Channel, Rules.Create(Entites.Rules.Copy(DAL.Privileges.LoadRules(copying).Rules))));
-            command.Message.Application.SendMessage(Message.Answer(command.Message, $"The privileges group named {args[0]} {(args.Length == 2 ? $"inheriting {args[1]} " : "")}was successfully created!"));
+            DAL.Privileges.Create(new Entites.Privileges(args[0], false, command.Message.UserToChannel.Channel,
+                Rules.Create(Entites.Rules.Copy(DAL.Privileges.LoadRules(copying).Rules))));
+            command.Message.Application.SendMessage(Message.Answer(command.Message,
+                $"The privileges group named {args[0]} {(args.Length == 2 ? $"inheriting {args[1]} " : "")}was successfully created!"));
         }
     }
 }

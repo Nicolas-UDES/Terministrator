@@ -1,10 +1,8 @@
 ﻿#region Usings
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Terministrator.Application.Interface;
-using Terministrator.Terministrator.DAL;
 
 #endregion
 
@@ -30,8 +28,10 @@ namespace Terministrator.Terministrator.BLL
 
         public static Entites.User Create(IUser iUser)
         {
-            Entites.User user = DAL.User.Create(new Entites.User(Application.GetOrCreate(iUser.GetApplication()), iUser.GetApplicationId()));
-            user.UserNames = new List<Entites.UserName> { DAL.UserName.Create(UserName.ExtractUserName(iUser, user)) };
+            Entites.User user =
+                DAL.User.Create(new Entites.User(Application.GetOrCreate(iUser.GetApplication()),
+                    iUser.GetApplicationId()));
+            user.UserNames = new List<Entites.UserName> {DAL.UserName.Create(UserName.ExtractUserName(iUser, user))};
             return user;
         }
 

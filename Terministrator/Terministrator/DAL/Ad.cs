@@ -1,5 +1,8 @@
-﻿using System;
-using System.Linq;
+﻿#region Usings
+
+using System;
+
+#endregion
 
 namespace Terministrator.Terministrator.DAL
 {
