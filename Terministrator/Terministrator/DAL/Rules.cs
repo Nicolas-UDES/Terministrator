@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using System.Data.Entity;
+using System.Security.Cryptography;
 
 #endregion
 
@@ -16,34 +17,50 @@ namespace Terministrator.Terministrator.DAL
         public static Entites.Rules Create(Entites.Rules rules)
         {
             Entites.Rules reference = ClearReferences(rules);
-            using (TerministratorContext conrules = new TerministratorContext(true))
+            using (TerministratorContext context = new TerministratorContext(true))
             {
-                rules.RulesId = conrules.Rules.Add(rules).RulesId;
-                conrules.SaveChanges();
+                rules.RulesId = context.Rules.Add(rules).RulesId;
+                context.SaveChanges();
             }
             return AddReferences(rules, reference);
         }
 
         public static Entites.Rules Get(int rulesId)
         {
-            using (TerministratorContext conrules = new TerministratorContext(true))
+            using (TerministratorContext context = new TerministratorContext(true))
             {
-                return conrules.Rules.Find(rulesId);
+                return context.Rules.Find(rulesId);
             }
         }
 
         public static Entites.Rules Update(Entites.Rules rules)
         {
-            using (TerministratorContext conrules = new TerministratorContext(true))
+            using (TerministratorContext context = new TerministratorContext(true))
             {
-                Entites.Rules old = conrules.Rules.Find(rules.RulesId);
+                Entites.Rules old = context.Rules.Find(rules.RulesId);
                 if (old != null)
                 {
+                    old.SpamDelay = rules.SpamDelay;
                     old.BlockedWordsEnabled = rules.BlockedWordsEnabled;
                     old.DomainBlocked = rules.DomainBlocked;
                     old.ExtensionBlocked = rules.ExtensionBlocked;
                     old.MessageTypeBlocked = rules.MessageTypeBlocked;
-                    conrules.SaveChanges();
+                    old.R9KEnabled = rules.R9KEnabled;
+                    context.SaveChanges();
+                }
+            }
+            return rules;
+        }
+
+        public static Entites.Rules UpdateBlockedWords(Entites.Rules rules)
+        {
+            using (TerministratorContext context = new TerministratorContext(true))
+            {
+                Entites.Rules old = context.Rules.Find(rules.RulesId);
+                if (old != null)
+                {
+                    old.BlockedWords = rules.BlockedWords;
+                    context.SaveChanges();
                 }
             }
             return rules;

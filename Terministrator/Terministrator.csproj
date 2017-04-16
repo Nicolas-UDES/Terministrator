@@ -128,6 +128,7 @@
     <Compile Include="Terministrator\Types\Enumerables.cs" />
     <Compile Include="Terministrator\Types\Logger.cs" />
     <Compile Include="Terministrator\Types\Regex.cs" />
+    <Compile Include="Terministrator\Types\Tools.cs" />
     <Compile Include="Terministrator\View\MainConsole.cs">
       <SubType>Form</SubType>
     </Compile>

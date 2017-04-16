@@ -20,8 +20,7 @@ namespace Terministrator
             System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
 
             Core core = new Core();
-            Application.TelegramApplication.Application.Instance.Token =
-                ConfigurationManager.AppSettings["TelegramTokenDebug"];
+            Application.TelegramApplication.Application.Instance.Token = ConfigurationManager.AppSettings["TelegramTokenDebug"];
             core.Register(Application.TelegramApplication.Application.Instance);
             Application.DiscordApplication.Application.Instance.Token = ConfigurationManager.AppSettings["DiscordToken"];
             core.Register(Application.DiscordApplication.Application.Instance);

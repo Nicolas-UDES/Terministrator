@@ -9,6 +9,16 @@ namespace Terministrator.Terministrator.Entites
 {
     class BlockedWord
     {
+        public BlockedWord()
+        {
+            
+        }
+
+        public BlockedWord(string word)
+        {
+            Word = word;
+        }
+
         [Key]
         public int BlockedWordId { get; set; }
 

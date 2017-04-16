@@ -39,6 +39,7 @@ namespace Terministrator.Terministrator.BLL
                 $"*Set Privileges*{nl}Synyax: \"/setprivileges [{us}user] privilegesName\". Set your or the user's privileges group.{nl}{nl}" +
                 $"*Rename Privileges*{nl}Synyax: \"/renameprivileges oldName newName\". Rename a privileges group. The name must not already exist in the channel.{nl}{nl}" +
                 $"*Add Privileges*{nl}Synyax: \"/addprivileges name [privilegesToCopy]\". Will create a new privileges group. If given another privileges group, will copy its rules; otherwise it takes the default ones.{nl}{nl}" +
+                $"*Reset Blocked Words*{nl}Synyax: \"/resetblockedwords privileges\". Will reset the blocked words to the initial list.{nl}{nl}" +
                 $"*Rules*{nl}Synyax: \"/rules [{us}user]\". Show the rules applying on your privileges group.{nl}{nl}" +
                 $"*Help*{nl}Synyax: \"/help [{us}user]\". Show this message.{nl}{nl}"));
         }

@@ -64,6 +64,7 @@ namespace Terministrator.Terministrator.DAL
             {
                 try
                 {
+                    //Pointless call (less populated table with never any results) just to see the reaction time of the DB
                     context.Application.SqlQuery("SELECT * FROM dbo.Applications WHERE ApplicationName is null;").Count();
                 }
                 catch (Exception e)

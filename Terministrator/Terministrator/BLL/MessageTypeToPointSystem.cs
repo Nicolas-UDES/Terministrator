@@ -38,6 +38,11 @@ namespace Terministrator.Terministrator.BLL
 
         internal static void SetAmounts(Command command, Core core = null)
         {
+            if (Tools.IsNotAdminThenSendWarning(command))
+            {
+                return;
+            }
+
             List<Entites.MessageTypeToPointSystem> olds =
                 GetAll(command.Message.UserToChannel.Channel.PointSystem.ChannelId);
             DeleteAllFrom(command.Message.UserToChannel.Channel.PointSystem.ChannelId);

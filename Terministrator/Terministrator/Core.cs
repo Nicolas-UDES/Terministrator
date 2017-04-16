@@ -42,6 +42,8 @@ namespace Terministrator.Terministrator
                 {"addprivileges", Privileges.AddPrivileges},
                 {"renameprivileges", Privileges.RenamePrivileges},
                 {"rules", Rules.GetRules},
+                {"setrules", Rules.SetRules},
+                {"resetblockedwords", Rules.ResetBlockedWords},
                 {"start", BLL.Terministrator.Start},
                 {"help", BLL.Terministrator.Help}
             };
@@ -185,7 +187,7 @@ namespace Terministrator.Terministrator
                 Action<Command, Core> action = Commands[command];
                 Logger.LoggerInstance.LogInformation(
                     $"Command recognized. Calling {action.Method.ReflectedType?.FullName}.{action.Method.Name}");
-                action(new Command(message, command, command.Substring(index + 1)), this);
+                action(new Command(message, command, message.GetText().Substring(index + 1)), this);
                 return true;
             }
             return false;

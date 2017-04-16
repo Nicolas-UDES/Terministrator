@@ -62,8 +62,7 @@ namespace Terministrator.Terministrator.BLL
         {
             float points =
                 DAL.PointSystem.LoadMessageTypes(DAL.Channel.LoadPointSystem(message.UserToChannel.Channel).PointSystem)
-                    ?.MessageTypeToPointSystem.FirstOrDefault(x => x.MessageTypeId == message.MessageTypeId)?.Reward ??
-                0;
+                    ?.MessageTypeToPointSystem.FirstOrDefault(x => x.MessageTypeId == message.MessageTypeId)?.Reward ?? 0;
             message.UserToChannel.Points += points;
             Update(message.UserToChannel);
             return points;
@@ -131,6 +130,11 @@ namespace Terministrator.Terministrator.BLL
 
         public static void SetPrivileges(Command command, Core core = null)
         {
+            if (Tools.IsNotAdminThenSendWarning(command))
+            {
+                return;
+            }
+
             string[] arguements = command.Arguement.Split(new[] {' '}, 2);
             string user;
             string privilegesName;

@@ -44,6 +44,11 @@ namespace Terministrator.Terministrator.BLL
 
         public static void RenamePrivileges(Command command, Core core = null)
         {
+            if (Tools.IsNotAdminThenSendWarning(command))
+            {
+                return;
+            }
+
             string[] args = command.Arguement.Split(new[] {' '}, 2);
             if (args.Length != 2)
             {
@@ -80,6 +85,11 @@ namespace Terministrator.Terministrator.BLL
 
         public static void AddPrivileges(Command command, Core core = null)
         {
+            if (Tools.IsNotAdminThenSendWarning(command))
+            {
+                return;
+            }
+
             string[] args = command.Arguement.Split(new[] {' '}, 2);
             if (args.Length == 0)
             {
