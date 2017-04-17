@@ -11,33 +11,48 @@ namespace Terministrator.Terministrator.BLL
 {
     static class Ad
     {
-        public static Entites.Ad GetOrCreate(Entites.Ad ad)
-        {
-            return Get(ad) ?? Create(ad);
-        }
-
-        public static Entites.Ad Get(Entites.Ad ad)
-        {
-            return Get(ad.AdId);
-        }
-
+        /// <summary>
+        /// Gets the specified ad.
+        /// </summary>
+        /// <param name="adId">The ad identifier.</param>
+        /// <returns>The requested ad.</returns>
         public static Entites.Ad Get(int adId)
         {
             return DAL.Ad.Get(adId);
         }
 
+        /// <summary>
+        /// Creates the specified ad.
+        /// </summary>
+        /// <param name="ad">The ad.</param>
+        /// <returns>The newly created ad.</returns>
         public static Entites.Ad Create(Entites.Ad ad)
         {
             return DAL.Ad.Create(ad);
         }
 
+        /// <summary>
+        /// Updates the specified ad.
+        /// </summary>
+        /// <param name="ad">The ad.</param>
+        /// <returns>The first arguement.</returns>
         public static Entites.Ad Update(Entites.Ad ad)
         {
             return DAL.Ad.Update(ad);
         }
 
+        /// <summary>
+        /// Mod command. Add a new ad to repeat on the channel following the ad system's settings.
+        /// </summary>
+        /// <param name="command">The command.</param>
+        /// <param name="core">The core.</param>
         public static void AddAd(Command command, Core core = null)
         {
+            if (Tools.IsNotModThenSendWarning(command))
+            {
+                return;
+            }
+
             DAL.Channel.LoadAdSystem(command.Message.UserToChannel.Channel);
             DAL.Message.LoadRepliesTo(command.Message);
             if (command.Arguement == null || command.Message.UserToChannel.Channel.AdSystem == null ||
@@ -57,6 +72,11 @@ namespace Terministrator.Terministrator.BLL
             t.Start();
         }
 
+        /// <summary>
+        /// Sends the requested ad.
+        /// </summary>
+        /// <param name="timer">The timer calling this function.</param>
+        /// <param name="adId">The ad identifier.</param>
         private static void SendAd(Timer timer, int adId)
         {
             Entites.Ad ad = Get(adId);

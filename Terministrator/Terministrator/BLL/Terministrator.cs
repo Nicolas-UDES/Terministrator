@@ -15,6 +15,11 @@ namespace Terministrator.Terministrator.BLL
             ? ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString()
             : Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
+        /// <summary>
+        /// User command. Always sent when a user open a private discussion with the bot on Telegram.
+        /// </summary>
+        /// <param name="command">The command.</param>
+        /// <param name="core">The core.</param>
         public static void Start(Command command, Core core = null)
         {
             Entites.Message.SendMessage(Message.Answer(command.Message,
@@ -24,6 +29,14 @@ namespace Terministrator.Terministrator.BLL
                 $"Terministator ready. Send /help to begin troll annihilation."));
         }
 
+        /// <summary>
+        /// User command. Send every functions with an explanation for each of them.
+        /// </summary>
+        /// <remarks>
+        /// Should add something to explain the bot's goals as well.
+        /// </remarks>
+        /// <param name="command">The command.</param>
+        /// <param name="core">The core.</param>
         public static void Help(Command command, Core core = null)
         {
             string nl = Environment.NewLine;

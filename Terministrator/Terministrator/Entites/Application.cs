@@ -85,9 +85,9 @@ namespace Terministrator.Terministrator.Entites
             GetApplication().Kick(user, channel);
         }
 
-        public List<IUser> Mods(IChannel channel)
+        public List<IUser> GetMods(IChannel channel)
         {
-            return GetApplication().Mods(channel);
+            return GetApplication().GetMods(channel);
         }
 
         public TimeSpan? Ping(TimeSpan? max = null)

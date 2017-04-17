@@ -9,8 +9,10 @@ namespace Terministrator.Terministrator.BLL
 {
     static class BlockedWord
     {
-        // https://www.frontgatemedia.com/a-list-of-723-bad-words-to-blacklist-and-how-to-use-facebooks-moderation-tool/
-
+        /// <summary>
+        /// Gets the default blocked words from app.config.
+        /// </summary>
+        /// <returns>The requested blocked words collection.</returns>
         public static List<Entites.BlockedWord> GetDefaultBlockedWords()
         {
             List<Entites.BlockedWord> types = new List<Entites.BlockedWord>();

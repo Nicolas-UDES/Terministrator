@@ -26,6 +26,9 @@ namespace Terministrator.Terministrator
 
     #endregion
 
+    /// <summary>
+    /// The core of the application. Distributes the commands and messages when receiving some.
+    /// </summary>
     public class Core
     {
         private static readonly Dictionary<string, Action<Command, Core>> Commands = new Dictionary
@@ -53,6 +56,9 @@ namespace Terministrator.Terministrator
         private readonly Timer _refreshPings;
         private readonly Timer _upTime;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Core"/> class.
+        /// </summary>
         public Core()
         {
             _applications = new List<IApplication>();
@@ -67,6 +73,9 @@ namespace Terministrator.Terministrator
             Logger.LoggerInstance.IsNoisy = true;
         }
 
+        /// <summary>
+        /// Starts this instance.
+        /// </summary>
         public void Start()
         {
             _applications.ForEach(x => x.Start());
@@ -75,6 +84,9 @@ namespace Terministrator.Terministrator
             Stop();
         }
 
+        /// <summary>
+        /// Stops this instance.
+        /// </summary>
         public void Stop()
         {
             _upTime.Dispose();
@@ -82,11 +94,19 @@ namespace Terministrator.Terministrator
             _applications.ForEach(x => x.Stop());
         }
 
+        /// <summary>
+        /// Updates the up time in the console.
+        /// </summary>
+        /// <param name="obj">The datetime to compare with.</param>
         private void UpdateUpTime(object obj)
         {
             _mainConsole.UpdateUpTime(DateTime.Now - (DateTime) obj);
         }
 
+        /// <summary>
+        /// Refreshes the pings in the console.
+        /// </summary>
+        /// <param name="obj">Unused.</param>
         private void RefreshPings(object obj)
         {
             _mainConsole.RefreshPing(0, TerministratorContext.Ping()?.Milliseconds);
@@ -97,14 +117,22 @@ namespace Terministrator.Terministrator
             }
         }
 
+        /// <summary>
+        /// Registers the specified application to start with the core.
+        /// </summary>
+        /// <param name="application">The application.</param>
         internal void Register(IApplication application)
         {
-            application.SetMessageDestination(ReceivedMessage);
+            application.SetMessageDestination(ReceiveMessage);
             _applications.Add(application);
             _mainConsole.AddClient(BLL.Application.GetOrCreate(application));
             _mainConsole.AddChannels(Channel.Get(application));
         }
 
+        /// <summary>
+        /// Sends the message before treating it if needed.
+        /// </summary>
+        /// <param name="message">The message.</param>
         private void SendMessage(Message message)
         {
             message.Application.SendMessage(message);
@@ -112,7 +140,11 @@ namespace Terministrator.Terministrator
             _mainConsole.MessagesSent++;
         }
 
-        void ReceivedMessage(IMessage iMessage)
+        /// <summary>
+        /// Receives the message.
+        /// </summary>
+        /// <param name="iMessage">The message.</param>
+        void ReceiveMessage(IMessage iMessage)
         {
             Logger.LoggerInstance.LogNoisy("Received a message.");
             try
@@ -133,6 +165,13 @@ namespace Terministrator.Terministrator
             }
         }
 
+        /// <summary>
+        /// Loads the subclasses from the message.
+        /// </summary>
+        /// <remarks>
+        /// This is a time eater; should ultimately all be moved in a single transaction
+        /// </remarks>
+        /// <param name="message">The message.</param>
         private static void LoadMessageChilds(Message message)
         {
             DAL.Channel.LoadPointSystem(
@@ -151,6 +190,10 @@ namespace Terministrator.Terministrator
             }
         }
 
+        /// <summary>
+        /// Dispatches the message to different methods waiting new messages.
+        /// </summary>
+        /// <param name="message">The message.</param>
         private void DispatchMessage(Message message)
         {
             _mainConsole.AddChannel(message.UserToChannel.Channel);
@@ -160,6 +203,11 @@ namespace Terministrator.Terministrator
             Rules.ReceivedMessage(message, CommandAnalyzer(message));
         }
 
+        /// <summary>
+        /// Parses the text and see if it's a command; if so calls the linked method.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <returns><c>true</c> if it was a command; otherwise, <c>false</c>.</returns>
         private bool CommandAnalyzer(Message message)
         {
             string command = message.GetText();

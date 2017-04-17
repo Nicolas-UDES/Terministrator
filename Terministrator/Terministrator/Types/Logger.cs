@@ -7,6 +7,9 @@ using System.Runtime.CompilerServices;
 
 namespace Terministrator.Terministrator.Types
 {
+    /// <summary>
+    /// Log the requested data in the designated places.
+    /// </summary>
     public class Logger
     {
         public enum Rating
@@ -25,8 +28,21 @@ namespace Terministrator.Terministrator.Types
 
         public static Logger LoggerInstance => Instance.Value;
 
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance is noisy. If it's not, it will ignores the calls to LogNoisy. 
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance is noisy; otherwise, <c>false</c>.
+        /// </value>
         public bool IsNoisy { get; set; }
 
+        /// <summary>
+        /// Logs the noisy.
+        /// </summary>
+        /// <param name="str">The string.</param>
+        /// <param name="lineNumber">The line number.</param>
+        /// <param name="memberName">Name of the member.</param>
+        /// <param name="filePath">The file path.</param>
         public void LogNoisy(string str, [CallerLineNumber] int lineNumber = 0,
             [CallerMemberName] string memberName = null, [CallerFilePath] string filePath = null)
         {
@@ -43,6 +59,13 @@ namespace Terministrator.Terministrator.Types
             }
         }
 
+        /// <summary>
+        /// Logs the information.
+        /// </summary>
+        /// <param name="str">The string.</param>
+        /// <param name="lineNumber">The line number.</param>
+        /// <param name="memberName">Name of the member.</param>
+        /// <param name="filePath">The file path.</param>
         public void LogInformation(string str, [CallerLineNumber] int lineNumber = 0,
             [CallerMemberName] string memberName = null, [CallerFilePath] string filePath = null)
         {
@@ -56,6 +79,13 @@ namespace Terministrator.Terministrator.Types
             });
         }
 
+        /// <summary>
+        /// Logs the warning.
+        /// </summary>
+        /// <param name="str">The string.</param>
+        /// <param name="lineNumber">The line number.</param>
+        /// <param name="memberName">Name of the member.</param>
+        /// <param name="filePath">The file path.</param>
         public void LogWarning(string str, [CallerLineNumber] int lineNumber = 0,
             [CallerMemberName] string memberName = null, [CallerFilePath] string filePath = null)
         {
@@ -69,6 +99,14 @@ namespace Terministrator.Terministrator.Types
             });
         }
 
+        /// <summary>
+        /// Logs the warning.
+        /// </summary>
+        /// <param name="e">The exception.</param>
+        /// <param name="str">The string.</param>
+        /// <param name="lineNumber">The line number.</param>
+        /// <param name="memberName">Name of the member.</param>
+        /// <param name="filePath">The file path.</param>
         public void LogWarning(Exception e, string str = null, [CallerLineNumber] int lineNumber = 0,
             [CallerMemberName] string memberName = null, [CallerFilePath] string filePath = null)
         {
@@ -83,6 +121,13 @@ namespace Terministrator.Terministrator.Types
             });
         }
 
+        /// <summary>
+        /// Logs the error.
+        /// </summary>
+        /// <param name="str">The string.</param>
+        /// <param name="lineNumber">The line number.</param>
+        /// <param name="memberName">Name of the member.</param>
+        /// <param name="filePath">The file path.</param>
         public void LogError(string str, [CallerLineNumber] int lineNumber = 0,
             [CallerMemberName] string memberName = null, [CallerFilePath] string filePath = null)
         {
@@ -96,6 +141,14 @@ namespace Terministrator.Terministrator.Types
             });
         }
 
+        /// <summary>
+        /// Logs the error.
+        /// </summary>
+        /// <param name="e">The exception.</param>
+        /// <param name="str">The string.</param>
+        /// <param name="lineNumber">The line number.</param>
+        /// <param name="memberName">Name of the member.</param>
+        /// <param name="filePath">The file path.</param>
         public void LogError(Exception e, string str = null, [CallerLineNumber] int lineNumber = 0,
             [CallerMemberName] string memberName = null, [CallerFilePath] string filePath = null)
         {
@@ -110,13 +163,24 @@ namespace Terministrator.Terministrator.Types
             });
         }
 
+        /// <summary>
+        /// Raises the <see cref="E:LoggingRequested" /> event.
+        /// </summary>
+        /// <param name="e">The <see cref="LoggingRequestedEventArgs"/> instance containing the event data.</param>
         protected void OnLoggingRequested(LoggingRequestedEventArgs e)
         {
             LoggingRequested?.Invoke(this, e);
         }
 
+        /// <summary>
+        /// Occurs when logging is requested.
+        /// </summary>
         public event EventHandler<LoggingRequestedEventArgs> LoggingRequested;
 
+        /// <summary>
+        /// Contains the data this was called with.
+        /// </summary>
+        /// <seealso cref="System.EventArgs" />
         public class LoggingRequestedEventArgs : EventArgs
         {
             public Rating Rating { get; set; }

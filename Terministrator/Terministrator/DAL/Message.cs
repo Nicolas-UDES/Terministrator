@@ -11,11 +11,11 @@ namespace Terministrator.Terministrator.DAL
 {
     static class Message
     {
-        public static bool Exists(Entites.Message message)
-        {
-            return Get(message.IdForApplication, message.UserToChannel.Channel.Application.ApplicationName) != null;
-        }
-
+        /// <summary>
+        /// Creates the specified message.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <returns>The same message with an updated ID.</returns>
         public static Entites.Message Create(Entites.Message message)
         {
             Entites.Message reference = ClearReferences(message);
@@ -27,6 +27,12 @@ namespace Terministrator.Terministrator.DAL
             return AddReferences(message, reference);
         }
 
+        /// <summary>
+        /// Gets the specified message.
+        /// </summary>
+        /// <param name="messageID">The message identifier (for the application).</param>
+        /// <param name="application">The application.</param>
+        /// <returns>The requested message. Null if none found.</returns>
         public static Entites.Message Get(string messageID, string application)
         {
             using (TerministratorContext context = new TerministratorContext(true))
@@ -38,17 +44,14 @@ namespace Terministrator.Terministrator.DAL
             }
         }
 
-        public static List<Entites.Message> GetAll(string channelID, string application)
-        {
-            using (TerministratorContext context = new TerministratorContext(true))
-            {
-                return (from c in context.Message
-                    where c.UserToChannel.Channel.IdForApplication == channelID &&
-                          c.ApplicationName == application
-                    select c).ToList();
-            }
-        }
-
+        /// <summary>
+        /// Count the messages between two dates.
+        /// </summary>
+        /// <param name="channelId">The channel identifier.</param>
+        /// <param name="applicationName">Name of the application.</param>
+        /// <param name="deb">The start date (inclusive).</param>
+        /// <param name="fin">The end date (exclusive).</param>
+        /// <returns>The number of messages.</returns>
         public static int NbMessagesBetween(int channelId, string applicationName, DateTime deb, DateTime fin)
         {
             using (TerministratorContext context = new TerministratorContext(true))
@@ -62,6 +65,11 @@ namespace Terministrator.Terministrator.DAL
             }
         }
 
+        /// <summary>
+        /// Loads the user to channel of a message.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <returns>The same message with the user to channel loaded.</returns>
         public static Entites.Message LoadUserToChannel(Entites.Message message)
         {
             using (TerministratorContext context = new TerministratorContext(true))
@@ -77,6 +85,11 @@ namespace Terministrator.Terministrator.DAL
             return message;
         }
 
+        /// <summary>
+        /// Loads the text collection of a message.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <returns>The same message with the text collection loaded.</returns>
         public static Entites.Message LoadTexts(Entites.Message message)
         {
             using (TerministratorContext context = new TerministratorContext(true))
@@ -87,6 +100,11 @@ namespace Terministrator.Terministrator.DAL
             return message;
         }
 
+        /// <summary>
+        /// Loads the application of the message.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <returns>The same message with the application instance initialized.</returns>
         public static Entites.Message LoadApplication(Entites.Message message)
         {
             using (TerministratorContext context = new TerministratorContext(true))
@@ -97,6 +115,11 @@ namespace Terministrator.Terministrator.DAL
             return message;
         }
 
+        /// <summary>
+        /// Loads the message being replied to.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <returns>The same message with the replied message loaded.</returns>
         public static Entites.Message LoadRepliesTo(Entites.Message message)
         {
             using (TerministratorContext context = new TerministratorContext(true))
@@ -110,6 +133,11 @@ namespace Terministrator.Terministrator.DAL
             return message;
         }
 
+        /// <summary>
+        /// Clears the references of the message.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <returns>A copy of the message given in entry with only the references.</returns>
         private static Entites.Message ClearReferences(Entites.Message message)
         {
             Entites.Message reference = new Entites.Message(message.Application, null, DateTime.MinValue,
@@ -122,6 +150,12 @@ namespace Terministrator.Terministrator.DAL
             return reference;
         }
 
+        /// <summary>
+        /// Adds the references of the second arguement in the first one.
+        /// </summary>
+        /// <param name="message">The message to add the references in.</param>
+        /// <param name="reference">The references.</param>
+        /// <returns>The first arguement.</returns>
         private static Entites.Message AddReferences(Entites.Message message, Entites.Message reference)
         {
             message.Application = reference.Application;

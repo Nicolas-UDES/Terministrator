@@ -16,6 +16,10 @@ using User = Terministrator.Terministrator.DAL.User;
 
 namespace Terministrator.Terministrator.View
 {
+    /// <summary>
+    /// The main console to administrate Terministrator.
+    /// </summary>
+    /// <seealso cref="System.Windows.Forms.Form" />
     public partial class MainConsole : Form
     {
         private const string TimeFormat = "d'd 'hh':'mm':'ss";
@@ -25,9 +29,14 @@ namespace Terministrator.Terministrator.View
         private readonly Label[] _statusPings;
         private int _messagesReceived;
 
+        private int _monitoredChannels;
         private int _messagesSent;
         private float _points;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainConsole"/> class.
+        /// </summary>
+        /// <param name="sendMessage">The send message.</param>
         internal MainConsole(Action<Message> sendMessage)
         {
             InitializeComponent();
@@ -37,7 +46,12 @@ namespace Terministrator.Terministrator.View
             _statusPings = new[] {label_Status0, label_Ping0, label_Status1, label_Ping1, label_Status2, label_Ping2};
         }
 
-
+        /// <summary>
+        /// Gets or sets the messages sent.
+        /// </summary>
+        /// <value>
+        /// The messages sent.
+        /// </value>
         public int MessagesSent
         {
             get { return _messagesSent; }
@@ -48,6 +62,12 @@ namespace Terministrator.Terministrator.View
             }
         }
 
+        /// <summary>
+        /// Gets or sets the messages received.
+        /// </summary>
+        /// <value>
+        /// The messages received.
+        /// </value>
         public int MessagesReceived
         {
             get { return _messagesReceived; }
@@ -58,6 +78,12 @@ namespace Terministrator.Terministrator.View
             }
         }
 
+        /// <summary>
+        /// Gets or sets the points.
+        /// </summary>
+        /// <value>
+        /// The points.
+        /// </value>
         public float Points
         {
             get { return _points; }
@@ -68,6 +94,27 @@ namespace Terministrator.Terministrator.View
             }
         }
 
+        /// <summary>
+        /// Gets the monitored channels.
+        /// </summary>
+        /// <value>
+        /// The monitored channels.
+        /// </value>
+        public int MonitoredChannels
+        {
+            get { return _monitoredChannels; }
+            private set
+            {
+                _monitoredChannels = value;
+                SetLabel(label_monitoredChannels, value.ToString());
+            }
+        }
+
+        /// <summary>
+        /// Handles the CheckedChanged event of the RadioButton_Channel control. Refresh the available channels when it happens.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void RadioButton_Channel_CheckedChanged(object sender, EventArgs e)
         {
             label_ChannelUser.Text = (radioButton_Channel.Checked ? radioButton_Channel.Text : radioButton_User.Text) +
@@ -75,12 +122,20 @@ namespace Terministrator.Terministrator.View
             RefreshChannelUserDataSource();
         }
 
+        /// <summary>
+        /// Refreshes list of channel.
+        /// </summary>
         private void RefreshChannelUserDataSource()
         {
             comboBox_ChannelUser.DataSource =
                 _channels[comboBox_Application.Text].Where(x => x.Private == radioButton_User.Checked).ToList();
         }
 
+        /// <summary>
+        /// Controls the access on a control over multiple threads.
+        /// </summary>
+        /// <param name="control">The control.</param>
+        /// <param name="action">The action.</param>
         private void ControlAccess(Control control, Action action)
         {
             if (control.InvokeRequired)
@@ -93,27 +148,50 @@ namespace Terministrator.Terministrator.View
             }
         }
 
+        /// <summary>
+        /// Wrapper to set a label.
+        /// </summary>
+        /// <param name="label">The label.</param>
+        /// <param name="text">The text.</param>
         private void SetLabel(Label label, string text)
         {
             ControlAccess(label, () => { label.Text = text; });
         }
 
+        /// <summary>
+        /// Updates since how long the application has been running.
+        /// </summary>
+        /// <param name="upTime">Up time.</param>
         public void UpdateUpTime(TimeSpan upTime)
         {
             SetLabel(label_Uptime, upTime.ToString(TimeFormat));
         }
 
+        /// <summary>
+        /// Updates since when the appplication has been running.
+        /// </summary>
+        /// <param name="upSince">Up since.</param>
         public void UpdateUpSince(DateTime upSince)
         {
-            label_UpSince.Text = upSince.ToString(CultureInfo.InvariantCulture);
+            SetLabel(label_UpSince, upSince.ToString(CultureInfo.InvariantCulture));
         }
 
+        /// <summary>
+        /// Refreshes the ping of the selected index.
+        /// </summary>
+        /// <param name="index">The index.</param>
+        /// <param name="ping">The ping.</param>
         public void RefreshPing(int index, long? ping)
         {
             SetLabel(_statusPings[index * 2], ping != null ? "Active" : "Inactive");
             SetLabel(_statusPings[index * 2 + 1], (ping ?? 0) + " ms");
         }
 
+        /// <summary>
+        /// Handles the Click event of the Button_Send control. Send what was written in the third tab's box.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void Button_Send_Click(object sender, EventArgs e)
         {
             Message message = BuildMessage();
@@ -124,6 +202,10 @@ namespace Terministrator.Terministrator.View
             AddMessage(message);
         }
 
+        /// <summary>
+        /// Builds a message sent with the third tab.
+        /// </summary>
+        /// <returns></returns>
         private Message BuildMessage()
         {
             Message message = new Message(
@@ -143,6 +225,10 @@ namespace Terministrator.Terministrator.View
             return message;
         }
 
+        /// <summary>
+        /// Adds the message in the third tab.
+        /// </summary>
+        /// <param name="message">The message.</param>
         internal void AddMessage(Message message)
         {
             int id = message.UserToChannel.ChannelId.Value;
@@ -166,6 +252,11 @@ namespace Terministrator.Terministrator.View
             ControlAccess(textBox_Interact, maybeAddText);
         }
 
+        /// <summary>
+        /// Handles the SelectedIndexChanged event of the ComboBox_ChannelUser control. Shows the new channel in the text box when it happens.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void ComboBox_ChannelUser_SelectedIndexChanged(object sender, EventArgs e)
         {
             int id = ((Channel) comboBox_ChannelUser.SelectedItem).NamableId;
@@ -174,16 +265,20 @@ namespace Terministrator.Terministrator.View
                 : "";
         }
 
+        /// <summary>
+        /// Handles the SelectedIndexChanged event of the comboBox_Application control. Refreshes the available channels when it happens.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void comboBox_Application_SelectedIndexChanged(object sender, EventArgs e)
         {
             RefreshChannelUserDataSource();
         }
 
-        internal void AddClients(List<Entites.Application> clients)
-        {
-            clients.ForEach(AddClient);
-        }
-
+        /// <summary>
+        /// Adds the client to the third tab.
+        /// </summary>
+        /// <param name="client">The client.</param>
         internal void AddClient(Entites.Application client)
         {
             if (_channels.ContainsKey(client.ApplicationName))
@@ -195,11 +290,19 @@ namespace Terministrator.Terministrator.View
             ControlAccess(comboBox_Application, () => { comboBox_Application.Items.Add(client); });
         }
 
+        /// <summary>
+        /// Adds the channels.
+        /// </summary>
+        /// <param name="channels">The channels.</param>
         internal void AddChannels(List<Channel> channels)
         {
             channels.ForEach(AddChannel);
         }
 
+        /// <summary>
+        /// Adds the channel in the third tab and count it in the first one.
+        /// </summary>
+        /// <param name="channel">The channel.</param>
         internal void AddChannel(Channel channel)
         {
             if (_channels[channel.ApplicationName].Exists(x => x.NamableId == channel.NamableId))
@@ -208,6 +311,7 @@ namespace Terministrator.Terministrator.View
             }
 
             _channels[channel.ApplicationName].Add(channel);
+            MonitoredChannels++;
             if (channel.Private == radioButton_User.Checked &&
                 comboBox_Application.Text.Equals(channel.ApplicationName, StringComparison.InvariantCultureIgnoreCase))
             {
@@ -215,16 +319,25 @@ namespace Terministrator.Terministrator.View
             }
         }
 
+        /// <summary>
+        /// Logs the specified data.
+        /// </summary>
+        /// <param name="logger">The logger.</param>
+        /// <param name="args">The <see cref="Logger.LoggingRequestedEventArgs"/> instance containing the event data.</param>
         public void Log(object logger, Logger.LoggingRequestedEventArgs args)
         {
-            string log = $"{GetPaddedRating(RatingToString(args.Rating))} at " +
-                         $"{DateTime.Now} located in {args.CallerFilePath?.Substring(args.CallerFilePath.LastIndexOf('\\') + 1)} " +
-                         $"{(args.CallerMemberName != null ? $"{args.CallerMemberName} " : "")}" +
-                         $"line {args.CallerLineNumber}{(args.Text != null ? ": " + args.Text : ".")}" +
-                         $"{(args.Exception != null ? $"\r\n{args.Exception}" : "")}";
-            Log(log);
+            Log($"{GetPaddedRating(RatingToString(args.Rating))} at " +
+                $"{DateTime.Now} located in {args.CallerFilePath?.Substring(args.CallerFilePath.LastIndexOf('\\') + 1)} " +
+                $"{(args.CallerMemberName != null ? $"{args.CallerMemberName} " : "")}" +
+                $"line {args.CallerLineNumber}{(args.Text != null ? ": " + args.Text : ".")}" +
+                $"{(args.Exception != null ? $"\r\n{args.Exception}" : "")}");
         }
 
+        /// <summary>
+        /// Change the enum to a showable string.
+        /// </summary>
+        /// <param name="rating">The rating.</param>
+        /// <returns></returns>
         private string RatingToString(Logger.Rating rating)
         {
             switch (rating)
@@ -242,17 +355,31 @@ namespace Terministrator.Terministrator.View
             return null;
         }
 
+        /// <summary>
+        /// Gets the padded rating.
+        /// </summary>
+        /// <param name="rating">The rating.</param>
+        /// <returns></returns>
         private string GetPaddedRating(string rating)
         {
-            return new string(' ', 15 - rating.Length) + rating;
+            return new string(' ', RatingToString(Logger.Rating.Warning).Length - rating.Length) + rating;
         }
 
+        /// <summary>
+        /// Logs the specified string in the second tab.
+        /// </summary>
+        /// <param name="str">The string.</param>
         private void Log(string str)
         {
             ControlAccess(textBox_log,
                 () => { textBox_log.AppendText($"{(textBox_log.Text.Length > 0 ? "\r\n" : "")}{str}"); });
         }
 
+        /// <summary>
+        /// Handles the Click event of the button_Clear control. Clears the logs on the second tab.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void button_Clear_Click(object sender, EventArgs e)
         {
             ControlAccess(textBox_log, () => { textBox_log.Clear(); });

@@ -57,6 +57,10 @@ namespace Terministrator.Terministrator.DAL
             base.Dispose();
         }
 
+        /// <summary>
+        /// Pings the database.
+        /// </summary>
+        /// <returns>The time necessary to ping. Null if no connection.</returns>
         public static TimeSpan? Ping()
         {
             DateTime now = DateTime.UtcNow;
@@ -67,7 +71,7 @@ namespace Terministrator.Terministrator.DAL
                     //Pointless call (less populated table with never any results) just to see the reaction time of the DB
                     context.Application.SqlQuery("SELECT * FROM dbo.Applications WHERE ApplicationName is null;").Count();
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     return null;
                 }

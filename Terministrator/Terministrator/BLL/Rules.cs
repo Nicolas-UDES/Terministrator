@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Terministrator.Application.Interface;
@@ -15,9 +16,15 @@ namespace Terministrator.Terministrator.BLL
     {
         // 3119/4500
         private const double MuteTimeConstant = 0.69311111111111;
+        // 10%
         private static readonly double SignalRatio = 0.1;
         private static readonly TimeSpan TimeoutLimit = TimeSpan.FromDays(365);
 
+        /// <summary>
+        /// Apply the rules on a newly received message.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <param name="isCommand">If the message was recognized as a command.</param>
         internal static void ReceivedMessage(Entites.Message message, bool isCommand)
         {
             if (!isCommand && message.Texts.Any())
@@ -30,14 +37,35 @@ namespace Terministrator.Terministrator.BLL
                 {
                     ApplyBlockedWords(message);
                 }
+                if ((message.UserToChannel?.Privileges?.Rules?.SpamDelay.HasValue ?? false) && message.UserToChannel.Privileges.Rules.SpamDelay > TimeSpan.Zero)
+                {
+                    ApplySpamDelay(message);
+                }
             }
         }
 
+        /// <summary>
+        /// Applies the spam delay. If the delay wasn't respected, <see cref="Fail"/> them.
+        /// </summary>
+        /// <param name="message">The message to analyze.</param>
+        private static void ApplySpamDelay(Entites.Message message)
+        {
+            Debug.Assert(message.UserToChannel.Privileges.Rules.SpamDelay != null, "message.UserToChannel.Privileges.Rules.SpamDelay != null");
+            if (message.SentOn - UserToChannel.GetMessageBefore(message.UserToChannel, message.SentOn).SentOn < message.UserToChannel.Privileges.Rules.SpamDelay.Value)
+            {
+                Fail(message, "You are sending messages too quickly. Be careful or you will be kicked.");
+            }
+        }
+
+        /// <summary>
+        /// Applies the blocked words filter. If a blocked word is found in the message, <see cref="Fail"/> them.
+        /// </summary>
+        /// <param name="message">The message to analyze.</param>
         private static void ApplyBlockedWords(Entites.Message message)
         {
             foreach (Entites.BlockedWord blockedWord in message.UserToChannel.Privileges.Rules.BlockedWords)
             {
-                if (message.GetText().Contains(blockedWord.Word))
+                if (message.GetText().IndexOf(blockedWord.Word, StringComparison.InvariantCultureIgnoreCase) >= 0)
                 {
                     Fail(message, "Your message contains a blocked word. Be careful or you will be kicked.");
                     return;
@@ -45,6 +73,10 @@ namespace Terministrator.Terministrator.BLL
             }
         }
 
+        /// <summary>
+        /// Applies the r9k filter. If a message with an identical r9k text is found, <see cref="Fail"/> them.
+        /// </summary>
+        /// <param name="message">The message to analyze.</param>
         private static void ApplyR9K(Entites.Message message)
         {
             Entites.Text text = message.Texts.OrderByDescending(x => x.SetOn).First();
@@ -59,6 +91,11 @@ namespace Terministrator.Terministrator.BLL
             }
         }
 
+        /// <summary>
+        /// Fails the user due to the specified message. Warn them if they weren't muted, kick them otherwise.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <param name="reason">The reason.</param>
         private static void Fail(Entites.Message message, string reason)
         {
             message.UserToChannel.NbSilences++;
@@ -77,6 +114,10 @@ namespace Terministrator.Terministrator.BLL
             Entites.Message.SendMessage(Message.Answer(message, reason));
         }
 
+        /// <summary>
+        /// Kicks the specified user from the channel if possible. Otherwise warn the mods.
+        /// </summary>
+        /// <param name="userToChannel">The user to channel.</param>
         private static void Kick(Entites.UserToChannel userToChannel)
         {
             if (userToChannel.Application.CanKick(userToChannel.Channel))
@@ -89,9 +130,13 @@ namespace Terministrator.Terministrator.BLL
             }
         }
 
+        /// <summary>
+        /// Sends a warning message to the mods about someone whom should be kicked.
+        /// </summary>
+        /// <param name="userToChannel">The user to channel to warn about.</param>
         private static void SendWarningMessages(Entites.UserToChannel userToChannel)
         {
-            foreach (IUser user in userToChannel.Application.Mods(DAL.UserToChannel.LoadChannel(userToChannel).Channel))
+            foreach (IUser user in userToChannel.Application.GetMods(DAL.UserToChannel.LoadChannel(userToChannel).Channel))
             {
                 Entites.Channel c = Channel.GetPrivateChannel(User.GetOrCreate(user));
                 if (c != null)
@@ -101,6 +146,11 @@ namespace Terministrator.Terministrator.BLL
             }
         }
 
+        /// <summary>
+        /// Apply the R9K filter to a string.
+        /// </summary>
+        /// <param name="msg">The text.</param>
+        /// <returns></returns>
         public static string ToR9KText(string msg)
         {
             msg = msg.ToLower();
@@ -116,11 +166,23 @@ namespace Terministrator.Terministrator.BLL
             return msg;
         }
 
+        /// <summary>
+        /// Shorten the use of a regex to replace a pattern in a text.
+        /// </summary>
+        /// <param name="text">The text.</param>
+        /// <param name="pattern">The pattern.</param>
+        /// <param name="replacement">The replacement.</param>
+        /// <returns>The replaced text.</returns>
         private static string RegexReplace(string text, string pattern, string replacement)
         {
             return new System.Text.RegularExpressions.Regex(pattern, RegexOptions.None).Replace(text, replacement);
         }
 
+        /// <summary>
+        /// Calculates the mute time one should get if this is their Nth mute.
+        /// </summary>
+        /// <param name="nbMutes">The nb mutes, greather than 0</param>
+        /// <returns></returns>
         private static TimeSpan GetMuteTime(int nbMutes)
         {
             return nbMutes <= 0
@@ -128,34 +190,57 @@ namespace Terministrator.Terministrator.BLL
                 : TimeSpan.FromSeconds(2.5 * Math.Pow(Math.E, MuteTimeConstant * nbMutes));
         }
 
+        /// <summary>
+        /// Creates the specified rules.
+        /// </summary>
+        /// <param name="rules">The rules.</param>
+        /// <returns>The same rules with an updated ID.</returns>
         public static Entites.Rules Create(Entites.Rules rules)
         {
             return DAL.Rules.Create(rules);
         }
 
+        /// <summary>
+        /// Creates a rules object with as few rules as possible.
+        /// </summary>
+        /// <returns>The requested rules</returns>
         public static Entites.Rules GetNewModRules()
         {
             return new Entites.Rules(null, false, false, false, false, false);
         }
 
+        /// <summary>
+        /// Creates a rules object with a maximum amount of rules.
+        /// </summary>
+        /// <returns>The requested rules</returns>
         public static Entites.Rules GetNewUserRules()
         {
-            Entites.Rules rules = new Entites.Rules(TimeSpan.FromSeconds(10), true, true, true, false, true)
+            Entites.Rules rules = new Entites.Rules(TimeSpan.FromSeconds(10), true, true, true, true, true)
             {
                 BlockedWords = BlockedWord.GetDefaultBlockedWords()
             };
             return rules;
         }
 
+        /// <summary>
+        /// User command. Gets the rules applied to them.
+        /// </summary>
+        /// <param name="command">The command.</param>
+        /// <param name="core">The core.</param>
         public static void GetRules(Command command, Core core = null)
         {
             command.Message.Application.SendMessage(Message.Answer(command.Message,
                 command.Message.UserToChannel.Privileges.Rules.ToString()));
         }
 
+        /// <summary>
+        /// Mod command. Sets the rules applying to a privileges group.
+        /// </summary>
+        /// <param name="command">The command.</param>
+        /// <param name="core">The core.</param>
         public static void SetRules(Command command, Core core = null)
         {
-            if (Tools.IsNotAdminThenSendWarning(command))
+            if (Tools.IsNotModThenSendWarning(command))
             {
                 return;
             }
@@ -204,9 +289,14 @@ namespace Terministrator.Terministrator.BLL
             command.Message.Application.SendMessage(Message.Answer(command.Message, $"The rules of {arguements[0]} were successfully updated."));
         }
 
+        /// <summary>
+        /// Mod command. Resets the blocked words set on a privileges group.
+        /// </summary>
+        /// <param name="command">The command.</param>
+        /// <param name="core">The core.</param>
         public static void ResetBlockedWords(Command command, Core core = null)
         {
-            if (Tools.IsNotAdminThenSendWarning(command))
+            if (Tools.IsNotModThenSendWarning(command))
             {
                 return;
             }

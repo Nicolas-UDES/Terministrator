@@ -44,7 +44,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
+            this.label_monitoredChannels = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label_Uptime = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
@@ -198,7 +198,7 @@
             this.tableLayoutPanel2.Controls.Add(this.label4, 3, 1);
             this.tableLayoutPanel2.Controls.Add(this.label14, 2, 1);
             this.tableLayoutPanel2.Controls.Add(this.label17, 0, 2);
-            this.tableLayoutPanel2.Controls.Add(this.label15, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.label_monitoredChannels, 1, 1);
             this.tableLayoutPanel2.Controls.Add(this.label3, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.label_Uptime, 1, 2);
             this.tableLayoutPanel2.Controls.Add(this.label19, 2, 2);
@@ -295,15 +295,15 @@
             this.label17.TabIndex = 9;
             this.label17.Text = "Uptime";
             // 
-            // label15
+            // label_monitoredChannels
             // 
-            this.label15.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(256, 29);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(13, 13);
-            this.label15.TabIndex = 8;
-            this.label15.Text = "0";
+            this.label_monitoredChannels.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label_monitoredChannels.AutoSize = true;
+            this.label_monitoredChannels.Location = new System.Drawing.Point(256, 29);
+            this.label_monitoredChannels.Name = "label_monitoredChannels";
+            this.label_monitoredChannels.Size = new System.Drawing.Size(13, 13);
+            this.label_monitoredChannels.TabIndex = 8;
+            this.label_monitoredChannels.Text = "0";
             // 
             // label3
             // 
@@ -913,7 +913,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label_monitoredChannels;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label_Uptime;
         private System.Windows.Forms.Label label19;

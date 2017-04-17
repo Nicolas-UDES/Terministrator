@@ -1,0 +1,2662 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Terministrator</name>
+    </assembly>
+    <members>
+        <member name="M:Terministrator.Application.DiscordApplication.Channel.#ctor(DiscordSharp.Objects.DiscordChannel)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Terministrator.Application.DiscordApplication.Channel"/> class.
+            </summary>
+            <param name="channel">The channel.</param>
+        </member>
+        <member name="M:Terministrator.Application.DiscordApplication.Channel.#ctor(DiscordSharp.Objects.DiscordPrivateChannel)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Terministrator.Application.DiscordApplication.Channel"/> class.
+            </summary>
+            <param name="channel">The channel.</param>
+        </member>
+        <member name="M:Terministrator.Application.DiscordApplication.Channel.GetApplicationId">
+            <summary>
+            Gets the application identifier.
+            </summary>
+            <returns>
+            The application identifier
+            </returns>
+        </member>
+        <member name="M:Terministrator.Application.DiscordApplication.Channel.GetApplication">
+            <summary>
+            Gets the application.
+            </summary>
+            <returns>
+            The application
+            </returns>
+        </member>
+        <member name="M:Terministrator.Application.DiscordApplication.Channel.GetFirstName">
+            <summary>
+            Gets the first name.
+            </summary>
+            <returns>
+            The first name
+            </returns>
+        </member>
+        <member name="M:Terministrator.Application.DiscordApplication.Channel.GetLastName">
+            <summary>
+            Gets the last name.
+            </summary>
+            <returns>
+            The last name
+            </returns>
+        </member>
+        <member name="M:Terministrator.Application.DiscordApplication.Channel.GetUsername">
+            <summary>
+            Gets the username.
+            </summary>
+            <returns>
+            The username
+            </returns>
+        </member>
+        <member name="M:Terministrator.Application.DiscordApplication.Channel.IsSolo">
+            <summary>
+            Determines whether this instance is a private channel.
+            </summary>
+            <returns>
+              <c>true</c> if this instance is a private channel; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Terministrator.Application.DiscordApplication.Application.#ctor">
+            <summary>
+            Prevents a default instance of the <see cref="T:Terministrator.Application.DiscordApplication.Application"/> class from being created.
+            </summary>
+        </member>
+        <member name="M:Terministrator.Application.DiscordApplication.Application.GetApplicationName">
+            <summary>
+            Gets the name of the application.
+            </summary>
+            <returns>A <see cref="T:System.String"/> with the value "DISCORD"</returns>
+        </member>
+        <member name="M:Terministrator.Application.DiscordApplication.Application.SetMessageDestination(System.Action{Terministrator.Application.Interface.IMessage})">
+            <summary>
+            Sets the message destination.
+            </summary>
+            <param name="receivedMessage">The received message method.</param>
+        </member>
+        <member name="M:Terministrator.Application.DiscordApplication.Application.Start">
+            <summary>
+            Starts this instance.
+            </summary>
+        </member>
+        <member name="M:Terministrator.Application.DiscordApplication.Application.Stop">
+            <summary>
+            Stops this instance.
+            </summary>
+        </member>
+        <member name="M:Terministrator.Application.DiscordApplication.Application.GetTerministrator">
+            <summary>
+            Gets the terministrator.
+            </summary>
+            <returns>
+            Gets the user Terministrator on Discord.
+            </returns>
+        </member>
+        <member name="M:Terministrator.Application.DiscordApplication.Application.SendMessage(Terministrator.Application.Interface.IMessage)">
+            <summary>
+            Sends the message.
+            </summary>
+            <param name="message">The message.</param>
+            <returns>
+            A task containing the ID of the message sent.
+            </returns>
+        </member>
+        <member name="M:Terministrator.Application.DiscordApplication.Application.EditMessage(Terministrator.Application.Interface.IMessage)">
+            <summary>
+            Edits the message.
+            </summary>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:Terministrator.Application.DiscordApplication.Application.Kick(Terministrator.Application.Interface.IUser,Terministrator.Application.Interface.IChannel)">
+            <summary>
+            Kicks the specified user.
+            </summary>
+            <param name="user">The user.</param>
+            <param name="channel">The channel.</param>
+        </member>
+        <member name="M:Terministrator.Application.DiscordApplication.Application.CanKick(Terministrator.Application.Interface.IChannel)">
+            <summary>
+            Determines whether this instance can kick the specified user.
+            </summary>
+            <param name="channel">The channel.</param>
+            <returns>
+              <c>true</c> if this instance can kick the specified user; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Terministrator.Application.DiscordApplication.Application.GetMods(Terministrator.Application.Interface.IChannel)">
+            <summary>
+            Gets the mods of the specified channel.
+            </summary>
+            <param name="channel">The channel.</param>
+            <returns>
+            A collection of user which are moderators.
+            </returns>
+        </member>
+        <member name="M:Terministrator.Application.DiscordApplication.Application.Ping(System.Nullable{System.TimeSpan})">
+            <summary>
+            Pings the application.
+            </summary>
+            <param name="max">The maximum time a ping can take. 5s by default.</param>
+            <returns>
+            The time necessary to ping. Null if no connection.
+            </returns>
+        </member>
+        <member name="M:Terministrator.Application.DiscordApplication.Application.GetCommandSymbol">
+            <summary>
+            Gets the command symbol.
+            </summary>
+            <returns>
+            The command symbol.
+            </returns>
+        </member>
+        <member name="M:Terministrator.Application.DiscordApplication.Application.GetUserSymbol">
+            <summary>
+            Gets the user symbol.
+            </summary>
+            <returns>
+            The user symbol.
+            </returns>
+        </member>
+        <member name="M:Terministrator.Application.DiscordApplication.Application.MessageReceived(System.Object,DiscordSharp.Events.DiscordMessageEventArgs)">
+            <summary>
+            Called when Discord sends us a message.
+            </summary>
+            <param name="o">The o.</param>
+            <param name="args">The <see cref="T:DiscordSharp.Events.DiscordMessageEventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="M:Terministrator.Application.DiscordApplication.Application.PrivateMessageReceived(System.Object,DiscordSharp.DiscordPrivateMessageEventArgs)">
+            <summary>
+            Called when Discord sends us a private message.
+            </summary>
+            <param name="o">The o.</param>
+            <param name="args">The <see cref="T:DiscordSharp.DiscordPrivateMessageEventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="M:Terministrator.Application.DiscordApplication.Message.#ctor(DiscordSharp.Events.DiscordMessageEventArgs)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Terministrator.Application.DiscordApplication.Message"/> class.
+            </summary>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:Terministrator.Application.DiscordApplication.Message.#ctor(DiscordSharp.DiscordPrivateMessageEventArgs)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Terministrator.Application.DiscordApplication.Message"/> class.
+            </summary>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:Terministrator.Application.DiscordApplication.Message.GetApplicationId">
+            <summary>
+            Gets the application identifier.
+            </summary>
+            <returns>
+            The application identifier
+            </returns>
+        </member>
+        <member name="M:Terministrator.Application.DiscordApplication.Message.GetFrom">
+            <summary>
+            Gets the author of the message.
+            </summary>
+            <returns>
+            The author
+            </returns>
+        </member>
+        <member name="M:Terministrator.Application.DiscordApplication.Message.GetChannel">
+            <summary>
+            Gets the channel.
+            </summary>
+            <returns>
+            The channel
+            </returns>
+        </member>
+        <member name="M:Terministrator.Application.DiscordApplication.Message.GetSentDate">
+            <summary>
+            Gets the sent date.
+            </summary>
+            <returns>
+            The sent date
+            </returns>
+        </member>
+        <member name="M:Terministrator.Application.DiscordApplication.Message.GetText">
+            <summary>
+            Gets the text.
+            </summary>
+            <returns>
+            The text
+            </returns>
+        </member>
+        <member name="M:Terministrator.Application.DiscordApplication.Message.GetRepliesTo">
+            <summary>
+            Gets the message replied by this one.
+            </summary>
+            <returns>
+            The message being replied to
+            </returns>
+        </member>
+        <member name="M:Terministrator.Application.DiscordApplication.Message.GetJoinedUser">
+            <summary>
+            Gets the joined user.
+            </summary>
+            <returns>
+            The joinded user
+            </returns>
+        </member>
+        <member name="M:Terministrator.Application.DiscordApplication.User.#ctor(DiscordSharp.Objects.DiscordMember)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Terministrator.Application.DiscordApplication.User"/> class.
+            </summary>
+            <param name="user">The user.</param>
+        </member>
+        <member name="M:Terministrator.Application.DiscordApplication.User.GetApplicationId">
+            <summary>
+            Gets the application identifier.
+            </summary>
+            <returns>
+            The application identifier
+            </returns>
+        </member>
+        <member name="M:Terministrator.Application.DiscordApplication.User.GetFirstName">
+            <summary>
+            Gets the first name.
+            </summary>
+            <returns>
+            The first name
+            </returns>
+        </member>
+        <member name="M:Terministrator.Application.DiscordApplication.User.GetLastName">
+            <summary>
+            Gets the last name.
+            </summary>
+            <returns>
+            The last name
+            </returns>
+        </member>
+        <member name="M:Terministrator.Application.DiscordApplication.User.GetUsername">
+            <summary>
+            Gets the username.
+            </summary>
+            <returns>
+            The username
+            </returns>
+        </member>
+        <member name="M:Terministrator.Application.DiscordApplication.User.GetApplication">
+            <summary>
+            Gets the application.
+            </summary>
+            <returns>
+            The application
+            </returns>
+        </member>
+        <member name="M:Terministrator.Application.Interface.IApplication.GetCommandSymbol">
+            <summary>
+            Gets the command symbol.
+            </summary>
+            <returns>The command symbol.</returns>
+        </member>
+        <member name="M:Terministrator.Application.Interface.IApplication.GetUserSymbol">
+            <summary>
+            Gets the user symbol.
+            </summary>
+            <returns>The user symbol.</returns>
+        </member>
+        <member name="M:Terministrator.Application.Interface.IApplication.GetApplicationName">
+            <summary>
+            Gets the name of the application.
+            </summary>
+            <returns>The name of the application.</returns>
+        </member>
+        <member name="M:Terministrator.Application.Interface.IApplication.SetMessageDestination(System.Action{Terministrator.Application.Interface.IMessage})">
+            <summary>
+            Sets the message destination.
+            </summary>
+            <param name="receivedMessage">The received message method.</param>
+        </member>
+        <member name="M:Terministrator.Application.Interface.IApplication.Start">
+            <summary>
+            Starts this instance.
+            </summary>
+        </member>
+        <member name="M:Terministrator.Application.Interface.IApplication.Stop">
+            <summary>
+            Stops this instance.
+            </summary>
+        </member>
+        <member name="M:Terministrator.Application.Interface.IApplication.SendMessage(Terministrator.Application.Interface.IMessage)">
+            <summary>
+            Sends the message.
+            </summary>
+            <param name="message">The message.</param>
+            <returns>A task containing the ID of the message sent.</returns>
+        </member>
+        <member name="M:Terministrator.Application.Interface.IApplication.EditMessage(Terministrator.Application.Interface.IMessage)">
+            <summary>
+            Edits the message.
+            </summary>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:Terministrator.Application.Interface.IApplication.GetTerministrator">
+            <summary>
+            Gets the terministrator.
+            </summary>
+            <returns>Gets the user Terministrator on the application.</returns>
+        </member>
+        <member name="M:Terministrator.Application.Interface.IApplication.CanKick(Terministrator.Application.Interface.IChannel)">
+            <summary>
+            Determines whether this instance can kick the specified user.
+            </summary>
+            <param name="channel">The channel.</param>
+            <returns>
+              <c>true</c> if this instance can kick the specified user; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Terministrator.Application.Interface.IApplication.Kick(Terministrator.Application.Interface.IUser,Terministrator.Application.Interface.IChannel)">
+            <summary>
+            Kicks the specified user.
+            </summary>
+            <param name="user">The user.</param>
+            <param name="channel">The channel.</param>
+        </member>
+        <member name="M:Terministrator.Application.Interface.IApplication.GetMods(Terministrator.Application.Interface.IChannel)">
+            <summary>
+            Gets the mods of the specified channel.
+            </summary>
+            <param name="channel">The channel.</param>
+            <returns>A collection of user which are moderators.</returns>
+        </member>
+        <member name="M:Terministrator.Application.Interface.IApplication.Ping(System.Nullable{System.TimeSpan})">
+            <summary>
+            Pings the application.
+            </summary>
+            <param name="max">The maximum time a ping can take.</param>
+            <returns>The time necessary to ping. Null if no connection.</returns>
+        </member>
+        <member name="M:Terministrator.Application.Interface.IChannel.GetApplicationId">
+            <summary>
+            Gets the application identifier.
+            </summary>
+            <returns>The application identifier</returns>
+        </member>
+        <member name="M:Terministrator.Application.Interface.IChannel.GetApplication">
+            <summary>
+            Gets the application.
+            </summary>
+            <returns>The application</returns>
+        </member>
+        <member name="M:Terministrator.Application.Interface.IChannel.GetFirstName">
+            <summary>
+            Gets the first name.
+            </summary>
+            <returns>The first name</returns>
+        </member>
+        <member name="M:Terministrator.Application.Interface.IChannel.GetLastName">
+            <summary>
+            Gets the last name.
+            </summary>
+            <returns>The last name</returns>
+        </member>
+        <member name="M:Terministrator.Application.Interface.IChannel.GetUsername">
+            <summary>
+            Gets the username.
+            </summary>
+            <returns>The username</returns>
+        </member>
+        <member name="M:Terministrator.Application.Interface.IChannel.IsSolo">
+            <summary>
+            Determines whether this instance is a private channel.
+            </summary>
+            <returns>
+              <c>true</c> if this instance is a private channel; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Terministrator.Application.Interface.IMessage.GetApplicationId">
+            <summary>
+            Gets the application identifier.
+            </summary>
+            <returns>The application identifier</returns>
+        </member>
+        <member name="M:Terministrator.Application.Interface.IMessage.GetFrom">
+            <summary>
+            Gets the author of the message.
+            </summary>
+            <returns>The author</returns>
+        </member>
+        <member name="M:Terministrator.Application.Interface.IMessage.GetChannel">
+            <summary>
+            Gets the channel.
+            </summary>
+            <returns>The channel</returns>
+        </member>
+        <member name="M:Terministrator.Application.Interface.IMessage.GetSentDate">
+            <summary>
+            Gets the sent date.
+            </summary>
+            <returns>The sent date</returns>
+        </member>
+        <member name="M:Terministrator.Application.Interface.IMessage.GetText">
+            <summary>
+            Gets the text.
+            </summary>
+            <returns>The text</returns>
+        </member>
+        <member name="M:Terministrator.Application.Interface.IMessage.GetRepliesTo">
+            <summary>
+            Gets the message replied by this one.
+            </summary>
+            <returns>The message being replied to</returns>
+        </member>
+        <member name="M:Terministrator.Application.Interface.IMessage.GetJoinedUser">
+            <summary>
+            Gets the joined user.
+            </summary>
+            <returns>The joinded user</returns>
+        </member>
+        <member name="M:Terministrator.Application.Interface.IUser.GetApplicationId">
+            <summary>
+            Gets the application identifier.
+            </summary>
+            <returns>The application identifier</returns>
+        </member>
+        <member name="M:Terministrator.Application.Interface.IUser.GetFirstName">
+            <summary>
+            Gets the first name.
+            </summary>
+            <returns>The first name</returns>
+        </member>
+        <member name="M:Terministrator.Application.Interface.IUser.GetLastName">
+            <summary>
+            Gets the last name.
+            </summary>
+            <returns>The last name</returns>
+        </member>
+        <member name="M:Terministrator.Application.Interface.IUser.GetUsername">
+            <summary>
+            Gets the username.
+            </summary>
+            <returns>The username</returns>
+        </member>
+        <member name="M:Terministrator.Application.Interface.IUser.GetApplication">
+            <summary>
+            Gets the application.
+            </summary>
+            <returns>The application</returns>
+        </member>
+        <member name="M:Terministrator.Application.TelegramApplication.Channel.#ctor(Telegram.Bot.Types.Chat)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Terministrator.Application.TelegramApplication.Channel"/> class.
+            </summary>
+            <param name="channel">The channel.</param>
+        </member>
+        <member name="M:Terministrator.Application.TelegramApplication.Channel.GetApplicationId">
+            <summary>
+            Gets the application identifier.
+            </summary>
+            <returns>
+            The application identifier
+            </returns>
+        </member>
+        <member name="M:Terministrator.Application.TelegramApplication.Channel.GetApplication">
+            <summary>
+            Gets the application.
+            </summary>
+            <returns>
+            The application
+            </returns>
+        </member>
+        <member name="M:Terministrator.Application.TelegramApplication.Channel.GetFirstName">
+            <summary>
+            Gets the first name.
+            </summary>
+            <returns>
+            The first name
+            </returns>
+        </member>
+        <member name="M:Terministrator.Application.TelegramApplication.Channel.GetLastName">
+            <summary>
+            Gets the last name.
+            </summary>
+            <returns>
+            The last name
+            </returns>
+        </member>
+        <member name="M:Terministrator.Application.TelegramApplication.Channel.IsSolo">
+            <summary>
+            Determines whether this instance is a private channel.
+            </summary>
+            <returns>
+              <c>true</c> if this instance is a private channel; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Terministrator.Application.TelegramApplication.Channel.GetUsername">
+            <summary>
+            Gets the username.
+            </summary>
+            <returns>
+            The username
+            </returns>
+        </member>
+        <member name="M:Terministrator.Application.TelegramApplication.Application.#ctor">
+            <summary>
+            Prevents a default instance of the <see cref="T:Terministrator.Application.TelegramApplication.Application"/> class from being created.
+            </summary>
+        </member>
+        <member name="M:Terministrator.Application.TelegramApplication.Application.GetApplicationName">
+            <summary>
+            Gets the name of the application.
+            </summary>
+            <returns>A <see cref="T:System.String"/> with the value "TELEGRAM 1.0.6"</returns>
+        </member>
+        <member name="M:Terministrator.Application.TelegramApplication.Application.SetMessageDestination(System.Action{Terministrator.Application.Interface.IMessage})">
+            <summary>
+            Sets the message destination.
+            </summary>
+            <param name="receivedMessage">The received message method.</param>
+        </member>
+        <member name="M:Terministrator.Application.TelegramApplication.Application.Start">
+            <summary>
+            Starts this instance.
+            </summary>
+        </member>
+        <member name="M:Terministrator.Application.TelegramApplication.Application.Stop">
+            <summary>
+            Stops this instance.
+            </summary>
+        </member>
+        <member name="M:Terministrator.Application.TelegramApplication.Application.GetTerministrator">
+            <summary>
+            Gets the user Terministrator on Telegram.
+            </summary>
+            <returns>Terministrator</returns>
+        </member>
+        <member name="M:Terministrator.Application.TelegramApplication.Application.SendMessage(Terministrator.Application.Interface.IMessage)">
+            <summary>
+            Sends the message.
+            </summary>
+            <param name="message">The message.</param>
+            <returns>A task containing the ID of the message sent for Telegram.</returns>
+        </member>
+        <member name="M:Terministrator.Application.TelegramApplication.Application.EditMessage(Terministrator.Application.Interface.IMessage)">
+            <summary>
+            Edits the message.
+            </summary>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:Terministrator.Application.TelegramApplication.Application.CanKick(Terministrator.Application.Interface.IChannel)">
+            <summary>
+            Determines whether this instance can kick in the specified channel.
+            </summary>
+            <param name="channel">The channel.</param>
+            <returns>
+              <c>true</c> if this instance can kick in the specified channel; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Terministrator.Application.TelegramApplication.Application.Kick(Terministrator.Application.Interface.IUser,Terministrator.Application.Interface.IChannel)">
+            <summary>
+            Kicks the specified user.
+            </summary>
+            <param name="user">The user.</param>
+            <param name="channel">The channel.</param>
+        </member>
+        <member name="M:Terministrator.Application.TelegramApplication.Application.GetMods(Terministrator.Application.Interface.IChannel)">
+            <summary>
+            Gets the mods of the specified channel.
+            </summary>
+            <param name="channel">The channel.</param>
+            <returns>A collection of user which are moderators.</returns>
+        </member>
+        <member name="M:Terministrator.Application.TelegramApplication.Application.Ping(System.Nullable{System.TimeSpan})">
+            <summary>
+            Pings Telegram.
+            </summary>
+            <param name="max">The maximum time a ping can take. 5s by default.</param>
+            <returns>The time necessary to ping. Null if no connection.</returns>
+        </member>
+        <member name="M:Terministrator.Application.TelegramApplication.Application.GetCommandSymbol">
+            <summary>
+            Gets the command symbol. Example: /help.
+            </summary>
+            <returns>The command symbol.</returns>
+        </member>
+        <member name="M:Terministrator.Application.TelegramApplication.Application.GetUserSymbol">
+            <summary>
+            Gets the user symbol. Example: @Terministrator.
+            </summary>
+            <returns>The user symbol.</returns>
+        </member>
+        <member name="M:Terministrator.Application.TelegramApplication.Application.MessageReceived(System.Object,Telegram.Bot.Args.MessageEventArgs)">
+            <summary>
+            Called when Telegram sends us a message.
+            </summary>
+            <param name="o">The o.</param>
+            <param name="args">The <see cref="T:Telegram.Bot.Args.MessageEventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="M:Terministrator.Application.TelegramApplication.Message.#ctor(Telegram.Bot.Types.Message)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Terministrator.Application.TelegramApplication.Message"/> class.
+            </summary>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:Terministrator.Application.TelegramApplication.Message.GetApplicationId">
+            <summary>
+            Gets the application identifier.
+            </summary>
+            <returns>
+            The application identifier
+            </returns>
+        </member>
+        <member name="M:Terministrator.Application.TelegramApplication.Message.GetFrom">
+            <summary>
+            Gets the author of the message.
+            </summary>
+            <returns>
+            The author
+            </returns>
+        </member>
+        <member name="M:Terministrator.Application.TelegramApplication.Message.GetChannel">
+            <summary>
+            Gets the channel.
+            </summary>
+            <returns>
+            The channel
+            </returns>
+        </member>
+        <member name="M:Terministrator.Application.TelegramApplication.Message.GetSentDate">
+            <summary>
+            Gets the sent date.
+            </summary>
+            <returns>
+            The sent date
+            </returns>
+        </member>
+        <member name="M:Terministrator.Application.TelegramApplication.Message.GetText">
+            <summary>
+            Gets the text.
+            </summary>
+            <returns>
+            The text
+            </returns>
+        </member>
+        <member name="M:Terministrator.Application.TelegramApplication.Message.GetJoinedUser">
+            <summary>
+            Gets the joined user.
+            </summary>
+            <returns>
+            The joinded user
+            </returns>
+        </member>
+        <member name="M:Terministrator.Application.TelegramApplication.Message.GetRepliesTo">
+            <summary>
+            Gets the message this instance replies to.
+            </summary>
+            <returns>The requested message.</returns>
+        </member>
+        <member name="M:Terministrator.Application.TelegramApplication.User.#ctor(Telegram.Bot.Types.User)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Terministrator.Application.TelegramApplication.User"/> class.
+            </summary>
+            <param name="user">The user.</param>
+        </member>
+        <member name="M:Terministrator.Application.TelegramApplication.User.GetApplicationId">
+            <summary>
+            Gets the application identifier.
+            </summary>
+            <returns>
+            The application identifier
+            </returns>
+        </member>
+        <member name="M:Terministrator.Application.TelegramApplication.User.GetFirstName">
+            <summary>
+            Gets the first name.
+            </summary>
+            <returns>
+            The first name
+            </returns>
+        </member>
+        <member name="M:Terministrator.Application.TelegramApplication.User.GetLastName">
+            <summary>
+            Gets the last name.
+            </summary>
+            <returns>
+            The last name
+            </returns>
+        </member>
+        <member name="M:Terministrator.Application.TelegramApplication.User.GetUsername">
+            <summary>
+            Gets the username.
+            </summary>
+            <returns>
+            The username
+            </returns>
+        </member>
+        <member name="M:Terministrator.Application.TelegramApplication.User.GetApplication">
+            <summary>
+            Gets the application.
+            </summary>
+            <returns>
+            The application
+            </returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.Ad.Get(System.Int32)">
+            <summary>
+            Gets the specified ad.
+            </summary>
+            <param name="adId">The ad identifier.</param>
+            <returns>The requested ad.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.Ad.Create(Terministrator.Terministrator.Entites.Ad)">
+            <summary>
+            Creates the specified ad.
+            </summary>
+            <param name="ad">The ad.</param>
+            <returns>The newly created ad.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.Ad.Update(Terministrator.Terministrator.Entites.Ad)">
+            <summary>
+            Updates the specified ad.
+            </summary>
+            <param name="ad">The ad.</param>
+            <returns>The first arguement.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.Ad.AddAd(Terministrator.Terministrator.Types.Command,Terministrator.Terministrator.Core)">
+            <summary>
+            Mod command. Add a new ad to repeat on the channel following the ad system's settings.
+            </summary>
+            <param name="command">The command.</param>
+            <param name="core">The core.</param>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.Ad.SendAd(System.Timers.Timer,System.Int32)">
+            <summary>
+            Sends the requested ad.
+            </summary>
+            <param name="timer">The timer calling this function.</param>
+            <param name="adId">The ad identifier.</param>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.AdSystem.Exists(System.Int32)">
+            <summary>
+            Tells if the specified ad system exists in the database.
+            </summary>
+            <param name="adSystemId">The ad system identifier.</param>
+            <returns><c>true</c> if it exists; otherwise <c>false</c>.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.AdSystem.Exists(Terministrator.Terministrator.Entites.AdSystem)">
+            <summary>
+            Tells if the specified ad system exists in the database.
+            </summary>
+            <param name="adSystem">The ad system.</param>
+            <returns><c>true</c> if it exists; otherwise <c>false</c>.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.AdSystem.UpdateOrCreate(Terministrator.Terministrator.Entites.AdSystem)">
+            <summary>
+            Updates or create the ad system.
+            </summary>
+            <param name="adSystem">The ad system.</param>
+            <returns>The updated/created ad system.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.AdSystem.Create(Terministrator.Terministrator.Entites.Channel)">
+            <summary>
+            Creates the specified ad system.
+            </summary>
+            <param name="channel">The channel to create an ad system for.</param>
+            <returns>The newly created ad system.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.AdSystem.Update(Terministrator.Terministrator.Entites.AdSystem)">
+            <summary>
+            Updates the specified ad system.
+            </summary>
+            <param name="adSystem">The ad system.</param>
+            <returns>The same ad system.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.AdSystem.SetAdSystem(Terministrator.Terministrator.Types.Command,Terministrator.Terministrator.Core)">
+            <summary>
+            Mod command. Sets the ad system for this channel.
+            </summary>
+            <param name="command">The command.</param>
+            <param name="core">The core.</param>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.MessageTypeToPointSystem.Create(Terministrator.Terministrator.Entites.PointSystem,Terministrator.Terministrator.Entites.MessageType,System.Single)">
+            <summary>
+            Creates the specified point system.
+            </summary>
+            <param name="pointSystem">The point system.</param>
+            <param name="messageType">Type of the message.</param>
+            <param name="reward">The reward.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.MessageTypeToPointSystem.Create(Terministrator.Terministrator.Entites.MessageTypeToPointSystem)">
+            <summary>
+            Creates the specified message type to point system.
+            </summary>
+            <param name="messageTypeToPointSystem">The message type to point system.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.MessageTypeToPointSystem.GetAll(System.Int32)">
+            <summary>
+            Gets all.
+            </summary>
+            <param name="pointSystemId">The point system identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.MessageTypeToPointSystem.DeleteAllFrom(System.Int32)">
+            <summary>
+            Deletes all the amounts between a point system and a message type.
+            </summary>
+            <param name="pointSystemId">The point system identifier.</param>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.MessageTypeToPointSystem.SetAmounts(Terministrator.Terministrator.Types.Command,Terministrator.Terministrator.Core)">
+            <summary>
+            Sets the amounts between the different message types and the point system.
+            </summary>
+            <param name="command">The command.</param>
+            <param name="core">The core.</param>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.MessageTypeToPointSystem.ReadArray(System.String[],System.Collections.Generic.List{System.Tuple{System.String,System.Single}}@)">
+            <summary>
+            Reads the array for the SetAmounts function.
+            </summary>
+            <param name="amounts">The amounts.</param>
+            <param name="array">The array.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.PointSystem.Create(Terministrator.Terministrator.Entites.Channel)">
+            <summary>
+            Creates a default point system for the specified channel.
+            </summary>
+            <param name="channel">The channel.</param>
+            <returns>The created point system.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.Privileges.Create(Terministrator.Terministrator.Entites.Channel)">
+            <summary>
+            Creates the default privileges comming with a new channel.
+            </summary>
+            <param name="channel">The channel.</param>
+            <returns>A collection of the default privileges.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.Privileges.GetDefaultUser(Terministrator.Terministrator.Entites.Channel)">
+            <summary>
+            Gets the default privileges group from that channel.
+            </summary>
+            <param name="channel">The channel.</param>
+            <returns>The requested privileges group.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.Privileges.GetNewUser(Terministrator.Terministrator.Entites.Channel)">
+            <summary>
+            Gets a new default user privileges group.
+            </summary>
+            <param name="channel">The channel where this will be in.</param>
+            <returns>The requested privileges.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.Privileges.GetNewMod(Terministrator.Terministrator.Entites.Channel)">
+            <summary>
+            Gets a new default mod privileges group.
+            </summary>
+            <param name="channel">The channel where this will be in.</param>
+            <returns>The requested privileges.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.Privileges.GetPrivileges(Terministrator.Terministrator.Entites.Channel,System.String)">
+            <summary>
+            Gets a specific privileges group in a channel.
+            </summary>
+            <param name="channel">The channel.</param>
+            <param name="name">The name.</param>
+            <returns>The requested privileges.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.Privileges.RenamePrivileges(Terministrator.Terministrator.Types.Command,Terministrator.Terministrator.Core)">
+            <summary>
+            Mod command. Renames the privileges group to an unused name.
+            </summary>
+            <param name="command">The command.</param>
+            <param name="core">The core.</param>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.Privileges.AddPrivileges(Terministrator.Terministrator.Types.Command,Terministrator.Terministrator.Core)">
+            <summary>
+            Mod command. Adds a new privileges group.
+            </summary>
+            <param name="command">The command.</param>
+            <param name="core">The core.</param>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.Rules.ReceivedMessage(Terministrator.Terministrator.Entites.Message,System.Boolean)">
+            <summary>
+            Apply the rules on a newly received message.
+            </summary>
+            <param name="message">The message.</param>
+            <param name="isCommand">If the message was recognized as a command.</param>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.Rules.ApplySpamDelay(Terministrator.Terministrator.Entites.Message)">
+            <summary>
+            Applies the spam delay. If the delay wasn't respected, <see cref="M:Terministrator.Terministrator.BLL.Rules.Fail(Terministrator.Terministrator.Entites.Message,System.String)"/> them.
+            </summary>
+            <param name="message">The message to analyze.</param>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.Rules.ApplyBlockedWords(Terministrator.Terministrator.Entites.Message)">
+            <summary>
+            Applies the blocked words filter. If a blocked word is found in the message, <see cref="M:Terministrator.Terministrator.BLL.Rules.Fail(Terministrator.Terministrator.Entites.Message,System.String)"/> them.
+            </summary>
+            <param name="message">The message to analyze.</param>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.Rules.ApplyR9K(Terministrator.Terministrator.Entites.Message)">
+            <summary>
+            Applies the r9k filter. If a message with an identical r9k text is found, <see cref="M:Terministrator.Terministrator.BLL.Rules.Fail(Terministrator.Terministrator.Entites.Message,System.String)"/> them.
+            </summary>
+            <param name="message">The message to analyze.</param>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.Rules.Fail(Terministrator.Terministrator.Entites.Message,System.String)">
+            <summary>
+            Fails the user due to the specified message. Warn them if they weren't muted, kick them otherwise.
+            </summary>
+            <param name="message">The message.</param>
+            <param name="reason">The reason.</param>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.Rules.Kick(Terministrator.Terministrator.Entites.UserToChannel)">
+            <summary>
+            Kicks the specified user from the channel if possible. Otherwise warn the mods.
+            </summary>
+            <param name="userToChannel">The user to channel.</param>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.Rules.SendWarningMessages(Terministrator.Terministrator.Entites.UserToChannel)">
+            <summary>
+            Sends a warning message to the mods about someone whom should be kicked.
+            </summary>
+            <param name="userToChannel">The user to channel to warn about.</param>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.Rules.ToR9KText(System.String)">
+            <summary>
+            Apply the R9K filter to a string.
+            </summary>
+            <param name="msg">The text.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.Rules.RegexReplace(System.String,System.String,System.String)">
+            <summary>
+            Shorten the use of a regex to replace a pattern in a text.
+            </summary>
+            <param name="text">The text.</param>
+            <param name="pattern">The pattern.</param>
+            <param name="replacement">The replacement.</param>
+            <returns>The replaced text.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.Rules.GetMuteTime(System.Int32)">
+            <summary>
+            Calculates the mute time one should get if this is their Nth mute.
+            </summary>
+            <param name="nbMutes">The nb mutes, greather than 0</param>
+            <returns></returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.Rules.Create(Terministrator.Terministrator.Entites.Rules)">
+            <summary>
+            Creates the specified rules.
+            </summary>
+            <param name="rules">The rules.</param>
+            <returns>The same rules with an updated ID.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.Rules.GetNewModRules">
+            <summary>
+            Creates a rules object with as few rules as possible.
+            </summary>
+            <returns>The requested rules</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.Rules.GetNewUserRules">
+            <summary>
+            Creates a rules object with a maximum amount of rules.
+            </summary>
+            <returns>The requested rules</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.Rules.GetRules(Terministrator.Terministrator.Types.Command,Terministrator.Terministrator.Core)">
+            <summary>
+            User command. Gets the rules applied to them.
+            </summary>
+            <param name="command">The command.</param>
+            <param name="core">The core.</param>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.Rules.SetRules(Terministrator.Terministrator.Types.Command,Terministrator.Terministrator.Core)">
+            <summary>
+            Mod command. Sets the rules applying to a privileges group.
+            </summary>
+            <param name="command">The command.</param>
+            <param name="core">The core.</param>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.Rules.ResetBlockedWords(Terministrator.Terministrator.Types.Command,Terministrator.Terministrator.Core)">
+            <summary>
+            Mod command. Resets the blocked words set on a privileges group.
+            </summary>
+            <param name="command">The command.</param>
+            <param name="core">The core.</param>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.SimilarTexts.Create">
+            <summary>
+            Creates a default SimilarTexts.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.SimilarTexts.Increment(System.Int32)">
+            <summary>
+            Increments the specified similar texts's amount number.
+            </summary>
+            <param name="similarTextsId">The similar texts identifier.</param>
+            <returns>The incremented similar texts.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.Terministrator.Start(Terministrator.Terministrator.Types.Command,Terministrator.Terministrator.Core)">
+            <summary>
+            User command. Always sent when a user open a private discussion with the bot on Telegram.
+            </summary>
+            <param name="command">The command.</param>
+            <param name="core">The core.</param>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.Terministrator.Help(Terministrator.Terministrator.Types.Command,Terministrator.Terministrator.Core)">
+            <summary>
+            User command. Send every functions with an explanation for each of them.
+            </summary>
+            <remarks>
+            Should add something to explain the bot's goals as well.
+            </remarks>
+            <param name="command">The command.</param>
+            <param name="core">The core.</param>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.UserName.GetFromUsername(System.String,System.String)">
+            <summary>
+            Gets the user name from a string.
+            </summary>
+            <param name="userName">Name of the user.</param>
+            <param name="applicationName">Name of the application.</param>
+            <returns>The requested user name. Null if nothing found.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.UserName.ExtractUserName(Terministrator.Application.Interface.IUser,Terministrator.Terministrator.Entites.User)">
+            <summary>
+            Creates an user name from a iUser's infos and a user's reference.
+            </summary>
+            <param name="iUser">The iuser.</param>
+            <param name="user">The user.</param>
+            <returns>The newly created user name.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.UserName.ExtractUserName(Terministrator.Application.Interface.IChannel,Terministrator.Terministrator.Entites.Channel)">
+            <summary>
+            Creates an user name from a ichannel's infos and a channel's reference.
+            </summary>
+            <param name="iChannel">The ichannel.</param>
+            <param name="channel">The channel.</param>
+            <returns>The newly created user name.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.UserName.UpdateUserName(Terministrator.Terministrator.Entites.UserName)">
+            <summary>
+            Switch the old user name to a non-default state and create this one.
+            </summary>
+            <param name="userName">The user name.</param>
+            <returns>The same user name with an updated ID.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.BlockedWord.GetDefaultBlockedWords">
+            <summary>
+            Gets the default blocked words from app.config.
+            </summary>
+            <returns>The requested blocked words collection.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.Application.GetOrCreate(Terministrator.Application.Interface.IApplication)">
+            <summary>
+            Gets or create the application.
+            </summary>
+            <param name="iApplication">The iapplication.</param>
+            <returns>The requested/created application.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.Application.UpdateOrCreate(Terministrator.Application.Interface.IApplication)">
+            <summary>
+            Updates or create the application.
+            </summary>
+            <param name="iApplication">The iapplication.</param>
+            <returns>The updated/created application.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.Application.Get(Terministrator.Application.Interface.IApplication)">
+            <summary>
+            Gets the specified application.
+            </summary>
+            <param name="iApplication">The iapplication.</param>
+            <returns>The requested application.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.Application.Create(Terministrator.Application.Interface.IApplication)">
+            <summary>
+            Creates the specified application.
+            </summary>
+            <param name="iApplication">The iapplication.</param>
+            <returns>The newly created application.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.Application.Update(Terministrator.Application.Interface.IApplication,Terministrator.Terministrator.Entites.Application)">
+            <summary>
+            Updates the specified application.
+            </summary>
+            <param name="iApplication">The iapplication to read from.</param>
+            <param name="application">The application to update.</param>
+            <returns>The second arguement, updated.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.Message.GetOrCreate(Terministrator.Application.Interface.IMessage)">
+            <summary>
+            Gets or create a message.
+            </summary>
+            <param name="iMessage">The imessage.</param>
+            <returns>The requested/created message.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.Message.Get(Terministrator.Application.Interface.IMessage)">
+            <summary>
+            Gets the related message.
+            </summary>
+            <param name="iMessage">The imessage.</param>
+            <returns>The requested message.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.Message.Create(Terministrator.Application.Interface.IMessage)">
+            <summary>
+            Creates the specified message.
+            </summary>
+            <param name="iMessage">The imessage.</param>
+            <returns>The newly created message.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.Message.Create(System.String,Terministrator.Terministrator.Entites.UserToChannel)">
+            <summary>
+            Creates a new message for a user, in a channel, with a specified text (not in the database).
+            </summary>
+            <param name="text">The text.</param>
+            <param name="userToChannel">The user to channel.</param>
+            <returns>The newly created message.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.Message.Answer(Terministrator.Terministrator.Entites.Message,System.String)">
+            <summary>
+            Given a message, make Terministrator answers to it.
+            </summary>
+            <param name="original">The original message.</param>
+            <param name="text">The text.</param>
+            <returns>The answering message.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.Message.NbMessagesBetween(Terministrator.Terministrator.Entites.Channel,System.DateTime,System.DateTime)">
+            <summary>
+            Counts the amount of messages between two dates.
+            </summary>
+            <param name="channel">The channel.</param>
+            <param name="from">From.</param>
+            <param name="to">To.</param>
+            <returns>The amount of messages.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.Message.NbMessagesSince(Terministrator.Terministrator.Entites.Channel,System.DateTime)">
+            <summary>
+            Counts the amount of messages between now and the specified date..
+            </summary>
+            <param name="channel">The channel.</param>
+            <param name="from">From.</param>
+            <returns>The amount of messages.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.MessageType.Get(System.String)">
+            <summary>
+            Gets the specified message type.
+            </summary>
+            <param name="name">The name.</param>
+            <returns>The requested message type.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.MessageType.GetAll">
+            <summary>
+            Gets all existing message types.
+            </summary>
+            <returns>The requested collection.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.MessageType.ToString">
+            <summary>
+            Returns a <see cref="T:System.String" /> that represents every available message types.
+            </summary>
+            <returns>
+            A <see cref="T:System.String" />.
+            </returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.MessageType.Count">
+            <summary>
+            Counts how many message types exists.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.MessageType.CreateTypes">
+            <summary>
+            Creates the default message types.
+            </summary>
+            <returns>The created message types.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.Text.GetR9K(Terministrator.Terministrator.Entites.Text)">
+            <summary>
+            Gets another text with the same r9k.
+            </summary>
+            <param name="text">The text.</param>
+            <returns>A similar text. Null if nothing found.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.Text.Create(Terministrator.Terministrator.Entites.Text)">
+            <summary>
+            Creates the specified text in the database.
+            </summary>
+            <param name="text">The text.</param>
+            <returns>The same text with an updated ID.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.Text.Update(Terministrator.Terministrator.Entites.Text)">
+            <summary>
+            Updates the specified text.
+            </summary>
+            <param name="text">The text.</param>
+            <returns>The same text.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.Text.SearchAndLink(Terministrator.Terministrator.Entites.Text)">
+            <summary>
+            Searches another text with the same R9K. If one is found, link this one to their Similar Text.
+            </summary>
+            <param name="text">The text.</param>
+            <returns>The same text with a possibly updated Similar Texts reference.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.Channel.UpdateOrCreate(Terministrator.Application.Interface.IChannel)">
+            <summary>
+            Updates or create a channel.
+            </summary>
+            <param name="iChannel">The ichannel.</param>
+            <returns>The requested/created channel.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.Channel.Get(Terministrator.Application.Interface.IChannel)">
+            <summary>
+            Gets the specified channel.
+            </summary>
+            <param name="iChannel">The ichannel.</param>
+            <returns>The requested channel.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.Channel.Get(Terministrator.Application.Interface.IApplication)">
+            <summary>
+            Gets every channels followed for an application.
+            </summary>
+            <param name="application">The application.</param>
+            <returns>The collection of channels.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.Channel.TopPoster(Terministrator.Terministrator.Entites.Channel)">
+            <summary>
+            Gives the users of a channel in descending order of messages sent.
+            </summary>
+            <param name="channel">The channel.</param>
+            <returns>The collection of user to channel</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.Channel.Create(Terministrator.Application.Interface.IChannel)">
+            <summary>
+            Creates the specified channel.
+            </summary>
+            <param name="iChannel">The ichannel.</param>
+            <returns>The newly created channel.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.Channel.Update(Terministrator.Application.Interface.IChannel,Terministrator.Terministrator.Entites.Channel)">
+            <summary>
+            Updates the specified channel.
+            </summary>
+            <param name="iChannel">The ichannel to take the information from.</param>
+            <param name="channel">The channel to update.</param>
+            <returns>The second arguement, but updated.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.Channel.GetPrivateChannel(Terministrator.Terministrator.Entites.User)">
+            <summary>
+            Gets the private channel with a user.
+            </summary>
+            <param name="user">The user.</param>
+            <returns>The requested channel.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.Channel.GetTopPosters(Terministrator.Terministrator.Types.Command,Terministrator.Terministrator.Core)">
+            <summary>
+            User command. Answers with every users in the channel ordered (descending) by messages sent.
+            </summary>
+            <param name="command">The command.</param>
+            <param name="core">The core.</param>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.User.GetOrCreate(Terministrator.Application.Interface.IUser)">
+            <summary>
+            Gets or create an user.
+            </summary>
+            <param name="iUser">The iuser.</param>
+            <returns>The requested user.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.User.UpdateOrCreate(Terministrator.Application.Interface.IUser)">
+            <summary>
+            Updates or create an user.
+            </summary>
+            <param name="iUser">The iuser.</param>
+            <returns>The requested user.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.User.Get(Terministrator.Application.Interface.IUser)">
+            <summary>
+            Gets the specified user.
+            </summary>
+            <param name="iUser">The iuser.</param>
+            <returns>The requested user. Null if nothing found.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.User.Create(Terministrator.Application.Interface.IUser)">
+            <summary>
+            Creates the specified user.
+            </summary>
+            <param name="iUser">The iuser.</param>
+            <returns>The newly created user.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.User.Update(Terministrator.Application.Interface.IUser,Terministrator.Terministrator.Entites.User)">
+            <summary>
+            Updates the specified user.
+            </summary>
+            <param name="iUser">The iuser.</param>
+            <param name="user">The user.</param>
+            <returns>The same user reference, but updated.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.UserToChannel.UpdateOrCreate(Terministrator.Application.Interface.IApplication,Terministrator.Application.Interface.IUser,Terministrator.Application.Interface.IChannel)">
+            <summary>
+            Updates or create the user to channel.
+            </summary>
+            <param name="iApplication">The application.</param>
+            <param name="iUser">The user.</param>
+            <param name="iChannel">The channel.</param>
+            <returns>The user to channel.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.UserToChannel.GetOrCreate(Terministrator.Application.Interface.IApplication,Terministrator.Application.Interface.IUser,Terministrator.Application.Interface.IChannel)">
+            <summary>
+            Gets or create the user to channel.
+            </summary>
+            <param name="iApplication">The application.</param>
+            <param name="iUser">The user.</param>
+            <param name="iChannel">The channel.</param>
+            <returns>The user to channel.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.UserToChannel.Update(Terministrator.Application.Interface.IUser,Terministrator.Application.Interface.IChannel,Terministrator.Terministrator.Entites.UserToChannel)">
+            <summary>
+            Updates the user to channel with the unique parameters.
+            </summary>
+            <param name="iUser">The user.</param>
+            <param name="iChannel">The channel.</param>
+            <param name="userToChannel">The user to channel to update.</param>
+            <returns>The same user to channel updated with the two other arguements' properties.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.UserToChannel.Get(Terministrator.Application.Interface.IUser,Terministrator.Application.Interface.IChannel)">
+            <summary>
+            Gets the specified user to channel from the unique parameters.
+            </summary>
+            <param name="iUser">The user.</param>
+            <param name="iChannel">The channel.</param>
+            <returns>The requested user to channel. Null if none found.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.UserToChannel.Create(Terministrator.Application.Interface.IApplication,Terministrator.Application.Interface.IUser,Terministrator.Application.Interface.IChannel)">
+            <summary>
+            Creates the specified user to channel.
+            </summary>
+            <param name="iApplication">The application.</param>
+            <param name="iUser">The user.</param>
+            <param name="iChannel">The channel.</param>
+            <returns>The newly created uesr to channel.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.UserToChannel.Update(Terministrator.Terministrator.Entites.UserToChannel)">
+            <summary>
+            Updates the specified user to channel.
+            </summary>
+            <param name="userToChannel">The user to channel.</param>
+            <returns>The same user to channel.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.UserToChannel.GetMessageBefore(Terministrator.Terministrator.Entites.UserToChannel,System.DateTime)">
+            <summary>
+            Gets the message sent by the user in that channel just before the requested date.
+            </summary>
+            <param name="userToChannel">The user to channel.</param>
+            <param name="date">The date.</param>
+            <returns>The requested message.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.UserToChannel.GetPoints(Terministrator.Terministrator.Types.Command,Terministrator.Terministrator.Core)">
+            <summary>
+            Chat command. Answers with the user's points in that channel.
+            </summary>
+            <param name="command">The command.</param>
+            <param name="core">The core.</param>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.UserToChannel.AttributePoints(Terministrator.Terministrator.Entites.Message,Terministrator.Terministrator.Core)">
+            <summary>
+            Attributes the points to a user from the channel's policies. Called upon receiving a new message.
+            </summary>
+            <param name="message">The message.</param>
+            <param name="core">The core.</param>
+            <returns>How many points were given to that user.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.UserToChannel.GivePoints(Terministrator.Terministrator.Types.Command,Terministrator.Terministrator.Core)">
+            <summary>
+            Chat command. Transfert points between a user to another one in the same channel.
+            </summary>
+            <param name="command">The command.</param>
+            <param name="core">The core.</param>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.UserToChannel.CheckGivePointsArguements(System.String[],System.Single@,Terministrator.Terministrator.Entites.UserToChannel,Terministrator.Terministrator.Entites.UserToChannel@)">
+            <summary>
+            Checks and extracts the GivePoints arguements.
+            </summary>
+            <param name="arguements">The arguements.</param>
+            <param name="amount">The amount.</param>
+            <param name="sender">The sender.</param>
+            <param name="receiver">The receiver.</param>
+            <returns>An error message. Null if none.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.UserToChannel.GetPrivileges(Terministrator.Terministrator.Types.Command,Terministrator.Terministrator.Core)">
+            <summary>
+            User command. Tells the user their privileges group's name.
+            </summary>
+            <param name="command">The command.</param>
+            <param name="core">The core.</param>
+        </member>
+        <member name="M:Terministrator.Terministrator.BLL.UserToChannel.SetPrivileges(Terministrator.Terministrator.Types.Command,Terministrator.Terministrator.Core)">
+            <summary>
+            Mod command. Sets the privileges group of a user.
+            </summary>
+            <param name="command">The command.</param>
+            <param name="core">The core.</param>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.Ad.Create(Terministrator.Terministrator.Entites.Ad)">
+            <summary>
+            Creates the specified ad.
+            </summary>
+            <param name="ad">The ad.</param>
+            <returns>The same ad with an updated ID.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.Ad.Get(System.Int32)">
+            <summary>
+            Gets the specified ad.
+            </summary>
+            <param name="adId">The ad identifier.</param>
+            <returns>The requested ad.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.Ad.Update(Terministrator.Terministrator.Entites.Ad)">
+            <summary>
+            Updates the specified ad.
+            </summary>
+            <param name="ad">The ad.</param>
+            <returns>The same ad.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.Ad.LoadAdSystem(Terministrator.Terministrator.Entites.Ad)">
+            <summary>
+            Loads the ad system associated to the ad.
+            </summary>
+            <param name="ad">The ad.</param>
+            <returns>The same ad with the ad system reference loaded.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.Ad.ClearReferences(Terministrator.Terministrator.Entites.Ad)">
+            <summary>
+            Clears the references of the ad.
+            </summary>
+            <param name="ad">The ad system type to ad.</param>
+            <returns>A copy of the ad given in entry with only the references.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.Ad.AddReferences(Terministrator.Terministrator.Entites.Ad,Terministrator.Terministrator.Entites.Ad)">
+            <summary>
+            Adds the references of the second arguement in the first one.
+            </summary>
+            <param name="ad">The ad to add the references in.</param>
+            <param name="reference">The references.</param>
+            <returns>The first arguement.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.MessageTypeToPointSystem.Create(Terministrator.Terministrator.Entites.MessageTypeToPointSystem)">
+            <summary>
+            Creates the specified message type to point system.
+            </summary>
+            <param name="messageTypeToPointSystem">The message type to point system.</param>
+            <returns>The same message type to point system.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.MessageTypeToPointSystem.DeleteAllFrom(System.Int32)">
+            <summary>
+            Deletes all the message type to point systems from the point system.
+            </summary>
+            <param name="pointSystemId">The point system identifier.</param>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.MessageTypeToPointSystem.GetAll(System.Int32)">
+            <summary>
+            Gets all the message type to point systems associated to a point system.
+            </summary>
+            <param name="pointSystemId">The point system identifier.</param>
+            <returns>The requested collection.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.MessageTypeToPointSystem.ClearReferences(Terministrator.Terministrator.Entites.MessageTypeToPointSystem)">
+            <summary>
+            Clears the references of the message type to point system.
+            </summary>
+            <param name="messageTypeToPointSystem">The message type to point system.</param>
+            <returns>A copy of the message type to point system given in entry with only the references.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.MessageTypeToPointSystem.AddReferences(Terministrator.Terministrator.Entites.MessageTypeToPointSystem,Terministrator.Terministrator.Entites.MessageTypeToPointSystem)">
+            <summary>
+            Adds the references of the second arguement in the first one.
+            </summary>
+            <param name="messageTypeToPointSystem">The message type to point system to add the references in.</param>
+            <param name="reference">The references.</param>
+            <returns>The first arguement.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.PointSystem.Create(Terministrator.Terministrator.Entites.PointSystem)">
+            <summary>
+            Creates the specified point system.
+            </summary>
+            <param name="pointSystem">The point system.</param>
+            <returns>The same point system with an updated ID.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.PointSystem.Get(System.Int32)">
+            <summary>
+            Gets the point system linked to the specified channel.
+            </summary>
+            <param name="channelId">The channel identifier.</param>
+            <returns>The point system requested.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.PointSystem.LoadMessageTypes(Terministrator.Terministrator.Entites.PointSystem)">
+            <summary>
+            Loads the message type collection of the point system..
+            </summary>
+            <param name="pointSystem">The point system.</param>
+            <returns>The same point system with an initialized message type to point system collection.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.PointSystem.ClearReferences(Terministrator.Terministrator.Entites.PointSystem)">
+            <summary>
+            Clears the references of the point system.
+            </summary>
+            <param name="pointSystem">The point system.</param>
+            <returns>A copy of the point system given in entry with only the references.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.PointSystem.AddReferences(Terministrator.Terministrator.Entites.PointSystem,Terministrator.Terministrator.Entites.PointSystem)">
+            <summary>
+            Adds the references of the second arguement in the first one.
+            </summary>
+            <param name="pointSystem">The point system to add the references in.</param>
+            <param name="reference">The references.</param>
+            <returns>The first arguement.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.Privileges.Create(Terministrator.Terministrator.Entites.Privileges)">
+            <summary>
+            Creates the specified privileges.
+            </summary>
+            <param name="privileges">The privileges.</param>
+            <returns>The same privileges with an updated id.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.Privileges.Get(System.Int32)">
+            <summary>
+            Gets the specified privileges.
+            </summary>
+            <param name="privilegesId">The privileges identifier.</param>
+            <returns>The requested privileges.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.Privileges.Update(Terministrator.Terministrator.Entites.Privileges)">
+            <summary>
+            Updates the specified privileges.
+            </summary>
+            <param name="privileges">The privileges.</param>
+            <returns>The same privileges.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.Privileges.GetDefaultUser(System.Int32)">
+            <summary>
+            Gets the default privileges of a channel.
+            </summary>
+            <param name="channelId">The channel identifier.</param>
+            <returns>The requested privileges.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.Privileges.GetPrivileges(System.Int32,System.String)">
+            <summary>
+            Gets the privileges associated to a channel.
+            </summary>
+            <param name="channelId">The channel identifier (namable).</param>
+            <param name="name">The name.</param>
+            <returns>The requested privileges.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.Privileges.LoadRules(Terministrator.Terministrator.Entites.Privileges)">
+            <summary>
+            Loads the rules reference.
+            </summary>
+            <param name="privileges">The privileges.</param>
+            <returns>The same privileges with the initialized privileges reference.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.Privileges.ClearReferences(Terministrator.Terministrator.Entites.Privileges)">
+            <summary>
+            Clears the references of the privileges.
+            </summary>
+            <param name="privileges">The privileges.</param>
+            <returns>A copy of the privileges given in entry with only the references.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.Privileges.AddReferences(Terministrator.Terministrator.Entites.Privileges,Terministrator.Terministrator.Entites.Privileges)">
+            <summary>
+            Adds the references of the second arguement in the first one.
+            </summary>
+            <param name="privileges">The privileges to add the references in.</param>
+            <param name="reference">The references.</param>
+            <returns>The first arguement.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.Rules.Create(Terministrator.Terministrator.Entites.Rules)">
+            <summary>
+            Creates the specified rules.
+            </summary>
+            <param name="rules">The rules.</param>
+            <returns>The same rules with the updated ID.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.Rules.Get(System.Int32)">
+            <summary>
+            Gets the specified rules.
+            </summary>
+            <param name="rulesId">The rules identifier.</param>
+            <returns>The rules requested.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.Rules.Update(Terministrator.Terministrator.Entites.Rules)">
+            <summary>
+            Updates the specified rules.
+            </summary>
+            <param name="rules">The rules.</param>
+            <returns>The same rules.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.Rules.UpdateBlockedWords(Terministrator.Terministrator.Entites.Rules)">
+            <summary>
+            Updates the blocked words.
+            </summary>
+            <param name="rules">The rules.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.Rules.LoadExtensions(Terministrator.Terministrator.Entites.Rules)">
+            <summary>
+            Loads the blocked extensions associated to rules.
+            </summary>
+            <param name="rules">The rules.</param>
+            <returns>The same rules with the blocked extensions collection initialized.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.Rules.LoadMessageTypes(Terministrator.Terministrator.Entites.Rules)">
+            <summary>
+            Loads the blocked message types associated to rules.
+            </summary>
+            <param name="rules">The rules.</param>
+            <returns>The same rules with the blocked message types collection initialized.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.Rules.LoadBlockedWords(Terministrator.Terministrator.Entites.Rules)">
+            <summary>
+            Loads the blocked words associated to rules.
+            </summary>
+            <param name="rules">The rules.</param>
+            <returns>The same rules with the blocked words collection initialized.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.Rules.LoadBlockedDomains(Terministrator.Terministrator.Entites.Rules)">
+            <summary>
+            Loads the blocked domains associated to rules.
+            </summary>
+            <param name="rules">The rules.</param>
+            <returns>The same rules with the blocked domains collection initialized.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.Rules.ClearReferences(Terministrator.Terministrator.Entites.Rules)">
+            <summary>
+            Clears the references of the rules.
+            </summary>
+            <param name="rules">The rules.</param>
+            <returns>A copy of the rules given in entry with only the references.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.Rules.AddReferences(Terministrator.Terministrator.Entites.Rules,Terministrator.Terministrator.Entites.Rules)">
+            <summary>
+            Adds the references of the second arguement in the first one.
+            </summary>
+            <param name="rules">The rules to add the references in.</param>
+            <param name="reference">The references.</param>
+            <returns>The first arguement.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.SimilarTexts.Create(Terministrator.Terministrator.Entites.SimilarTexts)">
+            <summary>
+            Creates the specified similar text.
+            </summary>
+            <param name="similarText">The similar text.</param>
+            <returns>The similar text with an updated ID.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.SimilarTexts.Get(System.Int32)">
+            <summary>
+            Gets the specified similar texts.
+            </summary>
+            <param name="similarTextsId">The similar texts identifier.</param>
+            <returns>The specified similar texts</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.SimilarTexts.Update(Terministrator.Terministrator.Entites.SimilarTexts)">
+            <summary>
+            Updates the specified similar text.
+            </summary>
+            <param name="similarText">The similar text.</param>
+            <returns>The same similar text.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.AdSystem.Create(Terministrator.Terministrator.Entites.AdSystem)">
+            <summary>
+            Creates the specified ad system.
+            </summary>
+            <param name="adSystem">The ad system.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.AdSystem.Update(Terministrator.Terministrator.Entites.AdSystem)">
+            <summary>
+            Updates the specified ad system.
+            </summary>
+            <param name="adSystem">The ad system.</param>
+            <returns>The same ad system.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.AdSystem.Get(System.Int32)">
+            <summary>
+            Gets the specified ad system associated to a channel.
+            </summary>
+            <param name="channelId">The channel identifier (Namable).</param>
+            <returns>The requested ad system.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.AdSystem.ClearReferences(Terministrator.Terministrator.Entites.AdSystem)">
+            <summary>
+            Clears the references of the ad system.
+            </summary>
+            <param name="adSystem">The ad system.</param>
+            <returns>A copy of the ad system given in entry with only the references.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.AdSystem.AddReferences(Terministrator.Terministrator.Entites.AdSystem,Terministrator.Terministrator.Entites.AdSystem)">
+            <summary>
+            Adds the references of the second arguement in the first one.
+            </summary>
+            <param name="adSystem">The ad system to add the references in.</param>
+            <param name="reference">The references.</param>
+            <returns>The first arguement.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.BlockedWord.Create(Terministrator.Terministrator.Entites.BlockedWord)">
+            <summary>
+            Creates the specified blocked word.
+            </summary>
+            <param name="blockedWord">The blocked word.</param>
+            <returns>The same blocked word with an updated ID.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.BlockedWord.Get(System.String)">
+            <summary>
+            Gets the specified blocked word.
+            </summary>
+            <param name="word">The word.</param>
+            <returns>The requested blocked word.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.Channel.Create(Terministrator.Terministrator.Entites.Channel)">
+            <summary>
+            Creates the specified channel.
+            </summary>
+            <param name="channel">The channel.</param>
+            <returns>The same channel with the updated ID.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.Channel.Get(System.String,System.String)">
+            <summary>
+            Gets the specified channel.
+            </summary>
+            <param name="channelID">The channel identifier (application).</param>
+            <param name="application">The application.</param>
+            <returns>The requested channel.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.Channel.Get(System.String)">
+            <summary>
+            Gets all the channels in a given application.
+            </summary>
+            <param name="application">The application.</param>
+            <returns>The requested channel.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.Channel.LoadUserNames(Terministrator.Terministrator.Entites.Channel)">
+            <summary>
+            Loads the user names.
+            </summary>
+            <param name="channel">The channel.</param>
+            <returns>The same channel with the user names collection loaded.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.Channel.LoadApplication(Terministrator.Terministrator.Entites.Channel)">
+            <summary>
+            Loads the application.
+            </summary>
+            <param name="channel">The channel.</param>
+            <returns>The same channel with the application reference loaded.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.Channel.LoadPointSystem(Terministrator.Terministrator.Entites.Channel)">
+            <summary>
+            Loads the point system.
+            </summary>
+            <param name="channel">The channel.</param>
+            <returns>The same channel with the point system reference loaded.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.Channel.LoadAdSystem(Terministrator.Terministrator.Entites.Channel)">
+            <summary>
+            Loads the ad system.
+            </summary>
+            <param name="channel">The channel.</param>
+            <returns>The same channel with the ad system reference loaded.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.Channel.LoadUsers(Terministrator.Terministrator.Entites.Channel)">
+            <summary>
+            Loads the user to channels.
+            </summary>
+            <param name="channel">The channel.</param>
+            <returns>The same channel with the user to channel collection loaded.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.Channel.ClearReferences(Terministrator.Terministrator.Entites.Channel)">
+            <summary>
+            Clears the references of the channel.
+            </summary>
+            <param name="channel">The channel.</param>
+            <returns>A copy of the channel given in entry with only the references.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.Channel.AddReferences(Terministrator.Terministrator.Entites.Channel,Terministrator.Terministrator.Entites.Channel)">
+            <summary>
+            Adds the references of the second arguement in the first one.
+            </summary>
+            <param name="channel">The channel to add the references in.</param>
+            <param name="reference">The references.</param>
+            <returns>The first arguement.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.Application.Get(System.String)">
+            <summary>
+            Gets the specified application name.
+            </summary>
+            <param name="applicationName">Name of the application.</param>
+            <returns>The requested application.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.Application.Create(Terministrator.Terministrator.Entites.Application)">
+            <summary>
+            Creates the specified application.
+            </summary>
+            <param name="application">The application.</param>
+            <returns>The same application with an updated ID.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.Application.Update(Terministrator.Terministrator.Entites.Application)">
+            <summary>
+            Updates the specified application.
+            </summary>
+            <param name="application">The application.</param>
+            <returns>The same application</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.Message.Create(Terministrator.Terministrator.Entites.Message)">
+            <summary>
+            Creates the specified message.
+            </summary>
+            <param name="message">The message.</param>
+            <returns>The same message with an updated ID.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.Message.Get(System.String,System.String)">
+            <summary>
+            Gets the specified message.
+            </summary>
+            <param name="messageID">The message identifier (for the application).</param>
+            <param name="application">The application.</param>
+            <returns>The requested message. Null if none found.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.Message.NbMessagesBetween(System.Int32,System.String,System.DateTime,System.DateTime)">
+            <summary>
+            Count the messages between two dates.
+            </summary>
+            <param name="channelId">The channel identifier.</param>
+            <param name="applicationName">Name of the application.</param>
+            <param name="deb">The start date (inclusive).</param>
+            <param name="fin">The end date (exclusive).</param>
+            <returns>The number of messages.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.Message.LoadUserToChannel(Terministrator.Terministrator.Entites.Message)">
+            <summary>
+            Loads the user to channel of a message.
+            </summary>
+            <param name="message">The message.</param>
+            <returns>The same message with the user to channel loaded.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.Message.LoadTexts(Terministrator.Terministrator.Entites.Message)">
+            <summary>
+            Loads the text collection of a message.
+            </summary>
+            <param name="message">The message.</param>
+            <returns>The same message with the text collection loaded.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.Message.LoadApplication(Terministrator.Terministrator.Entites.Message)">
+            <summary>
+            Loads the application of the message.
+            </summary>
+            <param name="message">The message.</param>
+            <returns>The same message with the application instance initialized.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.Message.LoadRepliesTo(Terministrator.Terministrator.Entites.Message)">
+            <summary>
+            Loads the message being replied to.
+            </summary>
+            <param name="message">The message.</param>
+            <returns>The same message with the replied message loaded.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.Message.ClearReferences(Terministrator.Terministrator.Entites.Message)">
+            <summary>
+            Clears the references of the message.
+            </summary>
+            <param name="message">The message.</param>
+            <returns>A copy of the message given in entry with only the references.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.Message.AddReferences(Terministrator.Terministrator.Entites.Message,Terministrator.Terministrator.Entites.Message)">
+            <summary>
+            Adds the references of the second arguement in the first one.
+            </summary>
+            <param name="message">The message to add the references in.</param>
+            <param name="reference">The references.</param>
+            <returns>The first arguement.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.MessageType.Create(Terministrator.Terministrator.Entites.MessageType)">
+            <summary>
+            Creates the specified message type.
+            </summary>
+            <param name="messageType">Type of the message.</param>
+            <returns>The same message type with an updated ID.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.MessageType.Update(Terministrator.Terministrator.Entites.MessageType)">
+            <summary>
+            Updates the name of the specified message type.
+            </summary>
+            <param name="messageType">Type of the message.</param>
+            <returns>The same message type.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.MessageType.Get(System.String)">
+            <summary>
+            Gets the specified message type.
+            </summary>
+            <param name="name">The name of the requested message type.</param>
+            <returns>The requested message type.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.MessageType.GetAll">
+            <summary>
+            Gets all message types.
+            </summary>
+            <returns>The collection of message types.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.MessageType.Count">
+            <summary>
+            Counts how many message types there are.
+            </summary>
+            <returns>The amount of message types.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.MessageType.DeleteAll">
+            <summary>
+            Deletes all message types from the database.
+            </summary>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.Text.Create(Terministrator.Terministrator.Entites.Text)">
+            <summary>
+            Creates the specified text.
+            </summary>
+            <param name="text">The text.</param>
+            <returns>The same text with an updated id.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.Text.Get(System.Int32)">
+            <summary>
+            Gets the specified text.
+            </summary>
+            <param name="textId">The text identifier.</param>
+            <returns>The text with the specified identifier.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.Text.Update(Terministrator.Terministrator.Entites.Text)">
+            <summary>
+            Updates the specified text.
+            </summary>
+            <param name="text">The text.</param>
+            <returns>The same text given in arguement.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.Text.GetR9K(Terministrator.Terministrator.Entites.Text)">
+            <summary>
+            Gets a text with the same r9k as the given text.
+            </summary>
+            <param name="text">The text.</param>
+            <returns>A text with the same r9k. Null if none found.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.Text.LoadSimilarTexts(Terministrator.Terministrator.Entites.Text)">
+            <summary>
+            Loads the similar texts reference.
+            </summary>
+            <param name="text">The text.</param>
+            <returns>The same text with the reference updated.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.Text.ClearReferences(Terministrator.Terministrator.Entites.Text)">
+            <summary>
+            Clears the references of the text.
+            </summary>
+            <param name="text">The user.</param>
+            <returns>A copy of the text given in entry with only the references.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.Text.AddReferences(Terministrator.Terministrator.Entites.Text,Terministrator.Terministrator.Entites.Text)">
+            <summary>
+            Adds the references of the second arguement in the first one.
+            </summary>
+            <param name="text">The text to add the references in.</param>
+            <param name="reference">The references.</param>
+            <returns>The first arguement.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.User.Create(Terministrator.Terministrator.Entites.User)">
+            <summary>
+            Creates the specified user.
+            </summary>
+            <param name="user">The user.</param>
+            <returns>The same user with an updated id.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.User.Get(System.String,System.String)">
+            <summary>
+            Gets the specified user identifier.
+            </summary>
+            <param name="userID">The user identifier (for the application).</param>
+            <param name="application">The application name.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.User.LoadUserNames(Terministrator.Terministrator.Entites.User)">
+            <summary>
+            Loads the user names of the user.
+            </summary>
+            <param name="user">The user.</param>
+            <returns>The same user with an initialized user name collection.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.User.LoadChannels(Terministrator.Terministrator.Entites.User)">
+            <summary>
+            Loads the channels collection of the user.
+            </summary>
+            <param name="user">The user.</param>
+            <returns>The same user with an initialized channel collection.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.User.ClearReferences(Terministrator.Terministrator.Entites.User)">
+            <summary>
+            Clears the references of the user.
+            </summary>
+            <param name="user">The user.</param>
+            <returns>A copy of the user given in entry with only the references.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.User.AddReferences(Terministrator.Terministrator.Entites.User,Terministrator.Terministrator.Entites.User)">
+            <summary>
+            Adds the references of the second arguement in the first one.
+            </summary>
+            <param name="user">The user to add the references in.</param>
+            <param name="reference">The references.</param>
+            <returns>The first arguement.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.UserName.GetFromUsername(System.String,System.String)">
+            <summary>
+            Find whom in the application has that username.
+            </summary>
+            <param name="username">The username.</param>
+            <param name="application">The application.</param>
+            <returns>The user name. Null if none found.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.UserName.GetAll(System.String,System.String)">
+            <summary>
+            For an applicationReferencableId and the application's id, find all the user names associated to a user.
+            </summary>
+            <param name="userId">The user identifier.</param>
+            <param name="application">The application.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.UserName.Create(Terministrator.Terministrator.Entites.UserName)">
+            <summary>
+            Creates the specified user name.
+            </summary>
+            <param name="userName">The user name.</param>
+            <returns>The same user name with the id updated.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.UserName.UpdateUserName(System.Int32)">
+            <summary>
+            Switch the user name to a non-current state.
+            </summary>
+            <param name="ownedById">The user identifier.</param>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.UserName.LoadOwnedBy(Terministrator.Terministrator.Entites.UserName)">
+            <summary>
+            Loads the owner of the user name.
+            </summary>
+            <param name="userName">The user name.</param>
+            <returns>The same user name but with the owner referenced.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.UserName.ClearReferences(Terministrator.Terministrator.Entites.UserName)">
+            <summary>
+            Clears the references of the user name.
+            </summary>
+            <param name="userName">The user name.</param>
+            <returns>A copy of the user name given in entry with only the references.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.UserName.AddReferences(Terministrator.Terministrator.Entites.UserName,Terministrator.Terministrator.Entites.UserName)">
+            <summary>
+            Adds the references of the second arguement in the first one.
+            </summary>
+            <param name="userName">The user to add the references in.</param>
+            <param name="reference">The references.</param>
+            <returns>The first arguement.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.UserToChannel.Exists(System.String,System.String,System.String)">
+            <summary>
+            Tells if the user to channel with these unique values exists in the database.
+            </summary>
+            <param name="userID">The user identifier.</param>
+            <param name="channelID">The channel identifier.</param>
+            <param name="applicationName">Name of the application.</param>
+            <returns><c>true</c> if the UserToChannel exist; otherwise <c>false</c>.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.UserToChannel.Exists(Terministrator.Terministrator.Entites.UserToChannel)">
+            <summary>
+            Tells if the user to channel exists in the database.
+            </summary>
+            <param name="userToChannel">The user identifier.</param>
+            <returns><c>true</c> if the UserToChannel exist; otherwise <c>false</c>.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.UserToChannel.Create(Terministrator.Terministrator.Entites.UserToChannel)">
+            <summary>
+            Creates the specified user to channel in the database.
+            </summary>
+            <param name="userToChannel">The user to channel.</param>
+            <returns>The user to channel witn an updated ID.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.UserToChannel.Update(Terministrator.Terministrator.Entites.UserToChannel)">
+            <summary>
+            Updates the specified user to channel in the database.
+            </summary>
+            <param name="userToChannel">The user to channel.</param>
+            <returns>The same user to channel that was given in entry.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.UserToChannel.Get(System.String,System.String,System.String)">
+            <summary>
+            Gets the specified user to channel from database.
+            </summary>
+            <param name="userID">The user identifier.</param>
+            <param name="channelID">The channel identifier.</param>
+            <param name="applicationName">Name of the application.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.UserToChannel.GetMessageBefore(System.Int32,System.DateTime)">
+            <summary>
+            Gets the first message sent before the specified date in the specified channel.
+            </summary>
+            <param name="userToChannelId">The user to channel identifier.</param>
+            <param name="sent">The date to compare with.</param>
+            <returns>The first message found. Null if none was found.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.UserToChannel.CountMessage(System.Int32)">
+            <summary>
+            Counts the number of messages a user sent in a channel.
+            </summary>
+            <param name="userToChannelId">The user to channel identifier.</param>
+            <returns>The number of messages a user sent in a channel</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.UserToChannel.LoadMessage(Terministrator.Terministrator.Entites.UserToChannel)">
+            <summary>
+            Loads the message collection.
+            </summary>
+            <param name="userToChannel">The user to channel.</param>
+            <returns>The user to channel with the initialized message collection.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.UserToChannel.LoadUser(Terministrator.Terministrator.Entites.UserToChannel)">
+            <summary>
+            Loads the user reference.
+            </summary>
+            <param name="userToChannel">The user to channel.</param>
+            <returns>The user to channel with the initialized user reference.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.UserToChannel.LoadChannel(Terministrator.Terministrator.Entites.UserToChannel)">
+            <summary>
+            Loads the channel reference.
+            </summary>
+            <param name="userToChannel">The user to channel.</param>
+            <returns>The user to channel with the initialized channel reference.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.UserToChannel.LoadPrivileges(Terministrator.Terministrator.Entites.UserToChannel)">
+            <summary>
+            Loads the privileges reference.
+            </summary>
+            <param name="userToChannel">The user to channel.</param>
+            <returns>The user to channel with the initialized privileges reference.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.UserToChannel.ClearReferences(Terministrator.Terministrator.Entites.UserToChannel)">
+            <summary>
+            Clears the references of the user to channel.
+            </summary>
+            <param name="userToChannel">The user to channel.</param>
+            <returns>A copy of the user to channel given in entry with only the references.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.UserToChannel.AddReferences(Terministrator.Terministrator.Entites.UserToChannel,Terministrator.Terministrator.Entites.UserToChannel)">
+            <summary>
+            Adds the references of the second arguement in the first one.
+            </summary>
+            <param name="userToChannel">The user to channel to add the references in.</param>
+            <param name="reference">The references.</param>
+            <returns>The first arguement.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.DAL.TerministratorContext.Ping">
+            <summary>
+            Pings the database.
+            </summary>
+            <returns>The time necessary to ping. Null if no connection.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.Types.Command.SplitArguements(System.Char,System.Int32)">
+            <summary>
+            Splits the arguements.
+            </summary>
+            <param name="separator">The separator.</param>
+            <param name="count">How many strings expected.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Terministrator.Terministrator.Types.Logger">
+            <summary>
+            Log the requested data in the designated places.
+            </summary>
+        </member>
+        <member name="P:Terministrator.Terministrator.Types.Logger.IsNoisy">
+            <summary>
+            Gets or sets a value indicating whether this instance is noisy. If it's not, it will ignores the calls to LogNoisy. 
+            </summary>
+            <value>
+              <c>true</c> if this instance is noisy; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:Terministrator.Terministrator.Types.Logger.LogNoisy(System.String,System.Int32,System.String,System.String)">
+            <summary>
+            Logs the noisy.
+            </summary>
+            <param name="str">The string.</param>
+            <param name="lineNumber">The line number.</param>
+            <param name="memberName">Name of the member.</param>
+            <param name="filePath">The file path.</param>
+        </member>
+        <member name="M:Terministrator.Terministrator.Types.Logger.LogInformation(System.String,System.Int32,System.String,System.String)">
+            <summary>
+            Logs the information.
+            </summary>
+            <param name="str">The string.</param>
+            <param name="lineNumber">The line number.</param>
+            <param name="memberName">Name of the member.</param>
+            <param name="filePath">The file path.</param>
+        </member>
+        <member name="M:Terministrator.Terministrator.Types.Logger.LogWarning(System.String,System.Int32,System.String,System.String)">
+            <summary>
+            Logs the warning.
+            </summary>
+            <param name="str">The string.</param>
+            <param name="lineNumber">The line number.</param>
+            <param name="memberName">Name of the member.</param>
+            <param name="filePath">The file path.</param>
+        </member>
+        <member name="M:Terministrator.Terministrator.Types.Logger.LogWarning(System.Exception,System.String,System.Int32,System.String,System.String)">
+            <summary>
+            Logs the warning.
+            </summary>
+            <param name="e">The exception.</param>
+            <param name="str">The string.</param>
+            <param name="lineNumber">The line number.</param>
+            <param name="memberName">Name of the member.</param>
+            <param name="filePath">The file path.</param>
+        </member>
+        <member name="M:Terministrator.Terministrator.Types.Logger.LogError(System.String,System.Int32,System.String,System.String)">
+            <summary>
+            Logs the error.
+            </summary>
+            <param name="str">The string.</param>
+            <param name="lineNumber">The line number.</param>
+            <param name="memberName">Name of the member.</param>
+            <param name="filePath">The file path.</param>
+        </member>
+        <member name="M:Terministrator.Terministrator.Types.Logger.LogError(System.Exception,System.String,System.Int32,System.String,System.String)">
+            <summary>
+            Logs the error.
+            </summary>
+            <param name="e">The exception.</param>
+            <param name="str">The string.</param>
+            <param name="lineNumber">The line number.</param>
+            <param name="memberName">Name of the member.</param>
+            <param name="filePath">The file path.</param>
+        </member>
+        <member name="M:Terministrator.Terministrator.Types.Logger.OnLoggingRequested(Terministrator.Terministrator.Types.Logger.LoggingRequestedEventArgs)">
+            <summary>
+            Raises the <see cref="E:LoggingRequested" /> event.
+            </summary>
+            <param name="e">The <see cref="T:Terministrator.Terministrator.Types.Logger.LoggingRequestedEventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="E:Terministrator.Terministrator.Types.Logger.LoggingRequested">
+            <summary>
+            Occurs when logging is requested.
+            </summary>
+        </member>
+        <member name="T:Terministrator.Terministrator.Types.Logger.LoggingRequestedEventArgs">
+            <summary>
+            Contains the data this was called with.
+            </summary>
+            <seealso cref="T:System.EventArgs" />
+        </member>
+        <member name="T:Terministrator.Terministrator.Types.Regex">
+            <summary>
+            Holds the regexes to find and replace text. Should be in the app.config in the future.
+            </summary>
+        </member>
+        <member name="M:Terministrator.Terministrator.Types.Tools.IsMod(Terministrator.Terministrator.Entites.UserToChannel)">
+            <summary>
+            Determines whether the specified user to channel is mod.
+            </summary>
+            <param name="userToChannel">The user to channel.</param>
+            <returns>
+              <c>true</c> if the specified user to channel is mod; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.Types.Tools.IsNotModThenSendWarning(Terministrator.Terministrator.Types.Command)">
+            <summary>
+            Determines whether the user sending the command is not an mod. If so, warn them.
+            </summary>
+            <param name="command">The command.</param>
+            <returns>
+              <c>true</c> if is not mod; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="T:Terministrator.Terministrator.View.MainConsole">
+            <summary>
+            The main console to administrate Terministrator.
+            </summary>
+            <seealso cref="T:System.Windows.Forms.Form" />
+        </member>
+        <member name="M:Terministrator.Terministrator.View.MainConsole.#ctor(System.Action{Terministrator.Terministrator.Entites.Message})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Terministrator.Terministrator.View.MainConsole"/> class.
+            </summary>
+            <param name="sendMessage">The send message.</param>
+        </member>
+        <member name="P:Terministrator.Terministrator.View.MainConsole.MessagesSent">
+            <summary>
+            Gets or sets the messages sent.
+            </summary>
+            <value>
+            The messages sent.
+            </value>
+        </member>
+        <member name="P:Terministrator.Terministrator.View.MainConsole.MessagesReceived">
+            <summary>
+            Gets or sets the messages received.
+            </summary>
+            <value>
+            The messages received.
+            </value>
+        </member>
+        <member name="P:Terministrator.Terministrator.View.MainConsole.Points">
+            <summary>
+            Gets or sets the points.
+            </summary>
+            <value>
+            The points.
+            </value>
+        </member>
+        <member name="P:Terministrator.Terministrator.View.MainConsole.MonitoredChannels">
+            <summary>
+            Gets the monitored channels.
+            </summary>
+            <value>
+            The monitored channels.
+            </value>
+        </member>
+        <member name="M:Terministrator.Terministrator.View.MainConsole.RadioButton_Channel_CheckedChanged(System.Object,System.EventArgs)">
+            <summary>
+            Handles the CheckedChanged event of the RadioButton_Channel control. Refresh the available channels when it happens.
+            </summary>
+            <param name="sender">The source of the event.</param>
+            <param name="e">The <see cref="T:System.EventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="M:Terministrator.Terministrator.View.MainConsole.RefreshChannelUserDataSource">
+            <summary>
+            Refreshes list of channel.
+            </summary>
+        </member>
+        <member name="M:Terministrator.Terministrator.View.MainConsole.ControlAccess(System.Windows.Forms.Control,System.Action)">
+            <summary>
+            Controls the access on a control over multiple threads.
+            </summary>
+            <param name="control">The control.</param>
+            <param name="action">The action.</param>
+        </member>
+        <member name="M:Terministrator.Terministrator.View.MainConsole.SetLabel(System.Windows.Forms.Label,System.String)">
+            <summary>
+            Wrapper to set a label.
+            </summary>
+            <param name="label">The label.</param>
+            <param name="text">The text.</param>
+        </member>
+        <member name="M:Terministrator.Terministrator.View.MainConsole.UpdateUpTime(System.TimeSpan)">
+            <summary>
+            Updates since how long the application has been running.
+            </summary>
+            <param name="upTime">Up time.</param>
+        </member>
+        <member name="M:Terministrator.Terministrator.View.MainConsole.UpdateUpSince(System.DateTime)">
+            <summary>
+            Updates since when the appplication has been running.
+            </summary>
+            <param name="upSince">Up since.</param>
+        </member>
+        <member name="M:Terministrator.Terministrator.View.MainConsole.RefreshPing(System.Int32,System.Nullable{System.Int64})">
+            <summary>
+            Refreshes the ping of the selected index.
+            </summary>
+            <param name="index">The index.</param>
+            <param name="ping">The ping.</param>
+        </member>
+        <member name="M:Terministrator.Terministrator.View.MainConsole.Button_Send_Click(System.Object,System.EventArgs)">
+            <summary>
+            Handles the Click event of the Button_Send control. Send what was written in the third tab's box.
+            </summary>
+            <param name="sender">The source of the event.</param>
+            <param name="e">The <see cref="T:System.EventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="M:Terministrator.Terministrator.View.MainConsole.BuildMessage">
+            <summary>
+            Builds a message sent with the third tab.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.View.MainConsole.AddMessage(Terministrator.Terministrator.Entites.Message)">
+            <summary>
+            Adds the message in the third tab.
+            </summary>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:Terministrator.Terministrator.View.MainConsole.ComboBox_ChannelUser_SelectedIndexChanged(System.Object,System.EventArgs)">
+            <summary>
+            Handles the SelectedIndexChanged event of the ComboBox_ChannelUser control. Shows the new channel in the text box when it happens.
+            </summary>
+            <param name="sender">The source of the event.</param>
+            <param name="e">The <see cref="T:System.EventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="M:Terministrator.Terministrator.View.MainConsole.comboBox_Application_SelectedIndexChanged(System.Object,System.EventArgs)">
+            <summary>
+            Handles the SelectedIndexChanged event of the comboBox_Application control. Refreshes the available channels when it happens.
+            </summary>
+            <param name="sender">The source of the event.</param>
+            <param name="e">The <see cref="T:System.EventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="M:Terministrator.Terministrator.View.MainConsole.AddClient(Terministrator.Terministrator.Entites.Application)">
+            <summary>
+            Adds the client to the third tab.
+            </summary>
+            <param name="client">The client.</param>
+        </member>
+        <member name="M:Terministrator.Terministrator.View.MainConsole.AddChannels(System.Collections.Generic.List{Terministrator.Terministrator.Entites.Channel})">
+            <summary>
+            Adds the channels.
+            </summary>
+            <param name="channels">The channels.</param>
+        </member>
+        <member name="M:Terministrator.Terministrator.View.MainConsole.AddChannel(Terministrator.Terministrator.Entites.Channel)">
+            <summary>
+            Adds the channel in the third tab and count it in the first one.
+            </summary>
+            <param name="channel">The channel.</param>
+        </member>
+        <member name="M:Terministrator.Terministrator.View.MainConsole.Log(System.Object,Terministrator.Terministrator.Types.Logger.LoggingRequestedEventArgs)">
+            <summary>
+            Logs the specified data.
+            </summary>
+            <param name="logger">The logger.</param>
+            <param name="args">The <see cref="T:Terministrator.Terministrator.Types.Logger.LoggingRequestedEventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="M:Terministrator.Terministrator.View.MainConsole.RatingToString(Terministrator.Terministrator.Types.Logger.Rating)">
+            <summary>
+            Change the enum to a showable string.
+            </summary>
+            <param name="rating">The rating.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.View.MainConsole.GetPaddedRating(System.String)">
+            <summary>
+            Gets the padded rating.
+            </summary>
+            <param name="rating">The rating.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.View.MainConsole.Log(System.String)">
+            <summary>
+            Logs the specified string in the second tab.
+            </summary>
+            <param name="str">The string.</param>
+        </member>
+        <member name="M:Terministrator.Terministrator.View.MainConsole.button_Clear_Click(System.Object,System.EventArgs)">
+            <summary>
+            Handles the Click event of the button_Clear control. Clears the logs on the second tab.
+            </summary>
+            <param name="sender">The source of the event.</param>
+            <param name="e">The <see cref="T:System.EventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="F:Terministrator.Terministrator.View.MainConsole.components">
+            <summary>
+            Variable nécessaire au concepteur.
+            </summary>
+        </member>
+        <member name="M:Terministrator.Terministrator.View.MainConsole.Dispose(System.Boolean)">
+            <summary>
+            Nettoyage des ressources utilisées.
+            </summary>
+            <param name="disposing">true si les ressources managées doivent être supprimées ; sinon, false.</param>
+        </member>
+        <member name="M:Terministrator.Terministrator.View.MainConsole.InitializeComponent">
+            <summary>
+            Méthode requise pour la prise en charge du concepteur - ne modifiez pas
+            le contenu de cette méthode avec l'éditeur de code.
+            </summary>
+        </member>
+        <member name="T:Terministrator.Terministrator.Core">
+            <summary>
+            The core of the application. Distributes the commands and messages when receiving some.
+            </summary>
+        </member>
+        <member name="M:Terministrator.Terministrator.Core.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Terministrator.Terministrator.Core"/> class.
+            </summary>
+        </member>
+        <member name="M:Terministrator.Terministrator.Core.Start">
+            <summary>
+            Starts this instance.
+            </summary>
+        </member>
+        <member name="M:Terministrator.Terministrator.Core.Stop">
+            <summary>
+            Stops this instance.
+            </summary>
+        </member>
+        <member name="M:Terministrator.Terministrator.Core.UpdateUpTime(System.Object)">
+            <summary>
+            Updates the up time in the console.
+            </summary>
+            <param name="obj">The datetime to compare with.</param>
+        </member>
+        <member name="M:Terministrator.Terministrator.Core.RefreshPings(System.Object)">
+            <summary>
+            Refreshes the pings in the console.
+            </summary>
+            <param name="obj">Unused.</param>
+        </member>
+        <member name="M:Terministrator.Terministrator.Core.Register(Terministrator.Application.Interface.IApplication)">
+            <summary>
+            Registers the specified application to start with the core.
+            </summary>
+            <param name="application">The application.</param>
+        </member>
+        <member name="M:Terministrator.Terministrator.Core.SendMessage(Terministrator.Terministrator.Entites.Message)">
+            <summary>
+            Sends the message before treating it if needed.
+            </summary>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:Terministrator.Terministrator.Core.ReceiveMessage(Terministrator.Application.Interface.IMessage)">
+            <summary>
+            Receives the message.
+            </summary>
+            <param name="iMessage">The message.</param>
+        </member>
+        <member name="M:Terministrator.Terministrator.Core.LoadMessageChilds(Terministrator.Terministrator.Entites.Message)">
+            <summary>
+            Loads the subclasses from the message.
+            </summary>
+            <remarks>
+            This is a time eater; should ultimately all be moved in a single transaction
+            </remarks>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:Terministrator.Terministrator.Core.DispatchMessage(Terministrator.Terministrator.Entites.Message)">
+            <summary>
+            Dispatches the message to different methods waiting new messages.
+            </summary>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:Terministrator.Terministrator.Core.CommandAnalyzer(Terministrator.Terministrator.Entites.Message)">
+            <summary>
+            Parses the text and see if it's a command; if so calls the linked method.
+            </summary>
+            <param name="message">The message.</param>
+            <returns><c>true</c> if it was a command; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.Entites.Namable.GetFirstName">
+            <summary>
+            Gets the first name of the current <see cref="T:Terministrator.Terministrator.Entites.UserName"/>.
+            </summary>
+            <returns>The first name</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.Entites.Namable.GetLastName">
+            <summary>
+            Gets the last name of the current <see cref="T:Terministrator.Terministrator.Entites.UserName"/>.
+            </summary>
+            <returns>The last name</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.Entites.Namable.GetUsername">
+            <summary>
+            Gets the username of the current <see cref="T:Terministrator.Terministrator.Entites.UserName"/>.
+            </summary>
+            <returns>The username</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.Entites.Namable.GetCurrentUserName">
+            <summary>
+            Gets the current <see cref="T:Terministrator.Terministrator.Entites.UserName"/> of the user.
+            </summary>
+            <returns>The current UserName</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.Entites.Namable.ToString">
+            <summary>
+            Returns a <see cref="T:System.String" /> that represents this instance.
+            </summary>
+            <returns>
+            A <see cref="T:System.String" /> that represents this instance.
+            </returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.Entites.Rules.ToString">
+            <summary>
+            Returns a <see cref="T:System.String" /> that represents this instance.
+            </summary>
+            <returns>
+            A <see cref="T:System.String" /> that represents this instance.
+            </returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.Entites.Rules.Copy(Terministrator.Terministrator.Entites.Rules)">
+            <summary>
+            Copies the specified rules.
+            </summary>
+            <param name="copy">The copy.</param>
+            <returns>A new Rules object</returns>
+        </member>
+        <member name="M:Terministrator.Terministrator.Entites.UserName.ToString">
+            <summary>
+            Returns a <see cref="T:System.String" /> that represents this instance.
+            </summary>
+            <returns>
+            A <see cref="T:System.String" /> that represents this instance.
+            </returns>
+        </member>
+        <member name="M:Terministrator.Program.Main">
+            <summary>
+                Point d'entrée principal de l'application.
+            </summary>
+        </member>
+        <member name="T:Terministrator.Properties.Resources">
+            <summary>
+              Une classe de ressource fortement typée destinée, entre autres, à la consultation des chaînes localisées.
+            </summary>
+        </member>
+        <member name="P:Terministrator.Properties.Resources.ResourceManager">
+            <summary>
+              Retourne l'instance ResourceManager mise en cache utilisée par cette classe.
+            </summary>
+        </member>
+        <member name="P:Terministrator.Properties.Resources.Culture">
+            <summary>
+              Remplace la propriété CurrentUICulture du thread actuel pour toutes
+              les recherches de ressources à l'aide de cette classe de ressource fortement typée.
+            </summary>
+        </member>
+    </members>
+</doc>

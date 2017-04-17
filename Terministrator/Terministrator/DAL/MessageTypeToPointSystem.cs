@@ -10,6 +10,11 @@ namespace Terministrator.Terministrator.DAL
 {
     static class MessageTypeToPointSystem
     {
+        /// <summary>
+        /// Creates the specified message type to point system.
+        /// </summary>
+        /// <param name="messageTypeToPointSystem">The message type to point system.</param>
+        /// <returns>The same message type to point system.</returns>
         public static Entites.MessageTypeToPointSystem Create(Entites.MessageTypeToPointSystem messageTypeToPointSystem)
         {
             Entites.MessageTypeToPointSystem reference = ClearReferences(messageTypeToPointSystem);
@@ -21,6 +26,10 @@ namespace Terministrator.Terministrator.DAL
             return AddReferences(messageTypeToPointSystem, reference);
         }
 
+        /// <summary>
+        /// Deletes all the message type to point systems from the point system.
+        /// </summary>
+        /// <param name="pointSystemId">The point system identifier.</param>
         public static void DeleteAllFrom(int pointSystemId)
         {
             using (TerministratorContext context = new TerministratorContext(true))
@@ -31,6 +40,11 @@ namespace Terministrator.Terministrator.DAL
             }
         }
 
+        /// <summary>
+        /// Gets all the message type to point systems associated to a point system.
+        /// </summary>
+        /// <param name="pointSystemId">The point system identifier.</param>
+        /// <returns>The requested collection.</returns>
         public static List<Entites.MessageTypeToPointSystem> GetAll(int pointSystemId)
         {
             using (TerministratorContext context = new TerministratorContext(true))
@@ -43,6 +57,11 @@ namespace Terministrator.Terministrator.DAL
             }
         }
 
+        /// <summary>
+        /// Clears the references of the message type to point system.
+        /// </summary>
+        /// <param name="messageTypeToPointSystem">The message type to point system.</param>
+        /// <returns>A copy of the message type to point system given in entry with only the references.</returns>
         private static Entites.MessageTypeToPointSystem ClearReferences(
             Entites.MessageTypeToPointSystem messageTypeToPointSystem)
         {
@@ -54,6 +73,12 @@ namespace Terministrator.Terministrator.DAL
             return reference;
         }
 
+        /// <summary>
+        /// Adds the references of the second arguement in the first one.
+        /// </summary>
+        /// <param name="messageTypeToPointSystem">The message type to point system to add the references in.</param>
+        /// <param name="reference">The references.</param>
+        /// <returns>The first arguement.</returns>
         private static Entites.MessageTypeToPointSystem AddReferences(
             Entites.MessageTypeToPointSystem messageTypeToPointSystem, Entites.MessageTypeToPointSystem reference)
         {

@@ -10,6 +10,11 @@ namespace Terministrator.Terministrator.BLL
 {
     static class Privileges
     {
+        /// <summary>
+        /// Creates the default privileges comming with a new channel.
+        /// </summary>
+        /// <param name="channel">The channel.</param>
+        /// <returns>A collection of the default privileges.</returns>
         public static List<Entites.Privileges> Create(Entites.Channel channel)
         {
             List<Entites.Privileges> privileges = new List<Entites.Privileges> {GetNewUser(channel), GetNewMod(channel)};
@@ -22,29 +27,55 @@ namespace Terministrator.Terministrator.BLL
             return privileges;
         }
 
-        public static Entites.Privileges GetNewUser(Entites.Channel channel)
-        {
-            return new Entites.Privileges("User", true, channel, Rules.GetNewUserRules());
-        }
-
+        /// <summary>
+        /// Gets the default privileges group from that channel.
+        /// </summary>
+        /// <param name="channel">The channel.</param>
+        /// <returns>The requested privileges group.</returns>
         public static Entites.Privileges GetDefaultUser(Entites.Channel channel)
         {
             return DAL.Privileges.GetDefaultUser(channel.NamableId);
         }
 
+        /// <summary>
+        /// Gets a new default user privileges group.
+        /// </summary>
+        /// <param name="channel">The channel where this will be in.</param>
+        /// <returns>The requested privileges.</returns>
+        public static Entites.Privileges GetNewUser(Entites.Channel channel)
+        {
+            return new Entites.Privileges("User", true, channel, Rules.GetNewUserRules());
+        }
+
+        /// <summary>
+        /// Gets a new default mod privileges group.
+        /// </summary>
+        /// <param name="channel">The channel where this will be in.</param>
+        /// <returns>The requested privileges.</returns>
         public static Entites.Privileges GetNewMod(Entites.Channel channel)
         {
             return new Entites.Privileges("Moderator", false, channel, Rules.GetNewModRules());
         }
 
+        /// <summary>
+        /// Gets a specific privileges group in a channel.
+        /// </summary>
+        /// <param name="channel">The channel.</param>
+        /// <param name="name">The name.</param>
+        /// <returns>The requested privileges.</returns>
         public static Entites.Privileges GetPrivileges(Entites.Channel channel, string name)
         {
             return DAL.Privileges.GetPrivileges(channel.NamableId, name);
         }
 
+        /// <summary>
+        /// Mod command. Renames the privileges group to an unused name.
+        /// </summary>
+        /// <param name="command">The command.</param>
+        /// <param name="core">The core.</param>
         public static void RenamePrivileges(Command command, Core core = null)
         {
-            if (Tools.IsNotAdminThenSendWarning(command))
+            if (Tools.IsNotModThenSendWarning(command))
             {
                 return;
             }
@@ -83,9 +114,14 @@ namespace Terministrator.Terministrator.BLL
                 $"The privileges group {args[0]} was successfully renammed to {args[1]}."));
         }
 
+        /// <summary>
+        /// Mod command. Adds a new privileges group.
+        /// </summary>
+        /// <param name="command">The command.</param>
+        /// <param name="core">The core.</param>
         public static void AddPrivileges(Command command, Core core = null)
         {
-            if (Tools.IsNotAdminThenSendWarning(command))
+            if (Tools.IsNotModThenSendWarning(command))
             {
                 return;
             }

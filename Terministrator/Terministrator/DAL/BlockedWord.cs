@@ -8,11 +8,11 @@ namespace Terministrator.Terministrator.DAL
 {
     static class BlockedWord
     {
-        public static bool Exists(Entites.BlockedWord blockedWord)
-        {
-            return Get(blockedWord.Word) != null;
-        }
-
+        /// <summary>
+        /// Creates the specified blocked word.
+        /// </summary>
+        /// <param name="blockedWord">The blocked word.</param>
+        /// <returns>The same blocked word with an updated ID.</returns>
         public static Entites.BlockedWord Create(Entites.BlockedWord blockedWord)
         {
             using (TerministratorContext context = new TerministratorContext(true))
@@ -23,6 +23,11 @@ namespace Terministrator.Terministrator.DAL
             }
         }
 
+        /// <summary>
+        /// Gets the specified blocked word.
+        /// </summary>
+        /// <param name="word">The word.</param>
+        /// <returns>The requested blocked word.</returns>
         public static Entites.BlockedWord Get(string word)
         {
             using (TerministratorContext context = new TerministratorContext(true))
@@ -30,14 +35,6 @@ namespace Terministrator.Terministrator.DAL
                 return (from c in context.BlockedWord
                     where c.Word == word
                     select c).FirstOrDefault();
-            }
-        }
-
-        public static Entites.BlockedWord Get(int blockedWordId)
-        {
-            using (TerministratorContext context = new TerministratorContext(true))
-            {
-                return context.BlockedWord.Find(blockedWordId);
             }
         }
     }

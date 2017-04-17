@@ -12,27 +12,42 @@ namespace Terministrator.Terministrator.BLL
 {
     static class Channel
     {
+        /// <summary>
+        /// Updates or create a channel.
+        /// </summary>
+        /// <param name="iChannel">The ichannel.</param>
+        /// <returns>The requested/created channel.</returns>
         public static Entites.Channel UpdateOrCreate(IChannel iChannel)
         {
             Entites.Channel channel = Get(iChannel);
             return channel == null ? Create(iChannel) : Update(iChannel, channel);
         }
 
-        public static Entites.Channel GetOrCreate(IChannel iChannel)
-        {
-            return Get(iChannel) ?? Create(iChannel);
-        }
-
+        /// <summary>
+        /// Gets the specified channel.
+        /// </summary>
+        /// <param name="iChannel">The ichannel.</param>
+        /// <returns>The requested channel.</returns>
         public static Entites.Channel Get(IChannel iChannel)
         {
             return DAL.Channel.Get(iChannel.GetApplicationId(), iChannel.GetApplication().GetApplicationName());
         }
 
+        /// <summary>
+        /// Gets every channels followed for an application.
+        /// </summary>
+        /// <param name="application">The application.</param>
+        /// <returns>The collection of channels.</returns>
         public static List<Entites.Channel> Get(IApplication application)
         {
             return DAL.Channel.Get(application.GetApplicationName());
         }
 
+        /// <summary>
+        /// Gives the users of a channel in descending order of messages sent.
+        /// </summary>
+        /// <param name="channel">The channel.</param>
+        /// <returns>The collection of user to channel</returns>
         public static List<Entites.UserToChannel> TopPoster(Entites.Channel channel)
         {
             return
@@ -41,6 +56,11 @@ namespace Terministrator.Terministrator.BLL
                     .ToList();
         }
 
+        /// <summary>
+        /// Creates the specified channel.
+        /// </summary>
+        /// <param name="iChannel">The ichannel.</param>
+        /// <returns>The newly created channel.</returns>
         public static Entites.Channel Create(IChannel iChannel)
         {
             Entites.Channel channel =
@@ -62,6 +82,12 @@ namespace Terministrator.Terministrator.BLL
             return channel;
         }
 
+        /// <summary>
+        /// Updates the specified channel.
+        /// </summary>
+        /// <param name="iChannel">The ichannel to take the information from.</param>
+        /// <param name="channel">The channel to update.</param>
+        /// <returns>The second arguement, but updated.</returns>
         public static Entites.Channel Update(IChannel iChannel, Entites.Channel channel)
         {
             DAL.Channel.LoadUserNames(channel);
@@ -73,6 +99,11 @@ namespace Terministrator.Terministrator.BLL
             return channel;
         }
 
+        /// <summary>
+        /// Gets the private channel with a user.
+        /// </summary>
+        /// <param name="user">The user.</param>
+        /// <returns>The requested channel.</returns>
         public static Entites.Channel GetPrivateChannel(Entites.User user)
         {
             return
@@ -80,6 +111,11 @@ namespace Terministrator.Terministrator.BLL
                     .Channels.FirstOrDefault(x => DAL.UserToChannel.LoadChannel(x).Channel.Private)?.Channel;
         }
 
+        /// <summary>
+        /// User command. Answers with every users in the channel ordered (descending) by messages sent.
+        /// </summary>
+        /// <param name="command">The command.</param>
+        /// <param name="core">The core.</param>
         public static void GetTopPosters(Command command, Core core = null)
         {
             StringBuilder sb = new StringBuilder();

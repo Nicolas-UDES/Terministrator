@@ -50,6 +50,12 @@ namespace Terministrator.Terministrator.Entites
 
         public bool R9KEnabled { get; set; }
 
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String" /> that represents this instance.
+        /// </returns>
         public override string ToString()
         {
             return
@@ -69,6 +75,11 @@ namespace Terministrator.Terministrator.Entites
                     : "");
         }
 
+        /// <summary>
+        /// Copies the specified rules.
+        /// </summary>
+        /// <param name="copy">The copy.</param>
+        /// <returns>A new Rules object</returns>
         public static Rules Copy(Rules copy)
         {
             return copy == null

@@ -10,11 +10,11 @@ namespace Terministrator.Terministrator.DAL
 {
     static class Channel
     {
-        public static bool Exists(Entites.Channel channel)
-        {
-            return Get(channel.IdForApplication, channel.Application.ApplicationName) != null;
-        }
-
+        /// <summary>
+        /// Creates the specified channel.
+        /// </summary>
+        /// <param name="channel">The channel.</param>
+        /// <returns>The same channel with the updated ID.</returns>
         public static Entites.Channel Create(Entites.Channel channel)
         {
             Entites.Channel reference = ClearReferences(channel);
@@ -27,6 +27,12 @@ namespace Terministrator.Terministrator.DAL
             return AddReferences(channel, reference);
         }
 
+        /// <summary>
+        /// Gets the specified channel.
+        /// </summary>
+        /// <param name="channelID">The channel identifier (application).</param>
+        /// <param name="application">The application.</param>
+        /// <returns>The requested channel.</returns>
         public static Entites.Channel Get(string channelID, string application)
         {
             using (TerministratorContext context = new TerministratorContext(true))
@@ -38,6 +44,11 @@ namespace Terministrator.Terministrator.DAL
             }
         }
 
+        /// <summary>
+        /// Gets all the channels in a given application.
+        /// </summary>
+        /// <param name="application">The application.</param>
+        /// <returns>The requested channel.</returns>
         public static List<Entites.Channel> Get(string application)
         {
             using (TerministratorContext context = new TerministratorContext(true))
@@ -48,6 +59,11 @@ namespace Terministrator.Terministrator.DAL
             }
         }
 
+        /// <summary>
+        /// Loads the user names.
+        /// </summary>
+        /// <param name="channel">The channel.</param>
+        /// <returns>The same channel with the user names collection loaded.</returns>
         public static Entites.Channel LoadUserNames(Entites.Channel channel)
         {
             using (TerministratorContext context = new TerministratorContext(true))
@@ -58,6 +74,11 @@ namespace Terministrator.Terministrator.DAL
             return channel;
         }
 
+        /// <summary>
+        /// Loads the application.
+        /// </summary>
+        /// <param name="channel">The channel.</param>
+        /// <returns>The same channel with the application reference loaded.</returns>
         public static Entites.Channel LoadApplication(Entites.Channel channel)
         {
             using (TerministratorContext context = new TerministratorContext(true))
@@ -68,6 +89,11 @@ namespace Terministrator.Terministrator.DAL
             return channel;
         }
 
+        /// <summary>
+        /// Loads the point system.
+        /// </summary>
+        /// <param name="channel">The channel.</param>
+        /// <returns>The same channel with the point system reference loaded.</returns>
         public static Entites.Channel LoadPointSystem(Entites.Channel channel)
         {
             using (TerministratorContext context = new TerministratorContext(true))
@@ -78,6 +104,11 @@ namespace Terministrator.Terministrator.DAL
             return channel;
         }
 
+        /// <summary>
+        /// Loads the ad system.
+        /// </summary>
+        /// <param name="channel">The channel.</param>
+        /// <returns>The same channel with the ad system reference loaded.</returns>
         public static Entites.Channel LoadAdSystem(Entites.Channel channel)
         {
             using (TerministratorContext context = new TerministratorContext(true))
@@ -88,6 +119,11 @@ namespace Terministrator.Terministrator.DAL
             return channel;
         }
 
+        /// <summary>
+        /// Loads the user to channels.
+        /// </summary>
+        /// <param name="channel">The channel.</param>
+        /// <returns>The same channel with the user to channel collection loaded.</returns>
         public static Entites.Channel LoadUsers(Entites.Channel channel)
         {
             using (TerministratorContext context = new TerministratorContext(true))
@@ -98,6 +134,11 @@ namespace Terministrator.Terministrator.DAL
             return channel;
         }
 
+        /// <summary>
+        /// Clears the references of the channel.
+        /// </summary>
+        /// <param name="channel">The channel.</param>
+        /// <returns>A copy of the channel given in entry with only the references.</returns>
         private static Entites.Channel ClearReferences(Entites.Channel channel)
         {
             Entites.Channel reference = new Entites.Channel(channel.Application, null, false, channel.AdSystem);
@@ -106,6 +147,12 @@ namespace Terministrator.Terministrator.DAL
             return reference;
         }
 
+        /// <summary>
+        /// Adds the references of the second arguement in the first one.
+        /// </summary>
+        /// <param name="channel">The channel to add the references in.</param>
+        /// <param name="reference">The references.</param>
+        /// <returns>The first arguement.</returns>
         private static Entites.Channel AddReferences(Entites.Channel channel, Entites.Channel reference)
         {
             channel.Application = reference.Application;

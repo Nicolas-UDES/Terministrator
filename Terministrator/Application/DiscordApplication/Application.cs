@@ -23,6 +23,9 @@ namespace Terministrator.Application.DiscordApplication
         private Action<IMessage> _receivedMessage;
         private Task<User> _terministratorTask;
 
+        /// <summary>
+        /// Prevents a default instance of the <see cref="Application"/> class from being created.
+        /// </summary>
         private Application()
         {
             _waitingMessages = new List<IMessage>();
@@ -34,10 +37,21 @@ namespace Terministrator.Application.DiscordApplication
 
         public string Token { get; set; }
 
+        /// <summary>
+        /// Gets the name of the application.
+        /// </summary>
+        /// <returns>A <see cref="string"/> with the value "DISCORD"</returns>
         public string GetApplicationName() => "DISCORD";
 
+        /// <summary>
+        /// Sets the message destination.
+        /// </summary>
+        /// <param name="receivedMessage">The received message method.</param>
         public void SetMessageDestination(Action<IMessage> receivedMessage) => _receivedMessage = receivedMessage;
 
+        /// <summary>
+        /// Starts this instance.
+        /// </summary>
         public void Start()
         {
             if (Running)
@@ -59,6 +73,9 @@ namespace Terministrator.Application.DiscordApplication
             _terministratorTask = Task.Factory.StartNew(() => new User(_bot.Me));
         }
 
+        /// <summary>
+        /// Stops this instance.
+        /// </summary>
         public void Stop()
         {
             if (!Running)
@@ -70,11 +87,24 @@ namespace Terministrator.Application.DiscordApplication
             _bot.Logout();
         }
 
+        /// <summary>
+        /// Gets the terministrator.
+        /// </summary>
+        /// <returns>
+        /// Gets the user Terministrator on Discord.
+        /// </returns>
         public IUser GetTerministrator()
         {
             return _terministratorTask.Result;
         }
 
+        /// <summary>
+        /// Sends the message.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <returns>
+        /// A task containing the ID of the message sent.
+        /// </returns>
         public Task<string> SendMessage(IMessage message)
         {
             if (message != null)
@@ -98,24 +128,47 @@ namespace Terministrator.Application.DiscordApplication
             return null;
         }
 
+        /// <summary>
+        /// Edits the message.
+        /// </summary>
+        /// <param name="message">The message.</param>
         public void EditMessage(IMessage message)
         {
             _bot.EditMessage(message.GetApplicationId(), message.GetText(),
                 _bot.GetChannelByID(Convert.ToInt64(message.GetChannel().GetApplicationId())));
         }
 
+        /// <summary>
+        /// Kicks the specified user.
+        /// </summary>
+        /// <param name="user">The user.</param>
+        /// <param name="channel">The channel.</param>
         public void Kick(IUser user, IChannel channel)
         {
             _bot.KickMember(_bot.GetMemberFromChannel(_bot.GetChannelByID(Convert.ToInt64(channel.GetApplicationId())),
                 user.GetApplicationId()));
         }
 
+        /// <summary>
+        /// Determines whether this instance can kick the specified user.
+        /// </summary>
+        /// <param name="channel">The channel.</param>
+        /// <returns>
+        ///   <c>true</c> if this instance can kick the specified user; otherwise, <c>false</c>.
+        /// </returns>
         public bool CanKick(IChannel channel)
         {
             return true;
         }
 
-        public List<IUser> Mods(IChannel channel)
+        /// <summary>
+        /// Gets the mods of the specified channel.
+        /// </summary>
+        /// <param name="channel">The channel.</param>
+        /// <returns>
+        /// A collection of user which are moderators.
+        /// </returns>
+        public List<IUser> GetMods(IChannel channel)
         {
             return
                 _bot.GetMessageHistory(_bot.GetChannelByID(Convert.ToInt64(channel.GetApplicationId())), int.MaxValue)
@@ -123,6 +176,13 @@ namespace Terministrator.Application.DiscordApplication
                     .Select(x => (IUser) new User(x.Author)).ToList();
         }
 
+        /// <summary>
+        /// Pings the application.
+        /// </summary>
+        /// <param name="max">The maximum time a ping can take. 5s by default.</param>
+        /// <returns>
+        /// The time necessary to ping. Null if no connection.
+        /// </returns>
         public TimeSpan? Ping(TimeSpan? max = null)
         {
             if (!Running)
@@ -145,16 +205,33 @@ namespace Terministrator.Application.DiscordApplication
             }
         }
 
+        /// <summary>
+        /// Gets the command symbol.
+        /// </summary>
+        /// <returns>
+        /// The command symbol.
+        /// </returns>
         public string GetCommandSymbol()
         {
             return "!";
         }
 
+        /// <summary>
+        /// Gets the user symbol.
+        /// </summary>
+        /// <returns>
+        /// The user symbol.
+        /// </returns>
         public string GetUserSymbol()
         {
             return "@";
         }
 
+        /// <summary>
+        /// Called when Discord sends us a message.
+        /// </summary>
+        /// <param name="o">The o.</param>
+        /// <param name="args">The <see cref="DiscordMessageEventArgs"/> instance containing the event data.</param>
         private void MessageReceived(object o, DiscordMessageEventArgs args)
         {
             if (_receivedMessage != null)
@@ -173,6 +250,11 @@ namespace Terministrator.Application.DiscordApplication
             }
         }
 
+        /// <summary>
+        /// Called when Discord sends us a private message.
+        /// </summary>
+        /// <param name="o">The o.</param>
+        /// <param name="args">The <see cref="DiscordPrivateMessageEventArgs"/> instance containing the event data.</param>
         private void PrivateMessageReceived(object o, DiscordPrivateMessageEventArgs args)
         {
             if (_receivedMessage != null)

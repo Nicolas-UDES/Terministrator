@@ -13,6 +13,13 @@ namespace Terministrator.Terministrator.BLL
     {
         private const string UniqueOthers = "!\"/$%?&*(others)*&?%$/\"!";
 
+        /// <summary>
+        /// Creates the specified point system.
+        /// </summary>
+        /// <param name="pointSystem">The point system.</param>
+        /// <param name="messageType">Type of the message.</param>
+        /// <param name="reward">The reward.</param>
+        /// <returns></returns>
         public static Entites.MessageTypeToPointSystem Create(Entites.PointSystem pointSystem,
             Entites.MessageType messageType, float reward)
         {
@@ -21,24 +28,43 @@ namespace Terministrator.Terministrator.BLL
                     reward));
         }
 
+        /// <summary>
+        /// Creates the specified message type to point system.
+        /// </summary>
+        /// <param name="messageTypeToPointSystem">The message type to point system.</param>
+        /// <returns></returns>
         public static Entites.MessageTypeToPointSystem Create(Entites.MessageTypeToPointSystem messageTypeToPointSystem)
         {
             return DAL.MessageTypeToPointSystem.Create(messageTypeToPointSystem);
         }
 
+        /// <summary>
+        /// Gets all.
+        /// </summary>
+        /// <param name="pointSystemId">The point system identifier.</param>
+        /// <returns></returns>
         public static List<Entites.MessageTypeToPointSystem> GetAll(int pointSystemId)
         {
             return DAL.MessageTypeToPointSystem.GetAll(pointSystemId);
         }
 
+        /// <summary>
+        /// Deletes all the amounts between a point system and a message type.
+        /// </summary>
+        /// <param name="pointSystemId">The point system identifier.</param>
         public static void DeleteAllFrom(int pointSystemId)
         {
             DAL.MessageTypeToPointSystem.DeleteAllFrom(pointSystemId);
         }
 
+        /// <summary>
+        /// Sets the amounts between the different message types and the point system.
+        /// </summary>
+        /// <param name="command">The command.</param>
+        /// <param name="core">The core.</param>
         internal static void SetAmounts(Command command, Core core = null)
         {
-            if (Tools.IsNotAdminThenSendWarning(command))
+            if (Tools.IsNotModThenSendWarning(command))
             {
                 return;
             }
@@ -77,6 +103,12 @@ namespace Terministrator.Terministrator.BLL
             }
         }
 
+        /// <summary>
+        /// Reads the array for the SetAmounts function.
+        /// </summary>
+        /// <param name="amounts">The amounts.</param>
+        /// <param name="array">The array.</param>
+        /// <returns></returns>
         private static string ReadArray(string[] amounts, out List<Tuple<string, float>> array)
         {
             array = new List<Tuple<string, float>>();

@@ -1,5 +1,8 @@
 ﻿namespace Terministrator.Terministrator.Types
 {
+    /// <summary>
+    /// Holds the regexes to find and replace text. Should be in the app.config in the future.
+    /// </summary>
     public static class Regex
     {
         public const string ControlCharacters = @"[\cA-\cZ]";
