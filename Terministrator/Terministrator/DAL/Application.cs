@@ -8,11 +8,11 @@ namespace Terministrator.Terministrator.DAL
 {
     static class Application
     {
-        public static bool Exists(string applicationName)
-        {
-            return Get(applicationName) != null;
-        }
-
+        /// <summary>
+        /// Gets the specified application name.
+        /// </summary>
+        /// <param name="applicationName">Name of the application.</param>
+        /// <returns>The requested application.</returns>
         public static Entites.Application Get(string applicationName)
         {
             using (TerministratorContext context = new TerministratorContext(true))
@@ -23,6 +23,11 @@ namespace Terministrator.Terministrator.DAL
             }
         }
 
+        /// <summary>
+        /// Creates the specified application.
+        /// </summary>
+        /// <param name="application">The application.</param>
+        /// <returns>The same application with an updated ID.</returns>
         public static Entites.Application Create(Entites.Application application)
         {
             using (TerministratorContext context = new TerministratorContext(true))
@@ -33,6 +38,11 @@ namespace Terministrator.Terministrator.DAL
             }
         }
 
+        /// <summary>
+        /// Updates the specified application.
+        /// </summary>
+        /// <param name="application">The application.</param>
+        /// <returns>The same application</returns>
         public static Entites.Application Update(Entites.Application application)
         {
             using (TerministratorContext context = new TerministratorContext(true))

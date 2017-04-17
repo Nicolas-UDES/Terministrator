@@ -14,23 +14,8 @@ namespace Terministrator.Terministrator.Entites
     {
         private IApplication _application;
 
-        [Key]
-        [MaxLength(128)]
-        public string ApplicationName { get; set; }
-
-        public string CommandSymbols { get; set; }
-
-        public string UserSymbols { get; set; }
-
-        public string Token { get; set; }
-
-        public virtual List<Channel> Channels { get; set; }
-
-        public virtual List<User> Users { get; set; }
-
         public Application()
         {
-            
         }
 
         public Application(string applicationName, string commandSymbols, string userSymbols, string token)
@@ -41,19 +26,23 @@ namespace Terministrator.Terministrator.Entites
             Token = token;
         }
 
-        public override string ToString()
-        {
-            return ApplicationName;
-        }
+        [Key]
+        [MaxLength(128)]
+        public string ApplicationName { get; set; }
+
+        public string CommandSymbols { get; set; }
+
+        public string UserSymbols { get; set; }
+
+        public virtual List<Channel> Channels { get; set; }
+
+        public virtual List<User> Users { get; set; }
+
+        public string Token { get; set; }
 
         public string GetApplicationName()
         {
             return ApplicationName;
-        }
-
-        private IApplication GetApplication()
-        {
-            return _application ?? (_application = ApplicationFactory.Get(ApplicationName));
         }
 
         public void SetMessageDestination(Action<IMessage> receivedMessage)
@@ -96,9 +85,9 @@ namespace Terministrator.Terministrator.Entites
             GetApplication().Kick(user, channel);
         }
 
-        public List<IUser> Mods(IChannel channel)
+        public List<IUser> GetMods(IChannel channel)
         {
-            return GetApplication().Mods(channel);
+            return GetApplication().GetMods(channel);
         }
 
         public TimeSpan? Ping(TimeSpan? max = null)
@@ -114,6 +103,16 @@ namespace Terministrator.Terministrator.Entites
         public string GetUserSymbol()
         {
             return UserSymbols;
+        }
+
+        public override string ToString()
+        {
+            return ApplicationName;
+        }
+
+        private IApplication GetApplication()
+        {
+            return _application ?? (_application = ApplicationFactory.Get(ApplicationName));
         }
     }
 }

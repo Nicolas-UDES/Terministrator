@@ -1,7 +1,6 @@
 ﻿#region Usings
 
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using Terministrator.Application.Interface;
 
 #endregion

@@ -1,6 +1,5 @@
 ﻿#region Usings
 
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -11,6 +10,20 @@ namespace Terministrator.Terministrator.Entites
 {
     class Privileges
     {
+        public Privileges()
+        {
+        }
+
+        public Privileges(string name, bool defaultUser, Channel channel, Rules rules)
+        {
+            Name = name;
+            Default = defaultUser;
+            ChannelId = channel.NamableId;
+            Channel = channel;
+            RulesId = rules.RulesId;
+            Rules = rules;
+        }
+
         [Key]
         public int PrivilegesId { get; set; }
 
@@ -32,17 +45,5 @@ namespace Terministrator.Terministrator.Entites
         public virtual Rules Rules { get; set; }
 
         public bool Default { get; set; }
-
-        public Privileges() { }
-
-        public Privileges(string name, bool defaultUser, Channel channel, Rules rules)
-        {
-            Name = name;
-            Default = defaultUser;
-            ChannelId = channel.NamableId;
-            Channel = channel;
-            RulesId = rules.RulesId;
-            Rules = rules;
-        }
     }
 }

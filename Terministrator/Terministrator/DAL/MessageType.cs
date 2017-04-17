@@ -9,11 +9,11 @@ namespace Terministrator.Terministrator.DAL
 {
     static class MessageType
     {
-        public static bool Exists(Entites.MessageType messageType)
-        {
-            return Get(messageType.Name) != null;
-        }
-
+        /// <summary>
+        /// Creates the specified message type.
+        /// </summary>
+        /// <param name="messageType">Type of the message.</param>
+        /// <returns>The same message type with an updated ID.</returns>
         public static Entites.MessageType Create(Entites.MessageType messageType)
         {
             using (TerministratorContext context = new TerministratorContext(true))
@@ -24,6 +24,11 @@ namespace Terministrator.Terministrator.DAL
             }
         }
 
+        /// <summary>
+        /// Updates the name of the specified message type.
+        /// </summary>
+        /// <param name="messageType">Type of the message.</param>
+        /// <returns>The same message type.</returns>
         public static Entites.MessageType Update(Entites.MessageType messageType)
         {
             using (TerministratorContext context = new TerministratorContext(true))
@@ -38,15 +43,11 @@ namespace Terministrator.Terministrator.DAL
             }
         }
 
-        public static Entites.MessageType CreateOrUpdate(Entites.MessageType messageType)
-        {
-            if (Exists(messageType))
-            {
-                return Update(messageType);
-            }
-            return Create(messageType);
-        }
-
+        /// <summary>
+        /// Gets the specified message type.
+        /// </summary>
+        /// <param name="name">The name of the requested message type.</param>
+        /// <returns>The requested message type.</returns>
         public static Entites.MessageType Get(string name)
         {
             using (TerministratorContext context = new TerministratorContext(true))
@@ -57,15 +58,23 @@ namespace Terministrator.Terministrator.DAL
             }
         }
 
+        /// <summary>
+        /// Gets all message types.
+        /// </summary>
+        /// <returns>The collection of message types.</returns>
         public static List<Entites.MessageType> GetAll()
         {
             using (TerministratorContext context = new TerministratorContext(true))
             {
                 return (from c in context.MessageType
-                        select c).ToList();
+                    select c).ToList();
             }
         }
 
+        /// <summary>
+        /// Counts how many message types there are.
+        /// </summary>
+        /// <returns>The amount of message types.</returns>
         public static int Count()
         {
             using (TerministratorContext context = new TerministratorContext(true))
@@ -74,6 +83,9 @@ namespace Terministrator.Terministrator.DAL
             }
         }
 
+        /// <summary>
+        /// Deletes all message types from the database.
+        /// </summary>
         public static void DeleteAll()
         {
             using (TerministratorContext context = new TerministratorContext(true))

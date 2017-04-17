@@ -9,7 +9,9 @@ namespace Terministrator.Terministrator.Entites
 {
     class MessageTypeToPointSystem
     {
-        public MessageTypeToPointSystem() { }
+        public MessageTypeToPointSystem()
+        {
+        }
 
         public MessageTypeToPointSystem(PointSystem pointSystem, MessageType messageType, float reward)
         {

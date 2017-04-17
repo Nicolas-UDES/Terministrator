@@ -14,7 +14,8 @@ namespace Terministrator.Terministrator.Entites
         {
         }
 
-        public UserName(string firstName, string lastName, string username, bool current, DateTime changedOn, Namable ownedBy)
+        public UserName(string firstName, string lastName, string username, bool current, DateTime changedOn,
+            Namable ownedBy)
         {
             FirstName = firstName;
             LastName = lastName;
@@ -42,6 +43,12 @@ namespace Terministrator.Terministrator.Entites
 
         public virtual Namable OwnedBy { get; set; }
 
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String" /> that represents this instance.
+        /// </returns>
         public override string ToString()
         {
             string retour = FirstName;

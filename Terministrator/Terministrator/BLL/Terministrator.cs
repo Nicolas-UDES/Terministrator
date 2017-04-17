@@ -1,29 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿#region Usings
+
+using System;
 using System.Deployment.Application;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using Terministrator.Terministrator.Types;
+
+#endregion
 
 namespace Terministrator.Terministrator.BLL
 {
     static class Terministrator
     {
-        private static string CurrentVersion => ApplicationDeployment.IsNetworkDeployed ? 
-            ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString() : Assembly.GetExecutingAssembly().GetName().Version.ToString();
+        private static string CurrentVersion => ApplicationDeployment.IsNetworkDeployed
+            ? ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString()
+            : Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
+        /// <summary>
+        /// User command. Always sent when a user open a private discussion with the bot on Telegram.
+        /// </summary>
+        /// <param name="command">The command.</param>
+        /// <param name="core">The core.</param>
         public static void Start(Command command, Core core = null)
         {
-            Entites.Message.SendMessage(Message.Answer(command.Message, 
+            Entites.Message.SendMessage(Message.Answer(command.Message,
                 $"./​Terministator\r\n" +
-                $"Loading Terministrator v{CurrentVersion}{(char)('a' + new Random().Next(0,10))}...\r\n" +
+                $"Loading Terministrator v{CurrentVersion}{(char) ('a' + new Random().Next(0, 10))}...\r\n" +
                 $"Initializing...\r\n" +
                 $"Terministator ready. Send /help to begin troll annihilation."));
         }
 
+        /// <summary>
+        /// User command. Send every functions with an explanation for each of them.
+        /// </summary>
+        /// <remarks>
+        /// Should add something to explain the bot's goals as well.
+        /// </remarks>
+        /// <param name="command">The command.</param>
+        /// <param name="core">The core.</param>
         public static void Help(Command command, Core core = null)
         {
             string nl = Environment.NewLine;
@@ -39,6 +52,7 @@ namespace Terministrator.Terministrator.BLL
                 $"*Set Privileges*{nl}Synyax: \"/setprivileges [{us}user] privilegesName\". Set your or the user's privileges group.{nl}{nl}" +
                 $"*Rename Privileges*{nl}Synyax: \"/renameprivileges oldName newName\". Rename a privileges group. The name must not already exist in the channel.{nl}{nl}" +
                 $"*Add Privileges*{nl}Synyax: \"/addprivileges name [privilegesToCopy]\". Will create a new privileges group. If given another privileges group, will copy its rules; otherwise it takes the default ones.{nl}{nl}" +
+                $"*Reset Blocked Words*{nl}Synyax: \"/resetblockedwords privileges\". Will reset the blocked words to the initial list.{nl}{nl}" +
                 $"*Rules*{nl}Synyax: \"/rules [{us}user]\". Show the rules applying on your privileges group.{nl}{nl}" +
                 $"*Help*{nl}Synyax: \"/help [{us}user]\". Show this message.{nl}{nl}"));
         }

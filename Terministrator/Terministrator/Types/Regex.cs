@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Terministrator.Terministrator.Types
+﻿namespace Terministrator.Terministrator.Types
 {
+    /// <summary>
+    /// Holds the regexes to find and replace text. Should be in the app.config in the future.
+    /// </summary>
     public static class Regex
     {
         public const string ControlCharacters = @"[\cA-\cZ]";
         public const string ControlCharactersReplace = @"";
-        public const string Smileys = @"(\:\w +\:|\<[\/\\] ? 3 |[\(\)\\\D |\*\$][\-\^]?[\:\;\=]|[\:\;\=B8] [\-\^]?[3DOPp\@\$\*\\\)\(\/\|])(?=\s|[\!\.\?]|$)";
+
+        public const string Smileys =
+            @"(\:\w +\:|\<[\/\\] ? 3 |[\(\)\\\D |\*\$][\-\^]?[\:\;\=]|[\:\;\=B8] [\-\^]?[3DOPp\@\$\*\\\)\(\/\|])(?=\s|[\!\.\?]|$)";
+
         public const string SmileysReplace = @" ";
         public const string Quote = @"([a-zA-Z])'([a-zA-Z])";
         public const string QuoteReplace = @"$1$2";

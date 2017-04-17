@@ -30,6 +30,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>C:\Users\Squirrel\Desktop\Terministrator.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DiscordSharp, Version=0.6.2.0, Culture=neutral, processorArchitecture=MSIL">
@@ -104,7 +105,12 @@
     <Compile Include="Migrations\201704151742380_addedtoken.Designer.cs">
       <DependentUpon>201704151742380_addedtoken.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201704152213320_testing.cs" />
+    <Compile Include="Migrations\201704152213320_testing.Designer.cs">
+      <DependentUpon>201704152213320_testing.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Telegram.cs" />
     <Compile Include="Terministrator\BLL\Ad.cs" />
     <Compile Include="Terministrator\BLL\AdSystem.cs" />
     <Compile Include="Terministrator\BLL\MessageTypeToPointSystem.cs" />
@@ -121,9 +127,9 @@
     <Compile Include="Terministrator\DAL\Rules.cs" />
     <Compile Include="Terministrator\DAL\SimilarTexts.cs" />
     <Compile Include="Terministrator\Types\Command.cs" />
-    <Compile Include="Terministrator\Types\Enumerables.cs" />
     <Compile Include="Terministrator\Types\Logger.cs" />
     <Compile Include="Terministrator\Types\Regex.cs" />
+    <Compile Include="Terministrator\Types\Tools.cs" />
     <Compile Include="Terministrator\View\MainConsole.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -190,6 +196,9 @@
     <EmbeddedResource Include="Migrations\201704151742380_addedtoken.resx">
       <DependentUpon>201704151742380_addedtoken.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704152213320_testing.resx">
+      <DependentUpon>201704152213320_testing.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Terministrator\View\MainConsole.resx">
       <DependentUpon>MainConsole.cs</DependentUpon>
     </EmbeddedResource>
@@ -202,7 +211,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

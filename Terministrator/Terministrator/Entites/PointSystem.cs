@@ -10,7 +10,9 @@ namespace Terministrator.Terministrator.Entites
 {
     class PointSystem
     {
-        public PointSystem() { }
+        public PointSystem()
+        {
+        }
 
         public PointSystem(Channel channel)
         {

@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.SqlTypes;
 
 #endregion
 
@@ -16,7 +15,8 @@ namespace Terministrator.Terministrator.Entites
         {
         }
 
-        public UserToChannel(Application application, User user, Channel channel, DateTime joinedOn, Privileges privileges, float points = 0, int nbSilences = 0, DateTime? silencedTo = null)
+        public UserToChannel(Application application, User user, Channel channel, DateTime joinedOn,
+            Privileges privileges, float points = 0, int nbSilences = 0, DateTime? silencedTo = null)
         {
             ApplicationName = application?.ApplicationName;
             Application = application;

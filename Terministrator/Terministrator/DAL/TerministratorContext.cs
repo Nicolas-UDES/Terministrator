@@ -2,9 +2,9 @@
 
 using System;
 using System.Data.Entity;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading;
+using Terministrator.Terministrator.Entites;
 
 #endregion
 
@@ -16,7 +16,6 @@ namespace Terministrator.Terministrator.DAL
 
         public TerministratorContext() : this(false)
         {
-            
         }
 
         public TerministratorContext(bool mutex) : base("Terministrator")
@@ -25,29 +24,6 @@ namespace Terministrator.Terministrator.DAL
             {
                 //Mutex.Value.WaitOne();
             }
-        }
-
-        public new void Dispose()
-        {
-            //Mutex.Value.ReleaseMutex();
-            base.Dispose();
-        }
-
-        public static TimeSpan? Ping()
-        {
-            DateTime now = DateTime.UtcNow;
-            using (TerministratorContext context = new TerministratorContext(true))
-            {
-                try
-                {
-                    context.Application.SqlQuery("SELECT ApplicationName FROM dbo.Applications WHERE ApplicationName is null;").ToList();
-                }
-                catch (Exception)
-                {
-                    return null;
-                }
-            }
-            return DateTime.UtcNow - now;
         }
 
         public DbSet<Entites.Ad> Ad { get; set; }
@@ -75,19 +51,32 @@ namespace Terministrator.Terministrator.DAL
         public DbSet<Entites.UserName> UserName { get; set; }
         public DbSet<Entites.UserToChannel> UserToChannel { get; set; }
 
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        public new void Dispose()
         {
-            //modelBuilder.Entity<Entites.Channel>().Map(m =>
-            //{
-            //    m.MapInheritedProperties();
-            //    m.ToTable("Channel");
-            //});
+            //Mutex.Value.ReleaseMutex();
+            base.Dispose();
+        }
 
-            //modelBuilder.Entity<Entites.User>().Map(m =>
-            //{
-            //    m.MapInheritedProperties();
-            //    m.ToTable("User");
-            //});
+        /// <summary>
+        /// Pings the database.
+        /// </summary>
+        /// <returns>The time necessary to ping. Null if no connection.</returns>
+        public static TimeSpan? Ping()
+        {
+            DateTime now = DateTime.UtcNow;
+            using (TerministratorContext context = new TerministratorContext(true))
+            {
+                try
+                {
+                    //Pointless call (less populated table with never any results) just to see the reaction time of the DB
+                    context.Application.SqlQuery("SELECT * FROM dbo.Applications WHERE ApplicationName is null;").Count();
+                }
+                catch (Exception)
+                {
+                    return null;
+                }
+            }
+            return DateTime.UtcNow - now;
         }
     }
 }
