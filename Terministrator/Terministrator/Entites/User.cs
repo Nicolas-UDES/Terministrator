@@ -7,6 +7,11 @@ using Terministrator.Application.Interface;
 
 namespace Terministrator.Terministrator.Entites
 {
+    /// <summary>
+    /// Entity of the user. Contains all the datas required for a user.
+    /// </summary>
+    /// <seealso cref="Namable" />
+    /// <seealso cref="IUser" />
     class User : Namable, IUser
     {
         public User()

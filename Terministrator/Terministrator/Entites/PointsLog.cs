@@ -6,6 +6,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Terministrator.Terministrator.Entites
 {
+    /// <summary>
+    /// Entity of the point logs. Contains all the datas required for logging an activity on a user's points, in a channel.
+    /// </summary>
     class PointsLog
     {
         [Key]

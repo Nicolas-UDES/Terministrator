@@ -8,12 +8,25 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Terministrator.Terministrator.Entites
 {
+    /// <summary>
+    /// Entity of the privileges. Contains all the datas required for the different privileges on a channel.
+    /// </summary>
     class Privileges
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Privileges"/> class.
+        /// </summary>
         public Privileges()
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Privileges"/> class.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <param name="defaultUser">if set to <c>true</c> [default user].</param>
+        /// <param name="channel">The channel.</param>
+        /// <param name="rules">The rules.</param>
         public Privileges(string name, bool defaultUser, Channel channel, Rules rules)
         {
             Name = name;

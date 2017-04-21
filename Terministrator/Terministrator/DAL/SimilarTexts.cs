@@ -1,5 +1,8 @@
 ﻿namespace Terministrator.Terministrator.DAL
 {
+    /// <summary>
+    /// Data access layer of the similar texts. Process every exchanges with Entity-Framework (AKA the database).
+    /// </summary>
     static class SimilarTexts
     {
         /// <summary>

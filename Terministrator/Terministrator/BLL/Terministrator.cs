@@ -9,6 +9,9 @@ using Terministrator.Terministrator.Types;
 
 namespace Terministrator.Terministrator.BLL
 {
+    /// <summary>
+    /// Business logic layer of Terministartor. Is only used for static answers (no requests to the database).
+    /// </summary>
     static class Terministrator
     {
         private static string CurrentVersion => ApplicationDeployment.IsNetworkDeployed

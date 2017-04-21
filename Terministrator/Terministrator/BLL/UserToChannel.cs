@@ -10,6 +10,9 @@ using Terministrator.Terministrator.Types;
 
 namespace Terministrator.Terministrator.BLL
 {
+    /// <summary>
+    /// Business logic layer of the user to channel. Create and update upon requests. Also does all the working when a single user in a channel is aimed.
+    /// </summary>
     static class UserToChannel
     {
         /// <summary>

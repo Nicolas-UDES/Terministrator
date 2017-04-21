@@ -270,7 +270,7 @@ namespace Terministrator.Terministrator.View
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void comboBox_Application_SelectedIndexChanged(object sender, EventArgs e)
+        private void ComboBox_Application_SelectedIndexChanged(object sender, EventArgs e)
         {
             RefreshChannelUserDataSource();
         }
@@ -380,7 +380,7 @@ namespace Terministrator.Terministrator.View
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void button_Clear_Click(object sender, EventArgs e)
+        private void Button_Clear_Click(object sender, EventArgs e)
         {
             ControlAccess(textBox_log, () => { textBox_log.Clear(); });
         }

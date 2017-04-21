@@ -8,6 +8,9 @@ using System.Linq;
 
 namespace Terministrator.Terministrator.DAL
 {
+    /// <summary>
+    /// Data access layer of the user to channels. Process every exchanges with Entity-Framework (AKA the database).
+    /// </summary>
     internal static class UserToChannel
     {
         /// <summary>

@@ -10,6 +10,9 @@ using Terministrator.Terministrator.Types;
 
 namespace Terministrator.Terministrator.BLL
 {
+    /// <summary>
+    /// Business logic layer of the channels. Processes every functions mainly dealing with channels.
+    /// </summary>
     static class Channel
     {
         /// <summary>

@@ -14,6 +14,10 @@ namespace Terministrator.Application.TelegramApplication
 
     #endregion
 
+    /// <summary>
+    /// Implement the channel interface for Telegram.
+    /// </summary>
+    /// <seealso cref="IChannel" />
     class Channel : IChannel
     {
         private readonly Application _application;

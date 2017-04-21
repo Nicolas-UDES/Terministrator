@@ -16,6 +16,10 @@ namespace Terministrator.Application.DiscordApplication
 
     #endregion
 
+    /// <summary>
+    /// Implement the application interface for Discord.
+    /// </summary>
+    /// <seealso cref="IMessage" />
     class Message : IMessage
     {
         private readonly Channel _channel;

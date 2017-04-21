@@ -9,6 +9,9 @@ using System.Text;
 
 namespace Terministrator.Terministrator.BLL
 {
+    /// <summary>
+    /// Business logic layer of the message types. Makes sure the database is up to date with the set types and gives them on request.
+    /// </summary>
     static class MessageType
     {
         private static readonly string[] Types =

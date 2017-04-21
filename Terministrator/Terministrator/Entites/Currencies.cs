@@ -7,6 +7,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Terministrator.Terministrator.Entites
 {
+    /// <summary>
+    /// Entity of the currencies. Contains all the datas required for a currency.
+    /// </summary>
     class Currencies
     {
         [Key]

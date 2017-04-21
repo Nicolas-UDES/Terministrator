@@ -1,6 +1,8 @@
 #region Usings
 
 using System.Data.Entity.Migrations;
+// ReSharper disable InconsistentNaming
+#pragma warning disable 1591
 
 #endregion
 

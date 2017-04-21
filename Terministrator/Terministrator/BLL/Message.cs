@@ -8,6 +8,9 @@ using Terministrator.Application.Interface;
 
 namespace Terministrator.Terministrator.BLL
 {
+    /// <summary>
+    /// Business logic layer of the messages. Mainly process the switch between an IMessage and a message.
+    /// </summary>
     static class Message
     {
         /// <summary>
@@ -38,6 +41,7 @@ namespace Terministrator.Terministrator.BLL
         /// <returns>The newly created message.</returns>
         public static Entites.Message Create(IMessage iMessage)
         {
+            //TODO: Actually process the real message types.
             Entites.Message message =
                 DAL.Message.Create(
                     new Entites.Message(Application.UpdateOrCreate(iMessage.GetChannel().GetApplication()),

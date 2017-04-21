@@ -12,20 +12,41 @@ namespace Terministrator.Terministrator.Types
     /// </summary>
     public class Logger
     {
+        /// <summary>
+        /// Defines the log level of the message.
+        /// </summary>
         public enum Rating
         {
+            /// <summary>
+            /// Nearly useless information
+            /// </summary>
             Noisy,
+            /// <summary>
+            /// Nice to know information
+            /// </summary>
             Information,
+            /// <summary>
+            /// Important information
+            /// </summary>
             Warning,
+            /// <summary>
+            /// Critical information
+            /// </summary>
             Error
         }
 
         private static readonly Lazy<Logger> Instance = new Lazy<Logger>(() => new Logger());
 
+        /// <summary>
+        /// Prevents a default instance of the <see cref="Logger"/> class from being created.
+        /// </summary>
         private Logger()
         {
         }
 
+        /// <summary>
+        /// Get the instance of the logger.
+        /// </summary>
         public static Logger LoggerInstance => Instance.Value;
 
         /// <summary>
@@ -183,11 +204,47 @@ namespace Terministrator.Terministrator.Types
         /// <seealso cref="System.EventArgs" />
         public class LoggingRequestedEventArgs : EventArgs
         {
+            /// <summary>
+            /// Gets or sets the rating.
+            /// </summary>
+            /// <value>
+            /// The rating.
+            /// </value>
             public Rating Rating { get; set; }
+            /// <summary>
+            /// Gets or sets the text.
+            /// </summary>
+            /// <value>
+            /// The text.
+            /// </value>
             public string Text { get; set; }
+            /// <summary>
+            /// Gets or sets the exception.
+            /// </summary>
+            /// <value>
+            /// The exception.
+            /// </value>
             public Exception Exception { get; set; }
+            /// <summary>
+            /// Gets or sets the caller line number.
+            /// </summary>
+            /// <value>
+            /// The caller line number.
+            /// </value>
             public int CallerLineNumber { get; set; }
+            /// <summary>
+            /// Gets or sets the name of the caller member.
+            /// </summary>
+            /// <value>
+            /// The name of the caller member.
+            /// </value>
             public string CallerMemberName { get; set; }
+            /// <summary>
+            /// Gets or sets the caller file path.
+            /// </summary>
+            /// <value>
+            /// The caller file path.
+            /// </value>
             public string CallerFilePath { get; set; }
         }
     }

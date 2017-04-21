@@ -8,6 +8,9 @@ using Terministrator.Terministrator.Types;
 
 namespace Terministrator.Terministrator.BLL
 {
+    /// <summary>
+    /// Business logic layer of the privileges. Let a moderator create and rename privileges and gives default privileges (User and Mod).
+    /// </summary>
     static class Privileges
     {
         /// <summary>

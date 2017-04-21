@@ -12,6 +12,9 @@ using Regex = Terministrator.Terministrator.Types.Regex;
 
 namespace Terministrator.Terministrator.BLL
 {
+    /// <summary>
+    /// Business logic layer of the rules. Applies the rules on each received messages. Also let a moderator edits specified rules.
+    /// </summary>
     internal static class Rules
     {
         // 3119/4500

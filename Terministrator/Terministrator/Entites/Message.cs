@@ -11,32 +11,33 @@ using Terministrator.Application.Interface;
 
 namespace Terministrator.Terministrator.Entites
 {
+    /// <summary>
+    /// Entity of the messages. Contains all the datas required for a message.
+    /// </summary>
+    /// <seealso cref="ApplicationReferencable" />
+    /// <seealso cref="IMessage" />
     class Message : ApplicationReferencable, IMessage
     {
         public static Action<Message> SendMessage = m => { m.Application.SendMessage(m); };
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Message"/> class.
+        /// </summary>
         public Message()
         {
         }
 
-        public Message(Message message) : base(message.Application, message.IdForApplication)
-        {
-            MessageId = message.MessageId;
-            UserToChannelId = message.UserToChannelId;
-            UserToChannel = message.UserToChannel;
-            RepliesToId = message.RepliesToId;
-            RepliesTo = message.RepliesTo;
-            SentOn = message.SentOn;
-            Deleted = message.Deleted;
-            MessageTypeId = message.MessageTypeId;
-            MessageType = message.MessageType;
-            Texts = message.Texts;
-            Files = message.Files;
-            AdSystems = message.AdSystems;
-            JoinedUserId = message.JoinedUserId;
-            JoinedUser = message.JoinedUser;
-        }
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Message"/> class.
+        /// </summary>
+        /// <param name="application">The application.</param>
+        /// <param name="idMessageForApplication">The identifier message for application.</param>
+        /// <param name="sentOn">The sent on.</param>
+        /// <param name="userToChannel">The user to channel.</param>
+        /// <param name="messageType">Type of the message.</param>
+        /// <param name="repliesTo">The replies to.</param>
+        /// <param name="deleted">if set to <c>true</c> [deleted].</param>
+        /// <param name="joinedUser">The joined user.</param>
         public Message(Application application, string idMessageForApplication, DateTime sentOn,
             UserToChannel userToChannel, MessageType messageType, Message repliesTo = null, bool deleted = false,
             UserToChannel joinedUser = null) : base(application, idMessageForApplication)
@@ -87,41 +88,89 @@ namespace Terministrator.Terministrator.Entites
 
         public virtual UserToChannel JoinedUser { get; set; }
 
+        /// <summary>
+        /// Gets the application identifier.
+        /// </summary>
+        /// <returns>
+        /// The application identifier
+        /// </returns>
         public string GetApplicationId()
         {
             return IdForApplication;
         }
 
+        /// <summary>
+        /// Gets the author of the message.
+        /// </summary>
+        /// <returns>
+        /// The author
+        /// </returns>
         public IUser GetFrom()
         {
             return UserToChannel.User;
         }
 
+        /// <summary>
+        /// Gets the channel.
+        /// </summary>
+        /// <returns>
+        /// The channel
+        /// </returns>
         public IChannel GetChannel()
         {
             return UserToChannel.Channel;
         }
 
+        /// <summary>
+        /// Gets the sent date.
+        /// </summary>
+        /// <returns>
+        /// The sent date
+        /// </returns>
         public DateTime GetSentDate()
         {
             return SentOn;
         }
 
+        /// <summary>
+        /// Gets the text.
+        /// </summary>
+        /// <returns>
+        /// The text
+        /// </returns>
         public string GetText()
         {
             return Texts != null && Texts.Any() ? Texts?.OrderByDescending(x => x.SetOn).ElementAt(0).ZeText : null;
         }
 
+        /// <summary>
+        /// Gets the message replied by this one.
+        /// </summary>
+        /// <returns>
+        /// The message being replied to
+        /// </returns>
         public IMessage GetRepliesTo()
         {
             return RepliesTo;
         }
 
+        /// <summary>
+        /// Gets the joined user.
+        /// </summary>
+        /// <returns>
+        /// The joinded user
+        /// </returns>
         public IUser GetJoinedUser()
         {
             return JoinedUser.User;
         }
 
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String" /> that represents this instance.
+        /// </returns>
         public override string ToString()
         {
             return '[' + SentOn.ToString("HH:mm") + "] " + UserToChannel.User + ": " + GetText() ?? "{no text}";

@@ -8,12 +8,27 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Terministrator.Terministrator.Entites
 {
+    /// <summary>
+    /// Entity of the rules. Contains all the datas required for a privilege's rules to be set on users.
+    /// </summary>
     class Rules
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Rules"/> class.
+        /// </summary>
         public Rules()
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Rules"/> class.
+        /// </summary>
+        /// <param name="spamDelay">The spam delay.</param>
+        /// <param name="extensionBlocked">if set to <c>true</c> [extension blocked].</param>
+        /// <param name="domainBlocked">if set to <c>true</c> [domain blocked].</param>
+        /// <param name="messageTypeBlocked">if set to <c>true</c> [message type blocked].</param>
+        /// <param name="blockedWordsEnabled">if set to <c>true</c> [blocked words enabled].</param>
+        /// <param name="r9kEnabled">if set to <c>true</c> [R9K enabled].</param>
         public Rules(TimeSpan? spamDelay, bool extensionBlocked, bool domainBlocked, bool messageTypeBlocked,
             bool blockedWordsEnabled, bool r9kEnabled)
         {

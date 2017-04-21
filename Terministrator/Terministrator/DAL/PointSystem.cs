@@ -1,5 +1,8 @@
 ﻿namespace Terministrator.Terministrator.DAL
 {
+    /// <summary>
+    /// Data access layer of the point systems. Process every exchanges with Entity-Framework (AKA the database).
+    /// </summary>
     static class PointSystem
     {
         /// <summary>

@@ -9,6 +9,9 @@ using Terministrator.Terministrator.Types;
 
 namespace Terministrator.Terministrator.BLL
 {
+    /// <summary>
+    /// Business logic layer of the message type to point systems. Let a moderator set the rewards when an user send a message of a type.
+    /// </summary>
     static class MessageTypeToPointSystem
     {
         private const string UniqueOthers = "!\"/$%?&*(others)*&?%$/\"!";

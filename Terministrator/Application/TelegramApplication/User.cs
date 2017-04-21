@@ -14,6 +14,10 @@ namespace Terministrator.Application.TelegramApplication
 
     #endregion
 
+    /// <summary>
+    /// Implement the user interface for Telegram.
+    /// </summary>
+    /// <seealso cref="IUser" />
     class User : IUser
     {
         private readonly int _applicationId;

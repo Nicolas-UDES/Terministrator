@@ -3,6 +3,9 @@ using System.Linq;
 
 namespace Terministrator.Terministrator.Types
 {
+    /// <summary>
+    /// Some handy tools that don't really find their place elsewhere in the code.
+    /// </summary>
     internal static class Tools
     {
         /// <summary>

@@ -7,8 +7,17 @@ using Terministrator.Terministrator.Entites;
 
 namespace Terministrator.Terministrator.Types
 {
+    /// <summary>
+    /// Used to hold the information of a command when a message is found to be one.
+    /// </summary>
     class Command
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Command"/> class.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="arguement">The arguement.</param>
         public Command(Message message, string name, string arguement)
         {
             Message = message;

@@ -6,6 +6,9 @@ using Terministrator.Application.Interface;
 
 namespace Terministrator.Terministrator.BLL
 {
+    /// <summary>
+    /// Business logic layer of the applications. Is able to work with IApplication to allow the Application Interface to talk with the database.
+    /// </summary>
     static class Application
     {
         /// <summary>
