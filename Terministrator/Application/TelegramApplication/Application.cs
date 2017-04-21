@@ -13,6 +13,10 @@ using Terministrator.Application.Interface;
 
 namespace Terministrator.Application.TelegramApplication
 {
+    /// <summary>
+    /// Implement the application interface for Telegram. Used to discuss with Discord's API.
+    /// </summary>
+    /// <seealso cref="IApplication" />
     class Application : IApplication
     {
         private static readonly Lazy<Application> Lazy = new Lazy<Application>(() => new Application());

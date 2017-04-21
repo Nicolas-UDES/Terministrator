@@ -14,6 +14,10 @@ using Terministrator.Application.Interface;
 
 namespace Terministrator.Application.DiscordApplication
 {
+    /// <summary>
+    /// Implement the application interface for Discord. Used to discuss with Discord's API.
+    /// </summary>
+    /// <seealso cref="IApplication" />
     class Application : IApplication
     {
         private static readonly Lazy<Application> Lazy = new Lazy<Application>(() => new Application());
@@ -170,10 +174,14 @@ namespace Terministrator.Application.DiscordApplication
         /// </returns>
         public List<IUser> GetMods(IChannel channel)
         {
+            DiscordChannel dChannel = _bot.GetChannelByID(Convert.ToInt64(channel.GetApplicationId()));
+            List<DiscordSpecialPermissions> perm = dChannel.Parent.Owner.Roles.SelectMany(x => x.Permissions.GetAllPermissions()).ToList();
             return
-                _bot.GetMessageHistory(_bot.GetChannelByID(Convert.ToInt64(channel.GetApplicationId())), int.MaxValue)
-                    .Where(x => x.Author.Roles.Any(y => y.Position > 0))
-                    .Select(x => (IUser) new User(x.Author)).ToList();
+                dChannel.Parent.Members.Where(
+                        x => x.Value.Roles.Exists(
+                            y => y.Permissions.HasPermission(DiscordSpecialPermissions.KickMembers)))
+                    .Select(x => (IUser) new User(x.Value))
+                    .ToList();
         }
 
         /// <summary>

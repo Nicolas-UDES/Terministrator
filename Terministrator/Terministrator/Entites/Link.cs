@@ -7,6 +7,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Terministrator.Terministrator.Entites
 {
+    /// <summary>
+    /// Entity of the links. Contains all the datas required for a link sent by a user.
+    /// </summary>
     class Link
     {
         [Key]

@@ -7,6 +7,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Terministrator.Terministrator.Entites
 {
+    /// <summary>
+    /// Dictates that its childs can be referenced on an application with an id.
+    /// Eg: the message 432267 on Telegram is unique.
+    /// </summary>
     abstract class ApplicationReferencable
     {
         public ApplicationReferencable()

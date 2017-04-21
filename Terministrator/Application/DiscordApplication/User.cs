@@ -13,6 +13,10 @@ namespace Terministrator.Application.DiscordApplication
 
     #endregion
 
+    /// <summary>
+    /// Implement the user interface for Discord.
+    /// </summary>
+    /// <seealso cref="IUser" />
     class User : IUser
     {
         private readonly string _applicationId;

@@ -6,6 +6,9 @@ using System.Diagnostics;
 
 namespace Terministrator.Terministrator.BLL
 {
+    /// <summary>
+    /// Business logic layer of the texts. Helps searching for r9k texts.
+    /// </summary>
     static class Text
     {
         /// <summary>

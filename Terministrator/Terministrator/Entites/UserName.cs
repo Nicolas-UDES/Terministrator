@@ -8,12 +8,27 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Terministrator.Terministrator.Entites
 {
+    /// <summary>
+    /// Entity of the user names. Contains all the datas required for a user name of a namable.
+    /// </summary>
     class UserName
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserName"/> class.
+        /// </summary>
         public UserName()
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserName"/> class.
+        /// </summary>
+        /// <param name="firstName">The first name.</param>
+        /// <param name="lastName">The last name.</param>
+        /// <param name="username">The username.</param>
+        /// <param name="current">if set to <c>true</c> [current].</param>
+        /// <param name="changedOn">The changed on.</param>
+        /// <param name="ownedBy">The owned by.</param>
         public UserName(string firstName, string lastName, string username, bool current, DateTime changedOn,
             Namable ownedBy)
         {

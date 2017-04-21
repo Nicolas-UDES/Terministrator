@@ -8,12 +8,23 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Terministrator.Terministrator.Entites
 {
+    /// <summary>
+    /// Entity of the message types. Contains all the datas required for a message type.
+    /// Eg: Text, SystemMessage, File, Emote, etc.
+    /// </summary>
     class MessageType
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MessageType"/> class.
+        /// </summary>
         public MessageType()
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MessageType"/> class.
+        /// </summary>
+        /// <param name="name">The name.</param>
         public MessageType(string name)
         {
             Name = name;

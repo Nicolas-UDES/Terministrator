@@ -7,6 +7,9 @@ using System.Configuration;
 
 namespace Terministrator.Terministrator.BLL
 {
+    /// <summary>
+    /// Business logic layer of the blocked words. Currently only gives the default words.
+    /// </summary>
     static class BlockedWord
     {
         /// <summary>

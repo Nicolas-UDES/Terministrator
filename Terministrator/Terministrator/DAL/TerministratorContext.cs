@@ -10,6 +10,9 @@ using Terministrator.Terministrator.Entites;
 
 namespace Terministrator.Terministrator.DAL
 {
+    /// <summary>
+    /// Context with the database. Managed (and obligatory) by Entity-Framework. 
+    /// </summary>
     class TerministratorContext : DbContext
     {
         private static readonly Lazy<Mutex> Mutex = new Lazy<Mutex>(() => new Mutex());

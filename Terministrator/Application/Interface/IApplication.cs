@@ -8,8 +8,17 @@ using System.Threading.Tasks;
 
 namespace Terministrator.Application.Interface
 {
+    /// <summary>
+    /// Black box giving the possibility to add as many applications as wanted, sended to Core.
+    /// </summary>
     interface IApplication
     {
+        /// <summary>
+        /// Gets or sets the token used to connect with the bots.
+        /// </summary>
+        /// <value>
+        /// The token.
+        /// </value>
         string Token { get; set; }
 
         /// <summary>

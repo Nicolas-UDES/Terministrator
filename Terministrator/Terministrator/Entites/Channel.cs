@@ -7,6 +7,11 @@ using Terministrator.Application.Interface;
 
 namespace Terministrator.Terministrator.Entites
 {
+    /// <summary>
+    /// Entity of the channels. Contains all the datas required for a channel.
+    /// </summary>
+    /// <seealso cref="Namable" />
+    /// <seealso cref="IChannel" />
     class Channel : Namable, IChannel
     {
         public Channel()

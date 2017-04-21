@@ -110,7 +110,6 @@
       <DependentUpon>201704152213320_testing.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Telegram.cs" />
     <Compile Include="Terministrator\BLL\Ad.cs" />
     <Compile Include="Terministrator\BLL\AdSystem.cs" />
     <Compile Include="Terministrator\BLL\MessageTypeToPointSystem.cs" />

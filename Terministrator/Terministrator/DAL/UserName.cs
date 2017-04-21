@@ -9,6 +9,9 @@ using System.Linq;
 
 namespace Terministrator.Terministrator.DAL
 {
+    /// <summary>
+    /// Data access layer of the user names. Process every exchanges with Entity-Framework (AKA the database).
+    /// </summary>
     static class UserName
     {
         /// <summary>

@@ -7,6 +7,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Terministrator.Terministrator.Entites
 {
+    /// <summary>
+    /// Entity of the points log reasons. Contains all the datas required for a reason of a change in the points been logged.
+    /// </summary>
     class PointsLogReason
     {
         [Key]

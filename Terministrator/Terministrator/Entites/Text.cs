@@ -8,6 +8,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Terministrator.Terministrator.Entites
 {
+    /// <summary>
+    /// Entity of the texts. Contains all the datas required for a text that was contained in a message.
+    /// </summary>
     class Text
     {
         public Text()

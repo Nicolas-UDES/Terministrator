@@ -7,7 +7,10 @@ using Terministrator.Application.Interface;
 
 namespace Terministrator.Terministrator.BLL
 {
-    class UserName
+    /// <summary>
+    /// Business logic layer of the user names. Create and update users upon requests.
+    /// </summary>
+    static class UserName
     {
         /// <summary>
         /// Gets the user name from a string.

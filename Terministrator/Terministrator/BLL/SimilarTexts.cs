@@ -6,6 +6,9 @@ using System;
 
 namespace Terministrator.Terministrator.BLL
 {
+    /// <summary>
+    /// Business logic layer of the similar texts. Simply create empty ones and let increment when a new similar message is found.
+    /// </summary>
     static class SimilarTexts
     {
         /// <summary>

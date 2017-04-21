@@ -1,5 +1,8 @@
 ﻿namespace Terministrator.Terministrator.BLL
 {
+    /// <summary>
+    /// Business logic layer of the point systems. Currently doesn't do much other than creating them.
+    /// </summary>
     static class PointSystem
     {
         /// <summary>

@@ -7,6 +7,9 @@ using Terministrator.Terministrator.Types;
 
 namespace Terministrator.Terministrator.BLL
 {
+    /// <summary>
+    /// Business logic layer of the adsystems. Implements the chat command to set them.
+    /// </summary>
     static class AdSystem
     {
         /// <summary>

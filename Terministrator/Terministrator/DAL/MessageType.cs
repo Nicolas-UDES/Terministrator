@@ -7,6 +7,9 @@ using System.Linq;
 
 namespace Terministrator.Terministrator.DAL
 {
+    /// <summary>
+    /// Data access layer of the message types. Process every exchanges with Entity-Framework (AKA the database).
+    /// </summary>
     static class MessageType
     {
         /// <summary>

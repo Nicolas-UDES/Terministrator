@@ -1,5 +1,8 @@
 ﻿namespace Terministrator.Application.Interface
 {
+    /// <summary>
+    /// Interface of what a channel should implement for the Core.
+    /// </summary>
     interface IChannel
     {
         /// <summary>

@@ -7,6 +7,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Terministrator.Terministrator.Entites
 {
+    /// <summary>
+    /// Entity of the domains. Contains all the datas required for a domain name.
+    /// </summary>
     class Domain
     {
         [Key]

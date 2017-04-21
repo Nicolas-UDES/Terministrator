@@ -8,6 +8,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Terministrator.Terministrator.Entites
 {
+    /// <summary>
+    /// Entity of the point system. Contains all the datas required for the rules applied to points, on a channel.
+    /// </summary>
     class PointSystem
     {
         public PointSystem()

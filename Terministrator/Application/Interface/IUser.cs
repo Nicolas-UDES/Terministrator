@@ -1,5 +1,8 @@
 ﻿namespace Terministrator.Application.Interface
 {
+    /// <summary>
+    /// Interface of what a user should implement for the Core.
+    /// </summary>
     interface IUser
     {
         /// <summary>

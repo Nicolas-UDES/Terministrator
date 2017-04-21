@@ -8,12 +8,23 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Terministrator.Terministrator.Entites
 {
+    /// <summary>
+    /// Entity of the similar texts. Contains all the datas required for a texts that are the same to point on.
+    /// </summary>
     class SimilarTexts
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SimilarTexts"/> class.
+        /// </summary>
         public SimilarTexts()
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SimilarTexts"/> class.
+        /// </summary>
+        /// <param name="nbSimilar">The nb similar.</param>
+        /// <param name="lastIncrement">The last increment.</param>
         public SimilarTexts(int nbSimilar, DateTime lastIncrement)
         {
             NBSimilar = nbSimilar;

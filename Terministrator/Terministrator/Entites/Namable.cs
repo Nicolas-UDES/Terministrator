@@ -8,12 +8,24 @@ using System.Linq;
 
 namespace Terministrator.Terministrator.Entites
 {
+    /// <summary>
+    /// Says that an entity can hold a username. This let us keep track of the history of usernames if they're changed.
+    /// </summary>
+    /// <seealso cref="ApplicationReferencable" />
     abstract class Namable : ApplicationReferencable
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Namable"/> class.
+        /// </summary>
         public Namable()
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Namable"/> class.
+        /// </summary>
+        /// <param name="application">The application.</param>
+        /// <param name="idForApplication">The identifier for application.</param>
         public Namable(Application application, string idForApplication) : base(application, idForApplication)
         {
         }

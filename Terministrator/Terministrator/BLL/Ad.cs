@@ -9,6 +9,9 @@ using Terministrator.Terministrator.Types;
 
 namespace Terministrator.Terministrator.BLL
 {
+    /// <summary>
+    /// Business logic layer of the ads. Implements the chat commands and the functions to send the ads following an interval.
+    /// </summary>
     static class Ad
     {
         /// <summary>

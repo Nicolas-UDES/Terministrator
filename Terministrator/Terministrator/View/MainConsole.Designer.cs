@@ -572,7 +572,7 @@
             this.button_Ckear.TabIndex = 0;
             this.button_Ckear.Text = "Clear";
             this.button_Ckear.UseVisualStyleBackColor = true;
-            this.button_Ckear.Click += new System.EventHandler(this.button_Clear_Click);
+            this.button_Ckear.Click += new System.EventHandler(this.Button_Clear_Click);
             // 
             // button3
             // 
@@ -697,7 +697,7 @@
             this.comboBox_Application.Name = "comboBox_Application";
             this.comboBox_Application.Size = new System.Drawing.Size(121, 21);
             this.comboBox_Application.TabIndex = 0;
-            this.comboBox_Application.SelectedIndexChanged += new System.EventHandler(this.comboBox_Application_SelectedIndexChanged);
+            this.comboBox_Application.SelectedIndexChanged += new System.EventHandler(this.ComboBox_Application_SelectedIndexChanged);
             // 
             // groupBox1
             // 

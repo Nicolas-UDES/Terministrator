@@ -8,6 +8,9 @@ using Terministrator.Application.Interface;
 
 namespace Terministrator.Terministrator.BLL
 {
+    /// <summary>
+    /// Business logic layer of the users. Create and update users upon requests.
+    /// </summary>
     static class User
     {
         /// <summary>

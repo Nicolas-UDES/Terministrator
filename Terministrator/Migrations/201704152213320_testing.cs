@@ -1,8 +1,13 @@
+#region Usings
+
+using System.Data.Entity.Migrations;
+// ReSharper disable InconsistentNaming
+#pragma warning disable 1591
+
+#endregion
+
 namespace Terministrator.Migrations
 {
-    using System;
-    using System.Data.Entity.Migrations;
-    
     public partial class testing : DbMigration
     {
         public override void Up()
