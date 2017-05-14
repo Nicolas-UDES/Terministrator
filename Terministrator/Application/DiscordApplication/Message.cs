@@ -60,7 +60,7 @@ namespace Terministrator.Application.DiscordApplication
         /// <returns>
         /// The application identifier
         /// </returns>
-        public string GetApplicationId() => _messageId;
+        public string ApplicationId => _messageId;
 
         /// <summary>
         /// Gets the author of the message.
@@ -68,7 +68,7 @@ namespace Terministrator.Application.DiscordApplication
         /// <returns>
         /// The author
         /// </returns>
-        public IUser GetFrom() => _from;
+        public IUser From => _from;
 
         /// <summary>
         /// Gets the channel.
@@ -76,7 +76,7 @@ namespace Terministrator.Application.DiscordApplication
         /// <returns>
         /// The channel
         /// </returns>
-        public IChannel GetChannel() => _channel;
+        public IChannel Channel => _channel;
 
         /// <summary>
         /// Gets the sent date.
@@ -84,7 +84,7 @@ namespace Terministrator.Application.DiscordApplication
         /// <returns>
         /// The sent date
         /// </returns>
-        public DateTime GetSentDate() => _sentDate;
+        public DateTime SentDate => _sentDate;
 
         /// <summary>
         /// Gets the text.
@@ -92,7 +92,7 @@ namespace Terministrator.Application.DiscordApplication
         /// <returns>
         /// The text
         /// </returns>
-        public string GetText() => _text;
+        public string Text => _text;
 
         /// <summary>
         /// Gets the message replied by this one.
@@ -100,7 +100,7 @@ namespace Terministrator.Application.DiscordApplication
         /// <returns>
         /// The message being replied to
         /// </returns>
-        public IMessage GetRepliesTo() => null;
+        public IMessage RepliesTo => null;
 
         /// <summary>
         /// Gets the joined user.
@@ -108,6 +108,6 @@ namespace Terministrator.Application.DiscordApplication
         /// <returns>
         /// The joinded user
         /// </returns>
-        public IUser GetJoinedUser() => null;
+        public IUser JoinedUser => null;
     }
 }

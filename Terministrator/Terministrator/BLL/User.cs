@@ -41,7 +41,7 @@ namespace Terministrator.Terministrator.BLL
         /// <returns>The requested user. Null if nothing found.</returns>
         public static Entites.User Get(IUser iUser)
         {
-            return DAL.User.Get(iUser.GetApplicationId(), iUser.GetApplication().GetApplicationName());
+            return DAL.User.Get(iUser.ApplicationId, iUser.Application.ApplicationName);
         }
 
         /// <summary>
@@ -52,8 +52,8 @@ namespace Terministrator.Terministrator.BLL
         public static Entites.User Create(IUser iUser)
         {
             Entites.User user =
-                DAL.User.Create(new Entites.User(Application.GetOrCreate(iUser.GetApplication()),
-                    iUser.GetApplicationId()));
+                DAL.User.Create(new Entites.User(Application.GetOrCreate(iUser.Application),
+                    iUser.ApplicationId));
             user.UserNames = new List<Entites.UserName> {DAL.UserName.Create(UserName.ExtractUserName(iUser, user))};
             return user;
         }

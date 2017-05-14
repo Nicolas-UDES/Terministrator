@@ -67,7 +67,7 @@ namespace Terministrator.Terministrator.BLL
         {
             foreach (Entites.BlockedWord blockedWord in message.UserToChannel.Privileges.Rules.BlockedWords)
             {
-                if (message.GetText().IndexOf(blockedWord.Word, StringComparison.InvariantCultureIgnoreCase) >= 0)
+                if (message.Text.IndexOf(blockedWord.Word, StringComparison.InvariantCultureIgnoreCase) >= 0)
                 {
                     Fail(message, "Your message contains a blocked word. Be careful or you will be kicked.");
                     return;

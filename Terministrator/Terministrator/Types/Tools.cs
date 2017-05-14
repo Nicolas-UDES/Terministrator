@@ -20,7 +20,7 @@ namespace Terministrator.Terministrator.Types
         {
             return
                 userToChannel.Application.GetMods(userToChannel.Channel)
-                    .Any(x => x.GetApplicationId() == userToChannel.User.GetApplicationId());
+                    .Any(x => x.ApplicationId == userToChannel.User.ApplicationId);
         }
 
         /// <summary>

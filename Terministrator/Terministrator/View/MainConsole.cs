@@ -214,7 +214,7 @@ namespace Terministrator.Terministrator.View
                 DateTime.UtcNow,
                 new UserToChannel(
                     (Entites.Application) comboBox_Application.SelectedItem,
-                    BLL.User.GetOrCreate(((Entites.Application) comboBox_Application.SelectedItem).GetTerministrator()),
+                    BLL.User.GetOrCreate(((Entites.Application) comboBox_Application.SelectedItem).Terministrator),
                     (Channel) comboBox_ChannelUser.SelectedItem,
                     DateTime.MinValue,
                     null),

@@ -66,12 +66,12 @@ namespace Terministrator.Terministrator.BLL
             }
 
             // If the user was invited back, we make sure to reboot their consequences.
-            if (message.JoinedUser != null &&
-                (message.JoinedUser.NbSilences != 0 || message.JoinedUser.SilencedTo != null))
+            if (message.JoinedUserToChannel != null &&
+                (message.JoinedUserToChannel.NbSilences != 0 || message.JoinedUserToChannel.SilencedTo != null))
             {
-                message.JoinedUser.NbSilences = 0;
-                message.JoinedUser.SilencedTo = null;
-                UserToChannel.Update(message.JoinedUser);
+                message.JoinedUserToChannel.NbSilences = 0;
+                message.JoinedUserToChannel.SilencedTo = null;
+                UserToChannel.Update(message.JoinedUserToChannel);
             }
 
             return message;

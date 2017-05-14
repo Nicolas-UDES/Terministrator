@@ -41,7 +41,7 @@
         /// <returns></returns>
         public static IApplication Get(string app)
         {
-            return app == TelegramApplication.Application.Instance.GetApplicationName()
+            return app == TelegramApplication.Application.Instance.ApplicationName
                 ? TelegramApplication.Application.Instance
                 : (IApplication) DiscordApplication.Application.Instance;
         }

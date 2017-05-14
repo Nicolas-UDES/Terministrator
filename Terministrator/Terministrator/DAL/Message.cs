@@ -144,12 +144,12 @@ namespace Terministrator.Terministrator.DAL
         private static Entites.Message ClearReferences(Entites.Message message)
         {
             Entites.Message reference = new Entites.Message(message.Application, null, DateTime.MinValue,
-                message.UserToChannel, message.MessageType, message.RepliesTo, false, message.JoinedUser);
+                message.UserToChannel, message.MessageType, message.RepliesTo, false, message.JoinedUserToChannel);
             message.Application = null;
             message.UserToChannel = null;
             message.RepliesTo = null;
             message.MessageType = null;
-            message.JoinedUser = null;
+            message.JoinedUserToChannel = null;
             return reference;
         }
 
@@ -165,7 +165,7 @@ namespace Terministrator.Terministrator.DAL
             message.UserToChannel = reference.UserToChannel;
             message.RepliesTo = reference.RepliesTo;
             message.MessageType = reference.MessageType;
-            message.JoinedUser = reference.JoinedUser;
+            message.JoinedUserToChannel = reference.JoinedUserToChannel;
             return message;
         }
     }
