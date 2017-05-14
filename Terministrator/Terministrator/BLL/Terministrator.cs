@@ -3,6 +3,7 @@
 using System;
 using System.Deployment.Application;
 using System.Reflection;
+using Terministrator.Terministrator.Entites;
 using Terministrator.Terministrator.Types;
 
 #endregion

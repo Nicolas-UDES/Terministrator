@@ -20,12 +20,7 @@ namespace Terministrator.Application.TelegramApplication
     /// <seealso cref="IChannel" />
     class Channel : IChannel
     {
-        private readonly Application _application;
         private readonly long _applicationId;
-        private readonly string _firstName;
-        private readonly bool _isSolo;
-        private readonly string _lastName;
-        private readonly string _username;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Channel"/> class.
@@ -34,11 +29,11 @@ namespace Terministrator.Application.TelegramApplication
         public Channel(TChannel channel)
         {
             _applicationId = channel.Id;
-            _firstName = channel.FirstName;
-            _lastName = channel.LastName;
-            _username = channel.Title;
-            _isSolo = channel.Type == ChatType.Private;
-            _application = Application.Instance;
+            FirstName = channel.FirstName;
+            LastName = channel.LastName;
+            Username = channel.Title;
+            IsSolo = channel.Type == ChatType.Private;
+            Application = TelegramApplication.Application.Instance;
         }
 
         /// <summary>
@@ -47,7 +42,7 @@ namespace Terministrator.Application.TelegramApplication
         /// <returns>
         /// The application identifier
         /// </returns>
-        public string GetApplicationId() => _applicationId.ToString();
+        public string ApplicationId => _applicationId.ToString();
 
         /// <summary>
         /// Gets the application.
@@ -55,7 +50,7 @@ namespace Terministrator.Application.TelegramApplication
         /// <returns>
         /// The application
         /// </returns>
-        public IApplication GetApplication() => _application;
+        public IApplication Application { get; }
 
         /// <summary>
         /// Gets the first name.
@@ -63,7 +58,7 @@ namespace Terministrator.Application.TelegramApplication
         /// <returns>
         /// The first name
         /// </returns>
-        public string GetFirstName() => _firstName;
+        public string FirstName { get; }
 
         /// <summary>
         /// Gets the last name.
@@ -71,7 +66,7 @@ namespace Terministrator.Application.TelegramApplication
         /// <returns>
         /// The last name
         /// </returns>
-        public string GetLastName() => _lastName;
+        public string LastName { get; }
 
         /// <summary>
         /// Determines whether this instance is a private channel.
@@ -79,7 +74,7 @@ namespace Terministrator.Application.TelegramApplication
         /// <returns>
         ///   <c>true</c> if this instance is a private channel; otherwise, <c>false</c>.
         /// </returns>
-        public bool IsSolo() => _isSolo;
+        public bool IsSolo { get; }
 
         /// <summary>
         /// Gets the username.
@@ -87,6 +82,6 @@ namespace Terministrator.Application.TelegramApplication
         /// <returns>
         /// The username
         /// </returns>
-        public string GetUsername() => _username;
+        public string Username { get; }
     }
 }

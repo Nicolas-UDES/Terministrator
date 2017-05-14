@@ -16,7 +16,7 @@ namespace Terministrator.Terministrator.Entites
         public int LinkId { get; set; }
 
         public string URL { get; set; }
-        public virtual Message Message { get; set; }
+        public virtual Text Text { get; set; }
         public virtual List<Domain> Domains { get; set; }
     }
 }

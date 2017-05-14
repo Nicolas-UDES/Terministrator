@@ -1,11 +1,11 @@
 ﻿#region Usings
 
-using System;
-using Terministrator.Terministrator.Entites;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 #endregion
 
-namespace Terministrator.Terministrator.Types
+namespace Terministrator.Terministrator.Entites
 {
     /// <summary>
     /// Used to hold the information of a command when a message is found to be one.
@@ -25,11 +25,15 @@ namespace Terministrator.Terministrator.Types
             Arguement = arguement;
         }
 
-        public Message Message { get; }
+        [Key]
+        [ForeignKey("Message")]
+        public int MessageId { get; set; }
 
-        public string Name { get; private set; }
+        public Message Message { get; set; }
 
-        public string Arguement { get; }
+        public string Name { get; set; }
+
+        public string Arguement { get; set; }
 
         /// <summary>
         /// Splits the arguements.

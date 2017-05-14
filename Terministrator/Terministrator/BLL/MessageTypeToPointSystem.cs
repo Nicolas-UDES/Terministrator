@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Terministrator.Terministrator.Entites;
 using Terministrator.Terministrator.Types;
 
 #endregion
@@ -75,9 +76,7 @@ namespace Terministrator.Terministrator.BLL
             List<Entites.MessageTypeToPointSystem> olds =
                 GetAll(command.Message.UserToChannel.Channel.PointSystem.ChannelId);
             DeleteAllFrom(command.Message.UserToChannel.Channel.PointSystem.ChannelId);
-
-            List<Tuple<string, float>> values;
-            string errorMessage = ReadArray(command.SplitArguements(';'), out values);
+            string errorMessage = ReadArray(command.SplitArguements(';'), out var values);
 
             if (errorMessage == null && values.Count != MessageType.Count() &&
                 !values.Exists(x => x.Item1.Equals(UniqueOthers)))
@@ -119,9 +118,7 @@ namespace Terministrator.Terministrator.BLL
             foreach (string amount in amounts)
             {
                 string[] splited = amount.Split(new[] {'-'}, 2);
-
-                float reward;
-                if (!float.TryParse(splited[0], out reward))
+                if (!float.TryParse(splited[0], out float reward))
                 {
                     return $"Is \"{splited[0]}\" supposed to be a number?";
                 }

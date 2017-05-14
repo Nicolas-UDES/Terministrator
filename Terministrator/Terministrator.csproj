@@ -89,29 +89,14 @@
     <Compile Include="Application\TelegramApplication\Application.cs" />
     <Compile Include="Application\TelegramApplication\Message.cs" />
     <Compile Include="Application\TelegramApplication\User.cs" />
-    <Compile Include="Migrations\201704140239553_initial.cs" />
-    <Compile Include="Migrations\201704140239553_initial.Designer.cs">
-      <DependentUpon>201704140239553_initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201704140326238_version2.cs" />
-    <Compile Include="Migrations\201704140326238_version2.Designer.cs">
-      <DependentUpon>201704140326238_version2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201704142140192_symbols.cs" />
-    <Compile Include="Migrations\201704142140192_symbols.Designer.cs">
-      <DependentUpon>201704142140192_symbols.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201704151742380_addedtoken.cs" />
-    <Compile Include="Migrations\201704151742380_addedtoken.Designer.cs">
-      <DependentUpon>201704151742380_addedtoken.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201704152213320_testing.cs" />
-    <Compile Include="Migrations\201704152213320_testing.Designer.cs">
-      <DependentUpon>201704152213320_testing.cs</DependentUpon>
+    <Compile Include="Migrations\201705060015500_Initial.cs" />
+    <Compile Include="Migrations\201705060015500_Initial.Designer.cs">
+      <DependentUpon>201705060015500_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Terministrator\BLL\Ad.cs" />
     <Compile Include="Terministrator\BLL\AdSystem.cs" />
+    <Compile Include="Terministrator\BLL\Link.cs" />
     <Compile Include="Terministrator\BLL\MessageTypeToPointSystem.cs" />
     <Compile Include="Terministrator\BLL\PointSystem.cs" />
     <Compile Include="Terministrator\BLL\Privileges.cs" />
@@ -125,9 +110,11 @@
     <Compile Include="Terministrator\DAL\Privileges.cs" />
     <Compile Include="Terministrator\DAL\Rules.cs" />
     <Compile Include="Terministrator\DAL\SimilarTexts.cs" />
-    <Compile Include="Terministrator\Types\Command.cs" />
+    <Compile Include="Terministrator\Entites\Command.cs" />
+    <Compile Include="Terministrator\Entites\MessageContent.cs" />
+    <Compile Include="Terministrator\Types\Configuration.cs" />
     <Compile Include="Terministrator\Types\Logger.cs" />
-    <Compile Include="Terministrator\Types\Regex.cs" />
+    <Compile Include="Terministrator\Types\ReplacingRegex.cs" />
     <Compile Include="Terministrator\Types\Tools.cs" />
     <Compile Include="Terministrator\View\MainConsole.cs">
       <SubType>Form</SubType>
@@ -176,27 +163,15 @@
     <Compile Include="Terministrator\Entites\PointSystem.cs" />
     <Compile Include="Terministrator\Entites\Privileges.cs" />
     <Compile Include="Terministrator\Entites\Rules.cs" />
-    <Compile Include="Terministrator\Entites\SimilarTexts.cs" />
+    <Compile Include="Terministrator\Entites\SimilarContent.cs" />
     <Compile Include="Terministrator\Entites\File.cs" />
     <Compile Include="Terministrator\Entites\Text.cs" />
     <Compile Include="Terministrator\Entites\User.cs" />
     <Compile Include="Terministrator\Entites\UserName.cs" />
     <Compile Include="Terministrator\Entites\UserToChannel.cs" />
     <Compile Include="Terministrator\DAL\TerministratorContext.cs" />
-    <EmbeddedResource Include="Migrations\201704140239553_initial.resx">
-      <DependentUpon>201704140239553_initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201704140326238_version2.resx">
-      <DependentUpon>201704140326238_version2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201704142140192_symbols.resx">
-      <DependentUpon>201704142140192_symbols.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201704151742380_addedtoken.resx">
-      <DependentUpon>201704151742380_addedtoken.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201704152213320_testing.resx">
-      <DependentUpon>201704152213320_testing.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201705060015500_Initial.resx">
+      <DependentUpon>201705060015500_Initial.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Terministrator\View\MainConsole.resx">
       <DependentUpon>MainConsole.cs</DependentUpon>
@@ -210,6 +185,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="Login.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

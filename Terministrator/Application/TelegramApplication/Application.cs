@@ -44,7 +44,7 @@ namespace Terministrator.Application.TelegramApplication
         /// Gets the name of the application.
         /// </summary>
         /// <returns>A <see cref="string"/> with the value "TELEGRAM 1.0.6"</returns>
-        public string GetApplicationName() => "TELEGRAM 1.0.6";
+        public string ApplicationName => "TELEGRAM 1.0.6";
 
         /// <summary>
         /// Sets the message destination.
@@ -88,10 +88,7 @@ namespace Terministrator.Application.TelegramApplication
         /// Gets the user Terministrator on Telegram.
         /// </summary>
         /// <returns>Terministrator</returns>
-        public IUser GetTerministrator()
-        {
-            return _terministratorTask.Result;
-        }
+        public IUser Terministrator => _terministratorTask.Result;
 
         /// <summary>
         /// Sends the message.
@@ -105,10 +102,10 @@ namespace Terministrator.Application.TelegramApplication
                 return
                     Task.Factory.StartNew(
                         () =>
-                            _bot.SendTextMessageAsync(Convert.ToInt64(message.GetChannel().GetApplicationId()),
-                                    message.GetText(),
+                            _bot.SendTextMessageAsync(Convert.ToInt64(message.Channel.ApplicationId),
+                                    message.Text,
                                     disableNotification: true,
-                                    replyToMessageId: Convert.ToInt32(message.GetRepliesTo()?.GetApplicationId() ?? "0"))
+                                    replyToMessageId: Convert.ToInt32(message.RepliesTo?.ApplicationId ?? "0"))
                                 .Result.MessageId.ToString());
             }
             return null;
@@ -120,8 +117,8 @@ namespace Terministrator.Application.TelegramApplication
         /// <param name="message">The message.</param>
         public void EditMessage(IMessage message)
         {
-            _bot.EditMessageTextAsync(Convert.ToInt64(message.GetChannel().GetApplicationId()),
-                Convert.ToInt32(message.GetChannel().GetApplicationId()), message.GetText());
+            _bot.EditMessageTextAsync(Convert.ToInt64(message.Channel.ApplicationId),
+                Convert.ToInt32(message.Channel.ApplicationId), message.Text);
         }
 
         /// <summary>
@@ -134,9 +131,9 @@ namespace Terministrator.Application.TelegramApplication
         public bool CanKick(IChannel channel)
         {
             return
-                _bot.GetChatAdministratorsAsync(channel.GetApplicationId())
+                _bot.GetChatAdministratorsAsync(channel.ApplicationId)
                     .Result.Any(x =>
-                        x.User.Id.ToString() == _terministratorTask.Result.GetApplicationId() &&
+                        x.User.Id.ToString() == _terministratorTask.Result.ApplicationId &&
                         x.Status == ChatMemberStatus.Administrator);
         }
 
@@ -147,7 +144,7 @@ namespace Terministrator.Application.TelegramApplication
         /// <param name="channel">The channel.</param>
         public void Kick(IUser user, IChannel channel)
         {
-            _bot.KickChatMemberAsync(channel.GetApplicationId(), Convert.ToInt32(user.GetApplicationId()));
+            _bot.KickChatMemberAsync(channel.ApplicationId, Convert.ToInt32(user.ApplicationId));
         }
 
         /// <summary>
@@ -158,7 +155,7 @@ namespace Terministrator.Application.TelegramApplication
         public List<IUser> GetMods(IChannel channel)
         {
             return
-                _bot.GetChatAdministratorsAsync(channel.GetApplicationId())
+                _bot.GetChatAdministratorsAsync(channel.ApplicationId)
                     .Result.Select(x => (IUser) new User(x.User))
                     .ToList();
         }
@@ -185,19 +182,13 @@ namespace Terministrator.Application.TelegramApplication
         /// Gets the command symbol. Example: /help.
         /// </summary>
         /// <returns>The command symbol.</returns>
-        public string GetCommandSymbol()
-        {
-            return "/";
-        }
+        public string CommandSymbols => "/";
 
         /// <summary>
         /// Gets the user symbol. Example: @Terministrator.
         /// </summary>
         /// <returns>The user symbol.</returns>
-        public string GetUserSymbol()
-        {
-            return "@";
-        }
+        public string UserSymbols => "@";
 
         /// <summary>
         /// Called when Telegram sends us a message.

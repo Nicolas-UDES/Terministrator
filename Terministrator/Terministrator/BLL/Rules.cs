@@ -3,10 +3,9 @@
 using System;
 using System.Diagnostics;
 using System.Linq;
-using System.Text.RegularExpressions;
 using Terministrator.Application.Interface;
+using Terministrator.Terministrator.Entites;
 using Terministrator.Terministrator.Types;
-using Regex = Terministrator.Terministrator.Types.Regex;
 
 #endregion
 
@@ -30,7 +29,7 @@ namespace Terministrator.Terministrator.BLL
         /// <param name="isCommand">If the message was recognized as a command.</param>
         internal static void ReceivedMessage(Entites.Message message, bool isCommand)
         {
-            if (!isCommand && message.Texts.Any())
+            if (!isCommand && message.Texts.Any() && DateTime.UtcNow - message.SentOn <= Configuration.MaxDelayToAct)
             {
                 if (message.UserToChannel?.Privileges?.Rules?.R9KEnabled ?? false)
                 {
@@ -88,7 +87,7 @@ namespace Terministrator.Terministrator.BLL
             // Check if not enough content or if we know the message
             if (text.ZeText.Length == 0 ||
                 text.ZeText.Length > 10 && (text.R9KText.Length / Convert.ToDouble(text.ZeText.Length) < SignalRatio ||
-                                            Text.SearchAndLink(text).SimilarTexts != null))
+                                            Text.SearchAndLink(text).SimilarContent != null))
             {
                 Fail(message, "Your privileges group makes you in r9k mode and the message you attempted to send is not unique. Be careful or you will be kicked.");
             }
@@ -157,28 +156,13 @@ namespace Terministrator.Terministrator.BLL
         public static string ToR9KText(string msg)
         {
             msg = msg.ToLower();
-            msg = RegexReplace(msg, Regex.ControlCharacters, Regex.ControlCharactersReplace);
-            msg = RegexReplace(msg, Regex.Smileys, Regex.SmileysReplace);
-            msg = RegexReplace(msg, Regex.Quote, Regex.QuoteReplace);
-            msg = RegexReplace(msg, Regex.Tiret, Regex.TiretReplace);
-            msg = RegexReplace(msg, Regex.RepeatingChar, Regex.RepeatingCharReplace);
-            msg = RegexReplace(msg, Regex.RepeatingChars, Regex.RepeatingCharsReplace);
+            foreach (ReplacingRegex rr in Configuration.R9KReplacingRegexes)
+            {
+                msg = rr.Replace(msg);
+            }
             msg = msg.Trim();
-            msg = RegexReplace(msg, Regex.Spaces, Regex.SpacesReplace);
 
             return msg;
-        }
-
-        /// <summary>
-        /// Shorten the use of a regex to replace a pattern in a text.
-        /// </summary>
-        /// <param name="text">The text.</param>
-        /// <param name="pattern">The pattern.</param>
-        /// <param name="replacement">The replacement.</param>
-        /// <returns>The replaced text.</returns>
-        private static string RegexReplace(string text, string pattern, string replacement)
-        {
-            return new System.Text.RegularExpressions.Regex(pattern, RegexOptions.None).Replace(text, replacement);
         }
 
         /// <summary>
@@ -232,7 +216,7 @@ namespace Terministrator.Terministrator.BLL
         /// <param name="core">The core.</param>
         public static void GetRules(Command command, Core core = null)
         {
-            command.Message.Application.SendMessage(Message.Answer(command.Message,
+            Entites.Message.SendMessage(Message.Answer(command.Message,
                 command.Message.UserToChannel.Privileges.Rules.ToString()));
         }
 
@@ -251,7 +235,7 @@ namespace Terministrator.Terministrator.BLL
             string[] arguements = command.SplitArguements(count: 7);
             if (arguements.Length < 7)
             {
-                command.Message.Application.SendMessage(Message.Answer(command.Message,
+                Entites.Message.SendMessage(Message.Answer(command.Message,
                     "Incorect syntax. Please use the following one: /setrules privileges messageDelayInSeconds extensionBlocked? domainBlocked? messageTypeBlocked? blockedWordsEnabled? r9kEnabled?. Note that the fields ending by ? must be either 'y' or 'n'."));
                 return;
             }
@@ -259,16 +243,15 @@ namespace Terministrator.Terministrator.BLL
             {
                 if (!arguements[i].Equals("y", StringComparison.InvariantCultureIgnoreCase) && !arguements[i].Equals("n", StringComparison.InvariantCultureIgnoreCase))
                 {
-                    command.Message.Application.SendMessage(Message.Answer(command.Message,
+                    Entites.Message.SendMessage(Message.Answer(command.Message,
                         "Incorect syntax. Please use the following one: /setrules privileges messageDelayInSeconds extensionBlocked? domainBlocked? messageTypeBlocked? blockedWordsEnabled? r9kEnabled?. Note that the fields ending by ? must be either 'y' or 'n'."));
                     return;
                 }
             }
 
-            int messageDelay;
-            if (!int.TryParse(arguements[1], out messageDelay))
+            if (!int.TryParse(arguements[1], out int messageDelay))
             {
-                command.Message.Application.SendMessage(Message.Answer(command.Message,
+                Entites.Message.SendMessage(Message.Answer(command.Message,
                     $"Please write a time in seconds rather than {arguements[1]}"));
                 return;
             }
@@ -276,7 +259,7 @@ namespace Terministrator.Terministrator.BLL
             Entites.Privileges privileges = Privileges.GetPrivileges(command.Message.UserToChannel.Channel, arguements[0]);
             if (privileges == null)
             {
-                command.Message.Application.SendMessage(Message.Answer(command.Message,
+                Entites.Message.SendMessage(Message.Answer(command.Message,
                     $"No privileges group nammed {arguements[0]} was found."));
                 return;
             }
@@ -289,7 +272,7 @@ namespace Terministrator.Terministrator.BLL
             privileges.Rules.BlockedWordsEnabled = "y".Equals(arguements[5], StringComparison.InvariantCultureIgnoreCase);
             privileges.Rules.R9KEnabled = "y".Equals(arguements[6], StringComparison.InvariantCultureIgnoreCase);
             DAL.Rules.Update(privileges.Rules);
-            command.Message.Application.SendMessage(Message.Answer(command.Message, $"The rules of {arguements[0]} were successfully updated."));
+            Entites.Message.SendMessage(Message.Answer(command.Message, $"The rules of {arguements[0]} were successfully updated."));
         }
 
         /// <summary>
@@ -306,7 +289,7 @@ namespace Terministrator.Terministrator.BLL
 
             if (string.IsNullOrEmpty(command.Arguement))
             {
-                command.Message.Application.SendMessage(Message.Answer(command.Message,
+                Entites.Message.SendMessage(Message.Answer(command.Message,
                     "You must specify the privileges group which's blocked words shall be reseted."));
                 return;
             }
@@ -314,14 +297,14 @@ namespace Terministrator.Terministrator.BLL
             Entites.Privileges privileges = Privileges.GetPrivileges(command.Message.UserToChannel.Channel, command.Arguement);
             if (privileges == null)
             {
-                command.Message.Application.SendMessage(Message.Answer(command.Message,
+                Entites.Message.SendMessage(Message.Answer(command.Message,
                     $"No privileges group nammed {command.Arguement} was found."));
                 return;
             }
 
             DAL.Privileges.LoadRules(privileges).Rules.BlockedWords = BlockedWord.GetDefaultBlockedWords();
             DAL.Rules.UpdateBlockedWords(privileges.Rules);
-            command.Message.Application.SendMessage(Message.Answer(command.Message, $"Blocked words of {command.Arguement} were successfully reinitialized."));
+            Entites.Message.SendMessage(Message.Answer(command.Message, $"Blocked words of {command.Arguement} were successfully reinitialized."));
         }
     }
 }

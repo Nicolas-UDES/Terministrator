@@ -22,7 +22,7 @@ namespace Terministrator.Terministrator.DAL
             Entites.Text reference = ClearReferences(text);
             using (TerministratorContext context = new TerministratorContext(true))
             {
-                text.TextId = context.Text.Add(text).TextId;
+                text.MessageContentId = context.Text.Add(text).MessageContentId;
                 context.SaveChanges();
             }
             return AddReferences(text, reference);
@@ -31,13 +31,13 @@ namespace Terministrator.Terministrator.DAL
         /// <summary>
         /// Gets the specified text.
         /// </summary>
-        /// <param name="textId">The text identifier.</param>
+        /// <param name="messageContentId">The text identifier.</param>
         /// <returns>The text with the specified identifier.</returns>
-        public static Entites.Text Get(int textId)
+        public static Entites.Text Get(int messageContentId)
         {
             using (TerministratorContext context = new TerministratorContext(true))
             {
-                return context.Text.Find(textId);
+                return context.Text.Find(messageContentId);
             }
         }
 
@@ -50,14 +50,14 @@ namespace Terministrator.Terministrator.DAL
         {
             using (TerministratorContext context = new TerministratorContext(true))
             {
-                Entites.Text old = context.Text.Find(text.TextId);
+                Entites.Text old = context.Text.Find(text.MessageContentId);
                 if (old != null)
                 {
-                    old.SimilarTextsId = text.SimilarTextsId;
+                    old.SimilarContentId = text.SimilarContentId;
                     context.SaveChanges();
-                    context.Entry(old).Reference(x => x.SimilarTexts);
+                    context.Entry(old).Reference(x => x.SimilarContent);
                 }
-                text.SimilarTexts = old?.SimilarTexts;
+                text.SimilarContent = old?.SimilarContent;
             }
             return text;
         }
@@ -72,10 +72,10 @@ namespace Terministrator.Terministrator.DAL
             using (TerministratorContext context = new TerministratorContext(true))
             {
                 Entites.Text retour =
-                    context.Text.FirstOrDefault(x => x.R9KText == text.R9KText && x.TextId != text.TextId);
+                    context.Text.FirstOrDefault(x => x.R9KText == text.R9KText && x.MessageContentId != text.MessageContentId);
                 if (retour != null)
                 {
-                    context.Entry(retour).Reference(p => p.SimilarTexts).Load();
+                    context.Entry(retour).Reference(p => p.SimilarContent).Load();
                 }
                 return retour;
             }
@@ -91,7 +91,7 @@ namespace Terministrator.Terministrator.DAL
             using (TerministratorContext context = new TerministratorContext(true))
             {
                 context.Text.Attach(text);
-                context.Entry(text).Reference(p => p.SimilarTexts).Load();
+                context.Entry(text).Reference(p => p.SimilarContent).Load();
             }
             return text;
         }
@@ -103,9 +103,9 @@ namespace Terministrator.Terministrator.DAL
         /// <returns>A copy of the text given in entry with only the references.</returns>
         private static Entites.Text ClearReferences(Entites.Text text)
         {
-            Entites.Text reference = new Entites.Text(null, DateTime.MinValue, text.Message, null, text.SimilarTexts);
+            Entites.Text reference = new Entites.Text(null, DateTime.MinValue, text.Message, null, text.SimilarContent);
             text.Message = null;
-            text.SimilarTexts = null;
+            text.SimilarContent = null;
             return reference;
         }
 
@@ -118,7 +118,7 @@ namespace Terministrator.Terministrator.DAL
         private static Entites.Text AddReferences(Entites.Text text, Entites.Text reference)
         {
             text.Message = reference.Message;
-            text.SimilarTexts = reference.SimilarTexts;
+            text.SimilarContent = reference.SimilarContent;
             return text;
         }
     }

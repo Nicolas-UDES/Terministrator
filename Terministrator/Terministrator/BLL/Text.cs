@@ -1,6 +1,9 @@
 ﻿#region Usings
 
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 #endregion
 
@@ -41,6 +44,20 @@ namespace Terministrator.Terministrator.BLL
             return DAL.Text.Update(text);
         }
 
+        public static List<Entites.Link> ExtractLinks(Entites.Text text)
+        {
+            List<Entites.Link> links = new List<Entites.Link>();
+            foreach (string link in text.ZeText.Split(' '))
+            {
+                Uri uri = Link.GetUri(link);
+                if (uri != null)
+                {
+                    links.Add(new Entites.Link());
+                }
+            }
+            return links;
+        }
+
         /// <summary>
         /// Searches another text with the same R9K. If one is found, link this one to their Similar Text.
         /// </summary>
@@ -51,14 +68,14 @@ namespace Terministrator.Terministrator.BLL
             Entites.Text otherText = GetR9K(text);
             if (otherText != null)
             {
-                if (otherText.SimilarTexts == null)
+                if (otherText.SimilarContent == null)
                 {
-                    otherText.SimilarTextsId = SimilarTexts.Create().SimilarMessagesId;
+                    otherText.SimilarContentId = SimilarTexts.Create().SimilarMessagesId;
                 }
-                text.SimilarTextsId = otherText.SimilarTextsId;
+                text.SimilarContentId = otherText.SimilarContentId;
                 DAL.Text.LoadSimilarTexts(Update(text));
-                Debug.Assert(text.SimilarTextsId != null, "text.SimilarTextsId != null");
-                SimilarTexts.Increment(text.SimilarTextsId.Value);
+                Debug.Assert(text.SimilarContentId != null, "text.SimilarContentId != null");
+                SimilarTexts.Increment(text.SimilarContentId.Value);
             }
             return text;
         }

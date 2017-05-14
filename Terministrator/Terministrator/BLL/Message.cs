@@ -30,8 +30,8 @@ namespace Terministrator.Terministrator.BLL
         /// <returns>The requested message.</returns>
         public static Entites.Message Get(IMessage iMessage)
         {
-            return DAL.Message.Get(iMessage.GetApplicationId(),
-                iMessage.GetChannel().GetApplication().GetApplicationName());
+            return DAL.Message.Get(iMessage.ApplicationId,
+                iMessage.Channel.Application.ApplicationName);
         }
 
         /// <summary>
@@ -44,24 +44,24 @@ namespace Terministrator.Terministrator.BLL
             //TODO: Actually process the real message types.
             Entites.Message message =
                 DAL.Message.Create(
-                    new Entites.Message(Application.UpdateOrCreate(iMessage.GetChannel().GetApplication()),
-                        iMessage.GetApplicationId(), iMessage.GetSentDate(),
-                        UserToChannel.UpdateOrCreate(iMessage.GetChannel().GetApplication(), iMessage.GetFrom(),
-                            iMessage.GetChannel()),
+                    new Entites.Message(Application.UpdateOrCreate(iMessage.Channel.Application),
+                        iMessage.ApplicationId, iMessage.SentDate,
+                        UserToChannel.UpdateOrCreate(iMessage.Channel.Application, iMessage.From,
+                            iMessage.Channel),
                         MessageType.Get("Text"),
-                        iMessage.GetRepliesTo() != null ? GetOrCreate(iMessage.GetRepliesTo()) : null,
+                        iMessage.RepliesTo != null ? GetOrCreate(iMessage.RepliesTo) : null,
                         false,
-                        iMessage.GetJoinedUser() == null
+                        iMessage.JoinedUser == null
                             ? null
-                            : UserToChannel.GetOrCreate(iMessage.GetChannel().GetApplication(), iMessage.GetJoinedUser(),
-                                iMessage.GetChannel())));
+                            : UserToChannel.GetOrCreate(iMessage.Channel.Application, iMessage.JoinedUser,
+                                iMessage.Channel)));
 
-            if (!string.IsNullOrEmpty(iMessage.GetText()))
+            if (!string.IsNullOrEmpty(iMessage.Text))
             {
                 message.Texts = new List<Entites.Text>
                 {
-                    Text.Create(new Entites.Text(iMessage.GetText(), iMessage.GetSentDate(), message,
-                        string.IsNullOrEmpty(iMessage.GetText()) ? null : Rules.ToR9KText(iMessage.GetText())))
+                    Text.Create(new Entites.Text(iMessage.Text, iMessage.SentDate, message,
+                        string.IsNullOrEmpty(iMessage.Text) ? null : Rules.ToR9KText(iMessage.Text)))
                 };
             }
 

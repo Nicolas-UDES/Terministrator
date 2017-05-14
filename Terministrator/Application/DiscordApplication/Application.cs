@@ -45,7 +45,7 @@ namespace Terministrator.Application.DiscordApplication
         /// Gets the name of the application.
         /// </summary>
         /// <returns>A <see cref="string"/> with the value "DISCORD"</returns>
-        public string GetApplicationName() => "DISCORD";
+        public string ApplicationName => "DISCORD";
 
         /// <summary>
         /// Sets the message destination.
@@ -97,10 +97,7 @@ namespace Terministrator.Application.DiscordApplication
         /// <returns>
         /// Gets the user Terministrator on Discord.
         /// </returns>
-        public IUser GetTerministrator()
-        {
-            return _terministratorTask.Result;
-        }
+        public IUser Terministrator => _terministratorTask.Result;
 
         /// <summary>
         /// Sends the message.
@@ -113,20 +110,20 @@ namespace Terministrator.Application.DiscordApplication
         {
             if (message != null)
             {
-                if (message.GetChannel().IsSolo())
+                if (message.Channel.IsSolo)
                 {
                     DiscordPrivateChannel dpc =
-                        _bot.GetPrivateChannels().FirstOrDefault(x => x.ID == message.GetChannel().GetApplicationId());
+                        _bot.GetPrivateChannels().FirstOrDefault(x => x.ID == message.Channel.ApplicationId);
                     return dpc != null
-                        ? Task.Factory.StartNew(() => _bot.SendMessageToUser(message.GetText(), dpc.Recipient).ID)
+                        ? Task.Factory.StartNew(() => _bot.SendMessageToUser(message.Text, dpc.Recipient).ID)
                         : null;
                 }
 
                 return
                     Task.Factory.StartNew(
                         () =>
-                            _bot.SendMessageToChannel(message.GetText(),
-                                _bot.GetChannelByID(Convert.ToInt64(message.GetChannel().GetApplicationId()))).ID);
+                            _bot.SendMessageToChannel(message.Text,
+                                _bot.GetChannelByID(Convert.ToInt64(message.Channel.ApplicationId))).ID);
             }
 
             return null;
@@ -138,8 +135,8 @@ namespace Terministrator.Application.DiscordApplication
         /// <param name="message">The message.</param>
         public void EditMessage(IMessage message)
         {
-            _bot.EditMessage(message.GetApplicationId(), message.GetText(),
-                _bot.GetChannelByID(Convert.ToInt64(message.GetChannel().GetApplicationId())));
+            _bot.EditMessage(message.ApplicationId, message.Text,
+                _bot.GetChannelByID(Convert.ToInt64(message.Channel.ApplicationId)));
         }
 
         /// <summary>
@@ -149,8 +146,8 @@ namespace Terministrator.Application.DiscordApplication
         /// <param name="channel">The channel.</param>
         public void Kick(IUser user, IChannel channel)
         {
-            _bot.KickMember(_bot.GetMemberFromChannel(_bot.GetChannelByID(Convert.ToInt64(channel.GetApplicationId())),
-                user.GetApplicationId()));
+            _bot.KickMember(_bot.GetMemberFromChannel(_bot.GetChannelByID(Convert.ToInt64(channel.ApplicationId)),
+                user.ApplicationId));
         }
 
         /// <summary>
@@ -174,7 +171,7 @@ namespace Terministrator.Application.DiscordApplication
         /// </returns>
         public List<IUser> GetMods(IChannel channel)
         {
-            DiscordChannel dChannel = _bot.GetChannelByID(Convert.ToInt64(channel.GetApplicationId()));
+            DiscordChannel dChannel = _bot.GetChannelByID(Convert.ToInt64(channel.ApplicationId));
             List<DiscordSpecialPermissions> perm = dChannel.Parent.Owner.Roles.SelectMany(x => x.Permissions.GetAllPermissions()).ToList();
             return
                 dChannel.Parent.Members.Where(
@@ -219,10 +216,7 @@ namespace Terministrator.Application.DiscordApplication
         /// <returns>
         /// The command symbol.
         /// </returns>
-        public string GetCommandSymbol()
-        {
-            return "!";
-        }
+        public string CommandSymbols => "!";
 
         /// <summary>
         /// Gets the user symbol.
@@ -230,10 +224,7 @@ namespace Terministrator.Application.DiscordApplication
         /// <returns>
         /// The user symbol.
         /// </returns>
-        public string GetUserSymbol()
-        {
-            return "@";
-        }
+        public string UserSymbols => "@";
 
         /// <summary>
         /// Called when Discord sends us a message.

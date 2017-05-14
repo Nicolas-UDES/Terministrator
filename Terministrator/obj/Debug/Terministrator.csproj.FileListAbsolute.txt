@@ -51,13 +51,10 @@ D:\Users\Squirrel\Documents\Git\Terministrator\Terministrator\bin\Debug\System.N
 D:\Users\Squirrel\Documents\Git\Terministrator\Terministrator\bin\Debug\Telegram.Bot.xml
 D:\Users\Squirrel\Documents\Git\Terministrator\Terministrator\bin\Debug\websocket-sharp.xml
 D:\Users\Squirrel\Documents\Git\Terministrator\Terministrator\obj\Debug\Terministrator.csprojResolveAssemblyReference.cache
-D:\Users\Squirrel\Documents\Git\Terministrator\Terministrator\obj\Debug\Terministrator.Migrations.initial.resources
-D:\Users\Squirrel\Documents\Git\Terministrator\Terministrator\obj\Debug\Terministrator.Migrations.version2.resources
-D:\Users\Squirrel\Documents\Git\Terministrator\Terministrator\obj\Debug\Terministrator.Migrations.symbols.resources
-D:\Users\Squirrel\Documents\Git\Terministrator\Terministrator\obj\Debug\Terministrator.Migrations.addedtoken.resources
 D:\Users\Squirrel\Documents\Git\Terministrator\Terministrator\obj\Debug\Terministrator.Terministrator.View.MainConsole.resources
 D:\Users\Squirrel\Documents\Git\Terministrator\Terministrator\obj\Debug\Terministrator.Properties.Resources.resources
 D:\Users\Squirrel\Documents\Git\Terministrator\Terministrator\obj\Debug\Terministrator.csproj.GenerateResource.Cache
 D:\Users\Squirrel\Documents\Git\Terministrator\Terministrator\obj\Debug\Terministrator.exe
 D:\Users\Squirrel\Documents\Git\Terministrator\Terministrator\obj\Debug\Terministrator.pdb
-D:\Users\Squirrel\Documents\Git\Terministrator\Terministrator\obj\Debug\Terministrator.Migrations.testing.resources
+D:\Users\Squirrel\Documents\Git\Terministrator\Terministrator\obj\Debug\Terministrator.Migrations.Initial.resources
+D:\Users\Squirrel\Documents\Git\Terministrator\Terministrator\bin\Debug\Login.config

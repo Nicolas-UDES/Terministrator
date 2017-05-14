@@ -56,17 +56,6 @@ namespace Terministrator.Terministrator.Entites
         public string Token { get; set; }
 
         /// <summary>
-        /// Gets the name of the application.
-        /// </summary>
-        /// <returns>
-        /// The name of the application.
-        /// </returns>
-        public string GetApplicationName()
-        {
-            return ApplicationName;
-        }
-
-        /// <summary>
         /// Sets the message destination.
         /// </summary>
         /// <param name="receivedMessage">The received message method.</param>
@@ -118,10 +107,7 @@ namespace Terministrator.Terministrator.Entites
         /// <returns>
         /// Gets the user Terministrator on the application.
         /// </returns>
-        public IUser GetTerministrator()
-        {
-            return GetApplication().GetTerministrator();
-        }
+        public IUser Terministrator => GetApplication().Terministrator;
 
         /// <summary>
         /// Determines whether this instance can kick the specified user.
@@ -178,17 +164,6 @@ namespace Terministrator.Terministrator.Entites
         public string GetCommandSymbol()
         {
             return CommandSymbols;
-        }
-
-        /// <summary>
-        /// Gets the user symbol.
-        /// </summary>
-        /// <returns>
-        /// The user symbol.
-        /// </returns>
-        public string GetUserSymbol()
-        {
-            return UserSymbols;
         }
 
         /// <summary>

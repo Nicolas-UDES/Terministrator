@@ -15,42 +15,42 @@ namespace Terministrator.Application.Interface
         /// Gets the application identifier.
         /// </summary>
         /// <returns>The application identifier</returns>
-        string GetApplicationId();
+        string ApplicationId { get; }
 
         /// <summary>
         /// Gets the author of the message.
         /// </summary>
         /// <returns>The author</returns>
-        IUser GetFrom();
+        IUser From { get; }
 
         /// <summary>
         /// Gets the channel.
         /// </summary>
         /// <returns>The channel</returns>
-        IChannel GetChannel();
+        IChannel Channel { get; }
 
         /// <summary>
         /// Gets the sent date.
         /// </summary>
         /// <returns>The sent date</returns>
-        DateTime GetSentDate();
+        DateTime SentDate { get; }
 
         /// <summary>
         /// Gets the text.
         /// </summary>
         /// <returns>The text</returns>
-        string GetText();
+        string Text { get; }
 
         /// <summary>
         /// Gets the message replied by this one.
         /// </summary>
         /// <returns>The message being replied to</returns>
-        IMessage GetRepliesTo();
+        IMessage RepliesTo { get; }
 
         /// <summary>
         /// Gets the joined user.
         /// </summary>
         /// <returns>The joinded user</returns>
-        IUser GetJoinedUser();
+        IUser JoinedUser { get; }
     }
 }

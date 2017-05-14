@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Threading;
 using Terministrator.Application.Interface;
 using Terministrator.Terministrator.DAL;
+using Terministrator.Terministrator.Entites;
 using Terministrator.Terministrator.Types;
 using Terministrator.Terministrator.View;
 using Ad = Terministrator.Terministrator.BLL.Ad;
@@ -14,6 +15,7 @@ using Message = Terministrator.Terministrator.Entites.Message;
 using MessageTypeToPointSystem = Terministrator.Terministrator.BLL.MessageTypeToPointSystem;
 using Privileges = Terministrator.Terministrator.BLL.Privileges;
 using Rules = Terministrator.Terministrator.BLL.Rules;
+using User = Terministrator.Terministrator.DAL.User;
 using UserToChannel = Terministrator.Terministrator.BLL.UserToChannel;
 
 #endregion
@@ -66,7 +68,7 @@ namespace Terministrator.Terministrator
             DateTime now = DateTime.Now;
             _mainConsole.UpdateUpSince(now);
             _upTime = new Timer(UpdateUpTime, now, 0, 1000);
-            _refreshPings = new Timer(RefreshPings, null, 500, 5000);
+            //_refreshPings = new Timer(RefreshPings, null, 500, 5000);
 
             Message.SendMessage = SendMessage;
             Logger.LoggerInstance.LoggingRequested += _mainConsole.Log;
@@ -136,7 +138,7 @@ namespace Terministrator.Terministrator
         private void SendMessage(Message message)
         {
             message.Application.SendMessage(message);
-            Logger.LoggerInstance.LogInformation("Sent a message.");
+            Logger.LoggerInstance.LogInformation($"Sent a message to {message.UserToChannel.Channel}: {message.Text}");
             _mainConsole.MessagesSent++;
         }
 
@@ -156,7 +158,7 @@ namespace Terministrator.Terministrator
                 LoadMessageChilds(message);
 
                 Logger.LoggerInstance.LogInformation(
-                    $"Message was sent by {message.UserToChannel.User} in {(message.UserToChannel.Channel.Private ? "private" : message.UserToChannel.Channel.ToString())} on {message.ApplicationName}.{(string.IsNullOrEmpty(message.GetText()) ? "" : $" \"{message.GetText()}\"")}");
+                    $"Message was sent by {message.UserToChannel.User} in {(message.UserToChannel.Channel.Private ? "private" : message.UserToChannel.Channel.ToString())} on {message.ApplicationName}.{(string.IsNullOrEmpty(message.Text) ? "" : $" \"{message.Text}\"")}");
                 DispatchMessage(message);
             }
             catch (Exception e)
@@ -210,7 +212,7 @@ namespace Terministrator.Terministrator
         /// <returns><c>true</c> if it was a command; otherwise, <c>false</c>.</returns>
         private bool CommandAnalyzer(Message message)
         {
-            string command = message.GetText();
+            string command = message.Text;
             string commandSymbol = message.Application.GetCommandSymbol();
             if (command == null || command.Length <= commandSymbol.Length ||
                 !commandSymbol.Equals(command.Substring(0, commandSymbol.Length),
@@ -223,8 +225,8 @@ namespace Terministrator.Terministrator
             command = index < 0
                 ? command.Substring(commandSymbol.Length)
                 : command.Substring(commandSymbol.Length, index - commandSymbol.Length);
-            string terministrator = message.Application.GetUserSymbol() +
-                                    message.Application.GetTerministrator().GetUsername();
+            string terministrator = message.Application.UserSymbols +
+                                    message.Application.Terministrator.Username;
             if (command.Contains(terministrator))
             {
                 command = command.Substring(0, command.Length - terministrator.Length);
@@ -235,7 +237,7 @@ namespace Terministrator.Terministrator
                 Action<Command, Core> action = Commands[command];
                 Logger.LoggerInstance.LogInformation(
                     $"Command recognized. Calling {action.Method.ReflectedType?.FullName}.{action.Method.Name}");
-                action(new Command(message, command, message.GetText().Substring(index + 1)), this);
+                action(new Command(message, command, message.Text.Substring(index + 1)), this);
                 return true;
             }
             return false;

@@ -287,7 +287,14 @@ namespace Terministrator.Terministrator.View
             }
 
             _channels.Add(client.ApplicationName, new List<Channel>());
-            ControlAccess(comboBox_Application, () => { comboBox_Application.Items.Add(client); });
+            ControlAccess(comboBox_Application, () =>
+            {
+                comboBox_Application.Items.Add(client);
+                if (comboBox_Application.Items.Count == 1)
+                {
+                    comboBox_Application.SelectedIndex = 0;
+                }
+            });
         }
 
         /// <summary>

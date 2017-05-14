@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using System;
+using Terministrator.Terministrator.Entites;
 using Terministrator.Terministrator.Types;
 
 #endregion

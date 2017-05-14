@@ -35,6 +35,7 @@ namespace Terministrator.Terministrator.DAL
         public DbSet<Entites.Channel> Channel { get; set; }
         public DbSet<Entites.Application> Application { get; set; }
         public DbSet<Entites.Currencies> Currencies { get; set; }
+        public DbSet<Entites.Command> Commands { get; set; }
         public DbSet<Entites.Domain> Domain { get; set; }
         public DbSet<Entites.Extension> Extension { get; set; }
         public DbSet<Entites.ExtensionCategory> ExtensionCategory { get; set; }
@@ -48,7 +49,7 @@ namespace Terministrator.Terministrator.DAL
         public DbSet<Entites.PointSystem> PointSystem { get; set; }
         public DbSet<Entites.Privileges> Privileges { get; set; }
         public DbSet<Entites.Rules> Rules { get; set; }
-        public DbSet<Entites.SimilarTexts> SimilarTexts { get; set; }
+        public DbSet<Entites.SimilarContent> SimilarTexts { get; set; }
         public DbSet<Entites.Text> Text { get; set; }
         public DbSet<Entites.User> User { get; set; }
         public DbSet<Entites.UserName> UserName { get; set; }

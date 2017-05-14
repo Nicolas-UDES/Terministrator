@@ -11,21 +11,21 @@ namespace Terministrator.Terministrator.Entites
     /// <summary>
     /// Entity of the similar texts. Contains all the datas required for a texts that are the same to point on.
     /// </summary>
-    class SimilarTexts
+    class SimilarContent
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="SimilarTexts"/> class.
+        /// Initializes a new instance of the <see cref="SimilarContent"/> class.
         /// </summary>
-        public SimilarTexts()
+        public SimilarContent()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SimilarTexts"/> class.
+        /// Initializes a new instance of the <see cref="SimilarContent"/> class.
         /// </summary>
         /// <param name="nbSimilar">The nb similar.</param>
         /// <param name="lastIncrement">The last increment.</param>
-        public SimilarTexts(int nbSimilar, DateTime lastIncrement)
+        public SimilarContent(int nbSimilar, DateTime lastIncrement)
         {
             NBSimilar = nbSimilar;
             LastIncrement = lastIncrement;
@@ -36,6 +36,6 @@ namespace Terministrator.Terministrator.Entites
 
         public int NBSimilar { get; set; }
         public DateTime LastIncrement { get; set; }
-        public virtual List<Text> Texts { get; set; }
+        public virtual List<MessageContent> Contents { get; set; }
     }
 }

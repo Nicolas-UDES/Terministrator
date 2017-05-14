@@ -2,6 +2,7 @@
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 
 #endregion
@@ -39,37 +40,29 @@ namespace Terministrator.Terministrator.Entites
         /// Gets the first name of the current <see cref="UserName"/>.
         /// </summary>
         /// <returns>The first name</returns>
-        public string GetFirstName()
-        {
-            return GetCurrentUserName().FirstName;
-        }
+        [NotMapped]
+        public string FirstName => CurrentUserName.FirstName;
 
         /// <summary>
         /// Gets the last name of the current <see cref="UserName"/>.
         /// </summary>
         /// <returns>The last name</returns>
-        public string GetLastName()
-        {
-            return GetCurrentUserName().LastName;
-        }
+        [NotMapped]
+        public string LastName => CurrentUserName.LastName;
 
         /// <summary>
         /// Gets the username of the current <see cref="UserName"/>.
         /// </summary>
         /// <returns>The username</returns>
-        public string GetUsername()
-        {
-            return GetCurrentUserName().Username;
-        }
+        [NotMapped]
+        public string Username => CurrentUserName.Username;
 
         /// <summary>
         /// Gets the current <see cref="UserName"/> of the user.
         /// </summary>
         /// <returns>The current UserName</returns>
-        public UserName GetCurrentUserName()
-        {
-            return UserNames.First(x => x.Current);
-        }
+        [NotMapped]
+        public UserName CurrentUserName => UserNames.First(x => x.Current);
 
         /// <summary>
         /// Returns a <see cref="System.String" /> that represents this instance.
@@ -79,7 +72,7 @@ namespace Terministrator.Terministrator.Entites
         /// </returns>
         public override string ToString()
         {
-            return GetCurrentUserName().ToString();
+            return CurrentUserName.ToString();
         }
     }
 }

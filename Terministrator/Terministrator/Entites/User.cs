@@ -1,6 +1,7 @@
 ﻿#region Usings
 
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using Terministrator.Application.Interface;
 
 #endregion
@@ -24,14 +25,10 @@ namespace Terministrator.Terministrator.Entites
 
         public virtual List<UserToChannel> Channels { get; set; }
 
-        public string GetApplicationId()
-        {
-            return IdForApplication;
-        }
+        [NotMapped]
+        public string ApplicationId => IdForApplication;
 
-        public IApplication GetApplication()
-        {
-            return Application;
-        }
+        [NotMapped]
+        IApplication IUser.Application => Application;
     }
 }

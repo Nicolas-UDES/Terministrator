@@ -12,12 +12,12 @@ namespace Terministrator.Terministrator.BLL
     static class SimilarTexts
     {
         /// <summary>
-        /// Creates a default SimilarTexts.
+        /// Creates a default SimilarContent.
         /// </summary>
         /// <returns></returns>
-        public static Entites.SimilarTexts Create()
+        public static Entites.SimilarContent Create()
         {
-            return DAL.SimilarTexts.Create(new Entites.SimilarTexts(1, DateTime.UtcNow));
+            return DAL.SimilarTexts.Create(new Entites.SimilarContent(1, DateTime.UtcNow));
         }
 
         /// <summary>
@@ -25,12 +25,12 @@ namespace Terministrator.Terministrator.BLL
         /// </summary>
         /// <param name="similarTextsId">The similar texts identifier.</param>
         /// <returns>The incremented similar texts.</returns>
-        public static Entites.SimilarTexts Increment(int similarTextsId)
+        public static Entites.SimilarContent Increment(int similarTextsId)
         {
-            Entites.SimilarTexts similarTexts = DAL.SimilarTexts.Get(similarTextsId);
-            similarTexts.LastIncrement = DateTime.UtcNow;
-            similarTexts.NBSimilar++;
-            return DAL.SimilarTexts.Update(similarTexts);
+            Entites.SimilarContent similarContent = DAL.SimilarTexts.Get(similarTextsId);
+            similarContent.LastIncrement = DateTime.UtcNow;
+            similarContent.NBSimilar++;
+            return DAL.SimilarTexts.Update(similarContent);
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Terministrator.Application.Interface;
+using Terministrator.Terministrator.Entites;
 using Terministrator.Terministrator.Types;
 
 #endregion
@@ -33,7 +34,7 @@ namespace Terministrator.Terministrator.BLL
         /// <returns>The requested channel.</returns>
         public static Entites.Channel Get(IChannel iChannel)
         {
-            return DAL.Channel.Get(iChannel.GetApplicationId(), iChannel.GetApplication().GetApplicationName());
+            return DAL.Channel.Get(iChannel.ApplicationId, iChannel.Application.ApplicationName);
         }
 
         /// <summary>
@@ -43,7 +44,7 @@ namespace Terministrator.Terministrator.BLL
         /// <returns>The collection of channels.</returns>
         public static List<Entites.Channel> Get(IApplication application)
         {
-            return DAL.Channel.Get(application.GetApplicationName());
+            return DAL.Channel.Get(application.ApplicationName);
         }
 
         /// <summary>
@@ -67,8 +68,8 @@ namespace Terministrator.Terministrator.BLL
         public static Entites.Channel Create(IChannel iChannel)
         {
             Entites.Channel channel =
-                DAL.Channel.Create(new Entites.Channel(Application.GetOrCreate(iChannel.GetApplication()),
-                    iChannel.GetApplicationId(), iChannel.IsSolo()));
+                DAL.Channel.Create(new Entites.Channel(Application.GetOrCreate(iChannel.Application),
+                    iChannel.ApplicationId, iChannel.IsSolo));
 
             channel.UserNames = new List<Entites.UserName>
             {
@@ -127,7 +128,7 @@ namespace Terministrator.Terministrator.BLL
                 sb.AppendLine(
                     $"{DAL.User.LoadUserNames(DAL.UserToChannel.LoadUser(userToChannel).User)} - {DAL.UserToChannel.CountMessage(userToChannel.UserToChannelId)} messages");
             }
-            command.Message.Application.SendMessage(Message.Answer(command.Message, sb.ToString()));
+            Entites.Message.SendMessage(Message.Answer(command.Message, sb.ToString()));
         }
     }
 }

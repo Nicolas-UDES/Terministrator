@@ -21,11 +21,6 @@ namespace Terministrator.Application.DiscordApplication
     class Channel : IChannel
     {
         private readonly Application _application;
-        private readonly string _applicationId;
-        private readonly string _firstName;
-        private readonly bool _isSolo;
-        private readonly string _lastName;
-        private readonly string _username;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Channel"/> class.
@@ -33,12 +28,12 @@ namespace Terministrator.Application.DiscordApplication
         /// <param name="channel">The channel.</param>
         public Channel(TChannel channel)
         {
-            _applicationId = channel.ID;
-            _firstName = channel.Name;
-            _lastName = channel.Topic;
-            _username = channel.Parent.Name;
-            _isSolo = false;
-            _application = Application.Instance;
+            ApplicationId = channel.ID;
+            FirstName = channel.Name;
+            LastName = channel.Topic;
+            Username = channel.Parent.Name;
+            IsSolo = false;
+            _application = DiscordApplication.Application.Instance;
         }
 
         /// <summary>
@@ -47,12 +42,12 @@ namespace Terministrator.Application.DiscordApplication
         /// <param name="channel">The channel.</param>
         public Channel(TPrivateChannel channel)
         {
-            _applicationId = channel.ID;
-            _firstName = channel.Recipient.Username;
-            _lastName = null;
-            _username = channel.Recipient.Email;
-            _isSolo = channel.Private;
-            _application = Application.Instance;
+            ApplicationId = channel.ID;
+            FirstName = channel.Recipient.Username;
+            LastName = null;
+            Username = channel.Recipient.Email;
+            IsSolo = channel.Private;
+            _application = DiscordApplication.Application.Instance;
         }
 
         /// <summary>
@@ -61,7 +56,7 @@ namespace Terministrator.Application.DiscordApplication
         /// <returns>
         /// The application identifier
         /// </returns>
-        public string GetApplicationId() => _applicationId;
+        public string ApplicationId { get; }
 
         /// <summary>
         /// Gets the application.
@@ -69,7 +64,7 @@ namespace Terministrator.Application.DiscordApplication
         /// <returns>
         /// The application
         /// </returns>
-        public IApplication GetApplication() => _application;
+        public IApplication Application => _application;
 
         /// <summary>
         /// Gets the first name.
@@ -77,7 +72,7 @@ namespace Terministrator.Application.DiscordApplication
         /// <returns>
         /// The first name
         /// </returns>
-        public string GetFirstName() => _firstName;
+        public string FirstName { get; }
 
         /// <summary>
         /// Gets the last name.
@@ -85,7 +80,7 @@ namespace Terministrator.Application.DiscordApplication
         /// <returns>
         /// The last name
         /// </returns>
-        public string GetLastName() => _lastName;
+        public string LastName { get; }
 
         /// <summary>
         /// Gets the username.
@@ -93,7 +88,7 @@ namespace Terministrator.Application.DiscordApplication
         /// <returns>
         /// The username
         /// </returns>
-        public string GetUsername() => _username;
+        public string Username { get; }
 
         /// <summary>
         /// Determines whether this instance is a private channel.
@@ -101,6 +96,6 @@ namespace Terministrator.Application.DiscordApplication
         /// <returns>
         ///   <c>true</c> if this instance is a private channel; otherwise, <c>false</c>.
         /// </returns>
-        public bool IsSolo() => _isSolo;
+        public bool IsSolo { get; }
     }
 }

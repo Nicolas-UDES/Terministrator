@@ -25,8 +25,6 @@ namespace Terministrator.Application.TelegramApplication
         private readonly User _joinedUser;
         private readonly int _messageId;
         private readonly Task<Message> _repliesToTask;
-        private readonly DateTime _sentDate;
-        private readonly string _text;
         private Message _repliesTo;
 
         /// <summary>
@@ -42,9 +40,9 @@ namespace Terministrator.Application.TelegramApplication
 
             _messageId = message.MessageId;
             _from = new User(message.From);
-            _sentDate = message.Date;
+            SentDate = message.Date;
             _channel = new Channel(message.Chat);
-            _text = message.Text;
+            Text = message.Text;
             _joinedUser = message.NewChatMember == null ? null : new User(message.NewChatMember);
         }
 
@@ -54,7 +52,7 @@ namespace Terministrator.Application.TelegramApplication
         /// <returns>
         /// The application identifier
         /// </returns>
-        public string GetApplicationId() => _messageId.ToString();
+        public string ApplicationId => _messageId.ToString();
 
         /// <summary>
         /// Gets the author of the message.
@@ -62,7 +60,7 @@ namespace Terministrator.Application.TelegramApplication
         /// <returns>
         /// The author
         /// </returns>
-        public IUser GetFrom() => _from;
+        public IUser From => _from;
 
         /// <summary>
         /// Gets the channel.
@@ -70,7 +68,7 @@ namespace Terministrator.Application.TelegramApplication
         /// <returns>
         /// The channel
         /// </returns>
-        public IChannel GetChannel() => _channel;
+        public IChannel Channel => _channel;
 
         /// <summary>
         /// Gets the sent date.
@@ -78,7 +76,7 @@ namespace Terministrator.Application.TelegramApplication
         /// <returns>
         /// The sent date
         /// </returns>
-        public DateTime GetSentDate() => _sentDate;
+        public DateTime SentDate { get; }
 
         /// <summary>
         /// Gets the text.
@@ -86,7 +84,7 @@ namespace Terministrator.Application.TelegramApplication
         /// <returns>
         /// The text
         /// </returns>
-        public string GetText() => _text;
+        public string Text { get; }
 
         /// <summary>
         /// Gets the joined user.
@@ -94,24 +92,12 @@ namespace Terministrator.Application.TelegramApplication
         /// <returns>
         /// The joinded user
         /// </returns>
-        public IUser GetJoinedUser() => _joinedUser;
+        public IUser JoinedUser => _joinedUser;
 
         /// <summary>
         /// Gets the message this instance replies to.
         /// </summary>
         /// <returns>The requested message.</returns>
-        public IMessage GetRepliesTo()
-        {
-            if (_repliesTo != null)
-            {
-                return _repliesTo;
-            }
-            if (_repliesToTask != null)
-            {
-                return _repliesTo = _repliesToTask.Result;
-            }
-
-            return null;
-        }
+        public IMessage RepliesTo => _repliesTo ?? (_repliesTo = _repliesToTask?.Result);
     }
 }

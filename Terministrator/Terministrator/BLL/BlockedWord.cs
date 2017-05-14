@@ -1,7 +1,7 @@
 ﻿#region Usings
 
 using System.Collections.Generic;
-using System.Configuration;
+using Terministrator.Terministrator.Types;
 
 #endregion
 
@@ -19,7 +19,7 @@ namespace Terministrator.Terministrator.BLL
         public static List<Entites.BlockedWord> GetDefaultBlockedWords()
         {
             List<Entites.BlockedWord> types = new List<Entites.BlockedWord>();
-            foreach (string word in ConfigurationManager.AppSettings["DefaultBlockedWords"].Split(','))
+            foreach (string word in Configuration.DefaultBlockedWords)
             {
                 types.Add(DAL.BlockedWord.Get(word) ?? DAL.BlockedWord.Create(new Entites.BlockedWord(word)));
             }

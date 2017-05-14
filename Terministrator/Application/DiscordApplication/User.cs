@@ -19,21 +19,16 @@ namespace Terministrator.Application.DiscordApplication
     /// <seealso cref="IUser" />
     class User : IUser
     {
-        private readonly string _applicationId;
-        private readonly string _firstName;
-        private readonly string _lastName;
-        private readonly string _username;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="User"/> class.
         /// </summary>
         /// <param name="user">The user.</param>
         public User(TUser user)
         {
-            _applicationId = user.ID;
-            _firstName = user.Username;
-            _lastName = "#" + user.Discriminator;
-            _username = user.Email;
+            ApplicationId = user.ID;
+            FirstName = user.Username;
+            LastName = "#" + user.Discriminator;
+            Username = user.Email;
         }
 
         /// <summary>
@@ -42,7 +37,7 @@ namespace Terministrator.Application.DiscordApplication
         /// <returns>
         /// The application identifier
         /// </returns>
-        public string GetApplicationId() => _applicationId;
+        public string ApplicationId { get; }
 
         /// <summary>
         /// Gets the first name.
@@ -50,7 +45,7 @@ namespace Terministrator.Application.DiscordApplication
         /// <returns>
         /// The first name
         /// </returns>
-        public string GetFirstName() => _firstName;
+        public string FirstName { get; }
 
         /// <summary>
         /// Gets the last name.
@@ -58,7 +53,7 @@ namespace Terministrator.Application.DiscordApplication
         /// <returns>
         /// The last name
         /// </returns>
-        public string GetLastName() => _lastName;
+        public string LastName { get; }
 
         /// <summary>
         /// Gets the username.
@@ -66,7 +61,7 @@ namespace Terministrator.Application.DiscordApplication
         /// <returns>
         /// The username
         /// </returns>
-        public string GetUsername() => _username;
+        public string Username { get; }
 
         /// <summary>
         /// Gets the application.
@@ -74,6 +69,6 @@ namespace Terministrator.Application.DiscordApplication
         /// <returns>
         /// The application
         /// </returns>
-        public IApplication GetApplication() => Application.Instance;
+        public IApplication Application => DiscordApplication.Application.Instance;
     }
 }

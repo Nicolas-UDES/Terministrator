@@ -51,7 +51,7 @@ namespace Terministrator.Terministrator.Entites
             SentOn = sentOn;
             Deleted = deleted;
             JoinedUserId = joinedUser?.UserToChannelId;
-            JoinedUser = joinedUser;
+            JoinedUserToChannel = joinedUser;
         }
 
         [Key]
@@ -86,7 +86,7 @@ namespace Terministrator.Terministrator.Entites
         [ForeignKey("JoinedUser")]
         public int? JoinedUserId { get; set; }
 
-        public virtual UserToChannel JoinedUser { get; set; }
+        public virtual UserToChannel JoinedUserToChannel { get; set; }
 
         /// <summary>
         /// Gets the application identifier.
@@ -94,10 +94,8 @@ namespace Terministrator.Terministrator.Entites
         /// <returns>
         /// The application identifier
         /// </returns>
-        public string GetApplicationId()
-        {
-            return IdForApplication;
-        }
+        [NotMapped]
+        public string ApplicationId => IdForApplication;
 
         /// <summary>
         /// Gets the author of the message.
@@ -105,10 +103,8 @@ namespace Terministrator.Terministrator.Entites
         /// <returns>
         /// The author
         /// </returns>
-        public IUser GetFrom()
-        {
-            return UserToChannel.User;
-        }
+        [NotMapped]
+        public IUser From => UserToChannel.User;
 
         /// <summary>
         /// Gets the channel.
@@ -116,10 +112,8 @@ namespace Terministrator.Terministrator.Entites
         /// <returns>
         /// The channel
         /// </returns>
-        public IChannel GetChannel()
-        {
-            return UserToChannel.Channel;
-        }
+        [NotMapped]
+        public IChannel Channel => UserToChannel.Channel;
 
         /// <summary>
         /// Gets the sent date.
@@ -127,10 +121,8 @@ namespace Terministrator.Terministrator.Entites
         /// <returns>
         /// The sent date
         /// </returns>
-        public DateTime GetSentDate()
-        {
-            return SentOn;
-        }
+        [NotMapped]
+        public DateTime SentDate => SentOn;
 
         /// <summary>
         /// Gets the text.
@@ -138,21 +130,8 @@ namespace Terministrator.Terministrator.Entites
         /// <returns>
         /// The text
         /// </returns>
-        public string GetText()
-        {
-            return Texts != null && Texts.Any() ? Texts?.OrderByDescending(x => x.SetOn).ElementAt(0).ZeText : null;
-        }
-
-        /// <summary>
-        /// Gets the message replied by this one.
-        /// </summary>
-        /// <returns>
-        /// The message being replied to
-        /// </returns>
-        public IMessage GetRepliesTo()
-        {
-            return RepliesTo;
-        }
+        [NotMapped]
+        public string Text => Texts != null && Texts.Any() ? Texts?.OrderByDescending(x => x.SetOn).ElementAt(0).ZeText : null;
 
         /// <summary>
         /// Gets the joined user.
@@ -160,10 +139,11 @@ namespace Terministrator.Terministrator.Entites
         /// <returns>
         /// The joinded user
         /// </returns>
-        public IUser GetJoinedUser()
-        {
-            return JoinedUser.User;
-        }
+        [NotMapped]
+        public IUser JoinedUser => JoinedUserToChannel.User;
+
+        [NotMapped]
+        IMessage IMessage.RepliesTo => RepliesTo;
 
         /// <summary>
         /// Returns a <see cref="System.String" /> that represents this instance.
@@ -171,9 +151,6 @@ namespace Terministrator.Terministrator.Entites
         /// <returns>
         /// A <see cref="System.String" /> that represents this instance.
         /// </returns>
-        public override string ToString()
-        {
-            return '[' + SentOn.ToString("HH:mm") + "] " + UserToChannel.User + ": " + GetText() ?? "{no text}";
-        }
+        public override string ToString() =>'[' + SentOn.ToString("HH:mm") + "] " + UserToChannel.User + ": " + Text ?? "{no text}";
     }
 }

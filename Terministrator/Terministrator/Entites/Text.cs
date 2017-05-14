@@ -11,41 +11,24 @@ namespace Terministrator.Terministrator.Entites
     /// <summary>
     /// Entity of the texts. Contains all the datas required for a text that was contained in a message.
     /// </summary>
-    class Text
+    class Text : MessageContent
     {
         public Text()
         {
         }
 
-        public Text(string text, DateTime setOn, Message message, string r9kText = null,
-            SimilarTexts similarTexts = null)
+        public Text(string text, DateTime setOn, Message message, string r9kText = null, SimilarContent similarContent = null)
         {
             ZeText = text;
             SetOn = setOn;
             MessageId = message.MessageId;
             Message = message;
-            SimilarTextsId = similarTexts?.SimilarMessagesId;
-            SimilarTexts = similarTexts;
+            SimilarContentId = similarContent?.SimilarMessagesId;
+            SimilarContent = similarContent;
             R9KText = r9kText;
         }
 
-        [Key]
-        public int TextId { get; set; }
-
-        [Required]
-        [ForeignKey("Message")]
-        public int MessageId { get; set; }
-
-        public virtual Message Message { get; set; }
-
-        [ForeignKey("SimilarTexts")]
-        public int? SimilarTextsId { get; set; }
-
-        public virtual SimilarTexts SimilarTexts { get; set; }
-
         public string ZeText { get; set; }
-
-        public DateTime SetOn { get; set; }
 
         public string R9KText { get; set; }
     }

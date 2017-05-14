@@ -31,7 +31,7 @@ namespace Terministrator.Terministrator.BLL
         /// <returns>The newly created user name.</returns>
         public static Entites.UserName ExtractUserName(IUser iUser, Entites.User user)
         {
-            return new Entites.UserName(iUser.GetFirstName(), iUser.GetLastName(), iUser.GetUsername(), true,
+            return new Entites.UserName(iUser.FirstName, iUser.LastName, iUser.Username, true,
                 DateTime.UtcNow, user);
         }
 
@@ -43,7 +43,7 @@ namespace Terministrator.Terministrator.BLL
         /// <returns>The newly created user name.</returns>
         public static Entites.UserName ExtractUserName(IChannel iChannel, Entites.Channel channel)
         {
-            return new Entites.UserName(iChannel.GetFirstName(), iChannel.GetLastName(), iChannel.GetUsername(), true,
+            return new Entites.UserName(iChannel.FirstName, iChannel.LastName, iChannel.Username, true,
                 DateTime.UtcNow, channel);
         }
 

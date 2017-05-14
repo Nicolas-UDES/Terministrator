@@ -1,5 +1,6 @@
 ﻿
 using System.Linq;
+using Terministrator.Terministrator.Entites;
 
 namespace Terministrator.Terministrator.Types
 {
@@ -36,7 +37,7 @@ namespace Terministrator.Terministrator.Types
                 return false;
             }
 
-            command.Message.Application.SendMessage(BLL.Message.Answer(command.Message, "This command is reserved for moderators."));
+            Entites.Message.SendMessage(BLL.Message.Answer(command.Message, "This command is reserved for moderators."));
             return true;
         }
     }

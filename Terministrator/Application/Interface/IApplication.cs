@@ -25,19 +25,19 @@ namespace Terministrator.Application.Interface
         /// Gets the command symbol.
         /// </summary>
         /// <returns>The command symbol.</returns>
-        string GetCommandSymbol();
+        string CommandSymbols { get; }
 
         /// <summary>
         /// Gets the user symbol.
         /// </summary>
         /// <returns>The user symbol.</returns>
-        string GetUserSymbol();
+        string UserSymbols { get; }
 
         /// <summary>
         /// Gets the name of the application.
         /// </summary>
         /// <returns>The name of the application.</returns>
-        string GetApplicationName();
+        string ApplicationName { get; }
 
         /// <summary>
         /// Sets the message destination.
@@ -72,7 +72,7 @@ namespace Terministrator.Application.Interface
         /// Gets the terministrator.
         /// </summary>
         /// <returns>Gets the user Terministrator on the application.</returns>
-        IUser GetTerministrator();
+        IUser Terministrator { get; }
 
         /// <summary>
         /// Determines whether this instance can kick the specified user.

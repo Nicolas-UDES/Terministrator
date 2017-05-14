@@ -211,6 +211,7 @@ namespace Terministrator.Terministrator.Types
             /// The rating.
             /// </value>
             public Rating Rating { get; set; }
+
             /// <summary>
             /// Gets or sets the text.
             /// </summary>
@@ -218,6 +219,7 @@ namespace Terministrator.Terministrator.Types
             /// The text.
             /// </value>
             public string Text { get; set; }
+
             /// <summary>
             /// Gets or sets the exception.
             /// </summary>
@@ -225,6 +227,7 @@ namespace Terministrator.Terministrator.Types
             /// The exception.
             /// </value>
             public Exception Exception { get; set; }
+
             /// <summary>
             /// Gets or sets the caller line number.
             /// </summary>
@@ -232,6 +235,7 @@ namespace Terministrator.Terministrator.Types
             /// The caller line number.
             /// </value>
             public int CallerLineNumber { get; set; }
+
             /// <summary>
             /// Gets or sets the name of the caller member.
             /// </summary>
@@ -239,6 +243,7 @@ namespace Terministrator.Terministrator.Types
             /// The name of the caller member.
             /// </value>
             public string CallerMemberName { get; set; }
+
             /// <summary>
             /// Gets or sets the caller file path.
             /// </summary>

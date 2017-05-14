@@ -4,6 +4,7 @@ using System;
 using System.Diagnostics;
 using System.Linq;
 using Terministrator.Application.Interface;
+using Terministrator.Terministrator.Entites;
 using Terministrator.Terministrator.Types;
 
 #endregion
@@ -65,8 +66,8 @@ namespace Terministrator.Terministrator.BLL
         /// <returns>The requested user to channel. Null if none found.</returns>
         public static Entites.UserToChannel Get(IUser iUser, IChannel iChannel)
         {
-            return DAL.UserToChannel.Get(iUser.GetApplicationId(), iChannel.GetApplicationId(),
-                iChannel.GetApplication().GetApplicationName());
+            return DAL.UserToChannel.Get(iUser.ApplicationId, iChannel.ApplicationId,
+                iChannel.Application.ApplicationName);
         }
 
         /// <summary>
@@ -139,41 +140,20 @@ namespace Terministrator.Terministrator.BLL
         /// <param name="core">The core.</param>
         public static void GivePoints(Command command, Core core = null)
         {
-            string[] arguements = command.SplitArguements(' ', 2);
-
-            float amount;
-            Entites.UserToChannel receiver;
-            string errorMessage = CheckGivePointsArguements(command.SplitArguements(' ', 2), out amount,
-                command.Message.UserToChannel, out receiver);
-            if (errorMessage != null)
-            {
-                Entites.Message.SendMessage(Message.Answer(command.Message, errorMessage));
-                return;
-            }
-
-            command.Message.UserToChannel.Points -= amount;
-            receiver.Points += amount;
-            Update(command.Message.UserToChannel);
-            Update(receiver);
-
-            Entites.Message.SendMessage(Message.Answer(command.Message,
-                "You gave @" + arguements[0].Substring(1) + " " + arguements[1] + " points."));
+            Entites.Message.SendMessage(Message.Answer(command.Message, GivePointsAnalyzes(command)));
         }
 
         /// <summary>
         /// Checks and extracts the GivePoints arguements.
         /// </summary>
-        /// <param name="arguements">The arguements.</param>
-        /// <param name="amount">The amount.</param>
-        /// <param name="sender">The sender.</param>
-        /// <param name="receiver">The receiver.</param>
+        /// <param name="command">The command</param>
         /// <returns>An error message. Null if none.</returns>
-        private static string CheckGivePointsArguements(string[] arguements, out float amount,
-            Entites.UserToChannel sender, out Entites.UserToChannel receiver)
+        private static string GivePointsAnalyzes(Command command)
         {
-            receiver = null;
+            string[] arguements = command.SplitArguements(' ', 2);
+            Entites.UserToChannel sender = command.Message.UserToChannel;
 
-            if (!float.TryParse(arguements[1], out amount))
+            if (!float.TryParse(arguements[1], out float amount))
             {
                 return "Is that supposed to be a number?";
             }
@@ -186,17 +166,21 @@ namespace Terministrator.Terministrator.BLL
                 return "You can't bill people; positive numbers only!";
             }
 
-            receiver =
-                DAL.User.LoadChannels(
-                        (Entites.User)
-                        UserName.GetFromUsername(arguements[0].Substring(1), sender.ApplicationName)?.OwnedBy)
-                    .Channels.FirstOrDefault(c => c.ChannelId == sender.ChannelId);
+            var receiver = DAL.User.LoadChannels(
+                    (Entites.User)
+                    UserName.GetFromUsername(arguements[0].Substring(1), sender.ApplicationName)?.OwnedBy)
+                .Channels.FirstOrDefault(c => c.ChannelId == sender.ChannelId);
             if (receiver == null)
             {
                 return "No one with the username " + arguements[0] + " known.";
             }
 
-            return null;
+            command.Message.UserToChannel.Points -= amount;
+            receiver.Points += amount;
+            Update(command.Message.UserToChannel);
+            Update(receiver);
+
+            return "You gave @" + arguements[0].Substring(1) + " " + arguements[1] + " points.";
         }
 
         /// <summary>
@@ -206,7 +190,7 @@ namespace Terministrator.Terministrator.BLL
         /// <param name="core">The core.</param>
         public static void GetPrivileges(Command command, Core core = null)
         {
-            command.Message.Application.SendMessage(Message.Answer(command.Message,
+            Entites.Message.SendMessage(Message.Answer(command.Message,
                 $"Your privilege groups is: {command.Message.UserToChannel.Privileges.Name}. To know the related rules, write /rules {command.Message.UserToChannel.Privileges.Name}."));
         }
 
@@ -217,12 +201,17 @@ namespace Terministrator.Terministrator.BLL
         /// <param name="core">The core.</param>
         public static void SetPrivileges(Command command, Core core = null)
         {
-            if (Tools.IsNotModThenSendWarning(command))
+            Entites.Message.SendMessage(Message.Answer(command.Message, SetPrivilegesAnalyzes(command)));
+        }
+
+        private static string SetPrivilegesAnalyzes(Command command)
+        {
+            if (!Tools.IsMod(command.Message.UserToChannel))
             {
-                return;
+                return "This command is reserved for moderators.";
             }
 
-            string[] arguements = command.Arguement.Split(new[] {' '}, 2);
+            string[] arguements = command.Arguement.Split(new[] { ' ' }, 2);
             string user;
             string privilegesName;
             if (arguements.Length > 1)
@@ -232,36 +221,27 @@ namespace Terministrator.Terministrator.BLL
             }
             else
             {
-                user = command.Message.UserToChannel.User.GetCurrentUserName().Username;
+                user = command.Message.UserToChannel.User.CurrentUserName.Username;
                 privilegesName = arguements[0];
             }
 
-            Debug.Assert(command.Message.UserToChannel.ChannelId != null,
-                "command.Message.UserToChannel.ChannelId != null");
             Entites.UserToChannel userToChannel =
-                Get(
-                    DAL.UserName.LoadOwnedBy(DAL.UserName.GetFromUsername(user, command.Message.ApplicationName))
+                Get(DAL.UserName.LoadOwnedBy(DAL.UserName.GetFromUsername(user, command.Message.ApplicationName))
                         .OwnedBy as Entites.User, command.Message.UserToChannel.Channel);
             if (userToChannel == null)
             {
-                command.Message.Application.SendMessage(Message.Answer(command.Message,
-                    $"No one nammed @{user} was found."));
-                return;
+                return $"No one nammed @{user} was found.";
             }
 
-            Entites.Privileges privileges = Privileges.GetPrivileges(command.Message.UserToChannel.Channel,
-                privilegesName);
+            Entites.Privileges privileges = Privileges.GetPrivileges(command.Message.UserToChannel.Channel, privilegesName);
             if (privileges == null)
             {
-                command.Message.Application.SendMessage(Message.Answer(command.Message,
-                    $"No privileges group nammed {privilegesName} was found."));
-                return;
+                return $"No privileges group nammed {privilegesName} was found.";
             }
 
             userToChannel.PrivilegesId = privileges.PrivilegesId;
             Update(userToChannel);
-            command.Message.Application.SendMessage(Message.Answer(command.Message,
-                $"Your privileges group is now set to {privilegesName}."));
+            return $"Your privileges group is now set to {privilegesName}.";
         }
     }
 }

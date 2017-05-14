@@ -39,7 +39,7 @@ namespace Terministrator.Terministrator.BLL
         /// <returns>The requested application.</returns>
         public static Entites.Application Get(IApplication iApplication)
         {
-            return DAL.Application.Get(iApplication.GetApplicationName());
+            return DAL.Application.Get(iApplication.ApplicationName);
         }
 
         /// <summary>
@@ -50,8 +50,8 @@ namespace Terministrator.Terministrator.BLL
         public static Entites.Application Create(IApplication iApplication)
         {
             return
-                DAL.Application.Create(new Entites.Application(iApplication.GetApplicationName(),
-                    iApplication.GetCommandSymbol(), iApplication.GetUserSymbol(), iApplication.Token));
+                DAL.Application.Create(new Entites.Application(iApplication.ApplicationName,
+                    iApplication.CommandSymbols, iApplication.UserSymbols, iApplication.Token));
         }
 
         /// <summary>
@@ -62,8 +62,8 @@ namespace Terministrator.Terministrator.BLL
         /// <returns>The second arguement, updated.</returns>
         public static Entites.Application Update(IApplication iApplication, Entites.Application application)
         {
-            application.CommandSymbols = iApplication.GetCommandSymbol();
-            application.UserSymbols = iApplication.GetUserSymbol();
+            application.CommandSymbols = iApplication.CommandSymbols;
+            application.UserSymbols = iApplication.UserSymbols;
             application.Token = iApplication.Token;
             return DAL.Application.Update(application);
         }

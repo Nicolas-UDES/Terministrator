@@ -37,19 +37,10 @@ namespace Terministrator.Terministrator.Entites
 
         public virtual List<Privileges> Privileges { get; set; }
 
-        public string GetApplicationId()
-        {
-            return IdForApplication;
-        }
+        public string ApplicationId => IdForApplication;
 
-        public IApplication GetApplication()
-        {
-            return Application;
-        }
+        IApplication IChannel.Application => Application;
 
-        bool IChannel.IsSolo()
-        {
-            return Private;
-        }
+        bool IChannel.IsSolo => Private;
     }
 }

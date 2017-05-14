@@ -9,30 +9,30 @@
         /// Gets the application identifier.
         /// </summary>
         /// <returns>The application identifier</returns>
-        string GetApplicationId();
+        string ApplicationId { get; }
 
         /// <summary>
         /// Gets the first name.
         /// </summary>
         /// <returns>The first name</returns>
-        string GetFirstName();
+        string FirstName { get; }
 
         /// <summary>
         /// Gets the last name.
         /// </summary>
         /// <returns>The last name</returns>
-        string GetLastName();
+        string LastName { get; }
 
         /// <summary>
         /// Gets the username.
         /// </summary>
         /// <returns>The username</returns>
-        string GetUsername();
+        string Username { get; }
 
         /// <summary>
         /// Gets the application.
         /// </summary>
         /// <returns>The application</returns>
-        IApplication GetApplication();
+        IApplication Application { get; }
     }
 }

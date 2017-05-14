@@ -3,6 +3,7 @@
 using System;
 using System.Data.SqlTypes;
 using System.Timers;
+using Terministrator.Terministrator.Entites;
 using Terministrator.Terministrator.Types;
 
 #endregion
